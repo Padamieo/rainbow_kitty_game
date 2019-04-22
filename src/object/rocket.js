@@ -1,0 +1,54 @@
+import phaser from 'phaser';
+
+// class Turt extends phaser.GameObjects.Sprite {
+class Rocket extends phaser.Physics.Arcade.Sprite {
+    constructor (scene, x, y) {
+      super(scene, x, y, 'rocket_frames');
+
+      //this.setTexture('all').setOrigin(0.5, 0.5);
+      scene.add.existing(this);
+      scene.physics.add.existing(this);
+      this.setRotation(phaser.Math.DegToRad(45));
+
+
+      //colours
+      var c = phaser.Display.Color.RandomRGB(0,256);
+      var r = phaser.Display.Color.ComponentToHex(c.r);
+      var g = phaser.Display.Color.ComponentToHex(c.g);
+      var b = phaser.Display.Color.ComponentToHex(c.b);
+      console.log('0x'+r+g+b);
+      this.colour = '0x'+r+g+b;
+      this.setTint('0x'+r+g+b);
+
+    }
+
+    update (game) {
+      var dt = game.time.elapsed;
+      this.x += toPlayerX * (0.05 * dt);
+
+      // if(this.body.position.x.toFixed(0) !== this.old.x || this.body.position.y.toFixed(0) !== this.old.y){
+      //   console.log(this.body.position.x.toFixed(0), this.old.x );
+      //   this.old.x = this.body.position.x.toFixed(0);
+      //   this.old.y = this.body.position.y.toFixed(0);
+      //   // console.log('update', this.old);
+      //   if(window.game.socket.connected){
+      //     window.game.socket.emit('updateServer', {
+      //       id:this.id,
+      //       x:this.old.x,
+      //       y:this.old.y
+      //     });
+      //   }
+      // }
+    }
+
+    preUpdate (time, delta) {
+      super.preUpdate(time, delta);
+      //this.y -= 5 * (0.05 * delta);
+    }
+
+    onWorldBounds(){
+      console.log('onWorldBounds');
+    }
+}
+
+export default Rocket;
