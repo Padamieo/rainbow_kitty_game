@@ -8,5 +8,10 @@ Open [http://localhost:8000](http://localhost:8000)
 ## servers
 - `yarn server` - run server
 
-
 https://rexrainbow.github.io/phaser3-rex-notes/docs/site/
+
+## working names
+Regenboog fonkeling katje bil
+flatulant kitty . . . rainbow
+farty kitty?
+rainbow kitty sparklebutt

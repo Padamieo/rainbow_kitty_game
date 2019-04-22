@@ -35,9 +35,10 @@ class Player extends phaser.GameObjects.Graphics {
       // var dt = game.time.elapsed;
       this.graphics.clear();
       if(this.scene.input.activePointer.isDown){
+
         if(!this.held){
           this.timer = this.scene.time.addEvent({
-            delay: 0,                // ms
+            delay: 0,
             callback: this.callback,
             //args: [],
             callbackScope: this,
@@ -47,6 +48,7 @@ class Player extends phaser.GameObjects.Graphics {
           this.held = true;
         }else{
           console.log(this.timer.getElapsed(), this.timer.getOverallProgress());
+          console.log(this.scene.kitty.alive);
         }
 
         this.circle = new Phaser.Geom.Circle(

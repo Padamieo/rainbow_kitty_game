@@ -53,7 +53,7 @@ class Menu extends phaser.Scene {
     this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
 
     this.add.image(0, 160, 'rocket_frames').setOrigin(0).setScale(1);
-    this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
+    //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
     console.log('create - Menu');
 
     this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
@@ -64,6 +64,7 @@ class Menu extends phaser.Scene {
 
   update(){
     this.player.update();
+    this.kitty.update();
   }
 
 }

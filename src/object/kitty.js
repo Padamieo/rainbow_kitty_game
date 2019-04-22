@@ -45,12 +45,13 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       // console.log('0x'+r+g+b);
       // this.colour = '0x'+r+g+b;
       // this.setTint('0x'+r+g+b);
-
+      this.alive = false;
+      this.y_velocity = 0;
     }
 
     update (game) {
-      var dt = game.time.elapsed;
-      this.x += toPlayerX * (0.05 * dt);
+      // var dt = game.time.elapsed;
+      // this.x += toPlayerX * (0.05 * dt);
 
       // if(this.body.position.x.toFixed(0) !== this.old.x || this.body.position.y.toFixed(0) !== this.old.y){
       //   console.log(this.body.position.x.toFixed(0), this.old.x );
@@ -64,6 +65,13 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       //       y:this.old.y
       //     });
       //   }
+      // }
+      var dt = this.scene.time.timeScale;
+      this.y = this.y - this.y_velocity;
+      this.y_velocity = this.y_velocity - 0.01 / dt;
+
+      // if(this.y > game.height-(game.height/10)){
+      //   this.dead = true;
       // }
     }
 
