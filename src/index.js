@@ -1,9 +1,9 @@
 import './index.css';
-
-import phaser from 'phaser';
-import Preload from './scenes/preload';
-import Menu from './scenes/menu';
 import Game from './scenes/game';
+import Menu from './scenes/menu';
+import phaser from 'phaser';
+import pkg from '../package.json';
+import Preload from './scenes/preload';
 
 var config = {
     type: Phaser.AUTO,
@@ -15,9 +15,11 @@ var config = {
     scale:{
       width: 405,
       height: 720,
-      mode: Phaser.Scale.FIT,
+      mode: Phaser.Scale.FIT, // Phaser.Scale.RESIZE,
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
+    version: pkg.version,
+    backgroundColor: 0x333333,
     fps: {
       target: 60,
     },

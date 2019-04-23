@@ -1,7 +1,7 @@
 // import phaser from 'phaser';
 
 import bb from 'assets/testsmall.png';
-import bg from 'assets/UIpack_vector.svg';
+import ui from 'assets/UIpack_vector.svg';
 import rocket from 'assets/rocket_test.svg';
 import kitty from 'assets/kitty_test.svg';
 import phaser from 'phaser';
@@ -19,7 +19,7 @@ class Menu extends phaser.Scene {
 
   preload() {
     this.load.image('bb', bb);
-    this.load.svg('bg', bg, { width: 1000, height:1000 });
+    this.load.svg('ui', ui, { width: 1000, height:1000 });
     this.load.svg('rocket', rocket, { width: 150, height:56 });
     this.load.svg('kitty', kitty, { width: 400, height:400 });
 
@@ -43,6 +43,18 @@ class Menu extends phaser.Scene {
 
     //this.load.image('all', turtle);
     console.log('preload - Menu');
+    var camera = this.cameras.main;
+    // var w = window.innerWidth;
+    // var h = window.innerHeight;
+    // var scale = Math.min(w / 405, h / 720);
+    // var width = w / scale;
+    // var height = h / scale;
+    // camera.setViewport(0, 0, 405, 405);
+    // camera.setBackgroundColor(0x001111);
+    // camera.setZoom(1);
+    // console.log(this);
+    // this.scene.setScale(2);
+    // camera.setScale(2);
   }
 
   create () {
@@ -55,6 +67,8 @@ class Menu extends phaser.Scene {
     this.add.image(0, 160, 'rocket_frames').setOrigin(0).setScale(1);
     //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
     console.log('create - Menu');
+
+    console.log(this.game.config.height);
 
     this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );

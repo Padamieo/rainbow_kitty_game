@@ -43,7 +43,9 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
     preUpdate (time, delta) {
       super.preUpdate(time, delta);
-      //this.y -= 5 * (0.05 * delta);
+      if(this.y > 0){
+        this.y -= (0.05 * delta);
+      }
     }
 
     onWorldBounds(){
