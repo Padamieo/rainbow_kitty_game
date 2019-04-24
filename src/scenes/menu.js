@@ -4,9 +4,11 @@ import bb from 'assets/testsmall.png';
 import ui from 'assets/UIpack_vector.svg';
 import rocket from 'assets/rocket_test.svg';
 import kitty from 'assets/kitty_test.svg';
+import wall from 'assets/background_wall_temp.png';
 
 import phaser from 'phaser';
 
+import Background from 'object/background';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rocket from 'object/rocket';
@@ -20,6 +22,7 @@ class Menu extends phaser.Scene {
 
   preload() {
     this.load.image('bb', bb);
+    this.load.image('wall', wall);
     this.load.svg('ui', ui, { width: 1000, height:1000 });
     this.load.svg('rocket', rocket, { width: 150, height:56 });
     this.load.svg('kitty', kitty, { width: 400, height:400 });
@@ -67,7 +70,9 @@ class Menu extends phaser.Scene {
     //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
     console.log('create - Menu');
 
-    console.log(this.game.config.height);
+    // console.log(this.game.config.height);
+
+    this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
 
     this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );

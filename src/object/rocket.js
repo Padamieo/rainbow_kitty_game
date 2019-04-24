@@ -21,13 +21,20 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
       this.setTint('0x'+r+g+b);
 
       this.type = 0;
+      this.max = 0.1;
+      this.speed = 0;
       this.reset();
     }
 
     preUpdate (time, delta) {
       super.preUpdate(time, delta);
-      if(this.y > 0){
-        this.y -= (0.05 * delta);
+      if(this.y > (0 - this.height)){
+        if(this.scene.kitty.fly){
+          this.speed = 0.05;
+        }else{
+          this.speed = 0.1;
+        }
+        this.y -= (this.speed * delta);
       }else{
         this.reset();
       }

@@ -79,7 +79,7 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
     preUpdate (time, delta) {
       super.preUpdate(time, delta);
       // console.log(this);
-      if(this.fly){
+      if(this.fly & this.alive){
         this.y -= (0.05 * delta);
       }else{
         if(this.y < this.scene.game.config.height){
