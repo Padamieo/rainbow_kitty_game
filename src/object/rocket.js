@@ -2,8 +2,8 @@ import phaser from 'phaser';
 
 // class Turt extends phaser.GameObjects.Sprite {
 class Rocket extends phaser.Physics.Arcade.Sprite {
-    constructor (scene, x, y) {
-      super(scene, x, y, 'rocket_frames');
+    constructor (scene) {
+      super(scene, 0, 0,'rocket_frames');
 
       //this.setTexture('all').setOrigin(0.5, 0.5);
       scene.add.existing(this);
@@ -20,32 +20,22 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
       this.colour = '0x'+r+g+b;
       this.setTint('0x'+r+g+b);
 
-    }
-
-    update (game) {
-      var dt = game.time.elapsed;
-      this.x += toPlayerX * (0.05 * dt);
-
-      // if(this.body.position.x.toFixed(0) !== this.old.x || this.body.position.y.toFixed(0) !== this.old.y){
-      //   console.log(this.body.position.x.toFixed(0), this.old.x );
-      //   this.old.x = this.body.position.x.toFixed(0);
-      //   this.old.y = this.body.position.y.toFixed(0);
-      //   // console.log('update', this.old);
-      //   if(window.game.socket.connected){
-      //     window.game.socket.emit('updateServer', {
-      //       id:this.id,
-      //       x:this.old.x,
-      //       y:this.old.y
-      //     });
-      //   }
-      // }
+      this.type = 0;
+      this.reset();
     }
 
     preUpdate (time, delta) {
       super.preUpdate(time, delta);
       if(this.y > 0){
         this.y -= (0.05 * delta);
+      }else{
+        this.reset();
       }
+    }
+
+    reset () {
+      this.x = Phaser.Math.Between(0, this.scene.game.config.width);
+      this.y = this.scene.game.config.height;
     }
 
     onWorldBounds(){

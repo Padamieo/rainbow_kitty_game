@@ -1,11 +1,10 @@
 import phaser from 'phaser';
 
-// class Turt extends phaser.GameObjects.Sprite {
 // Phaser.Geom.Circle
 class Player extends phaser.GameObjects.Graphics {
-    constructor (scene, x, y) {
-      super(scene, x, y);
-      // scene.add.existing(this);
+    constructor (scene, options) {
+      super(scene, options);
+      scene.add.existing(this);
 
       this.graphics = scene.add.graphics({
         lineStyle: {
@@ -19,77 +18,78 @@ class Player extends phaser.GameObjects.Graphics {
         }
       });
 
-      // this.circle = new Phaser.Geom.Circle(0, 0, 100);
-      // this.graphics2 = this.graphics.fillCircleShape(this.circle);
-      // this.graphics.strokeCircleShape(this.circle);
-      // var graphics = this.add.graphics({ fillStyle: { color: 0xff0000 } });
-      // graphics.fillCircleShape(circle);
+      this.duration = 1000;
+      this.full = this.scene.game.config.width/4;
+      this.size = 0;
       this.held = false;
+      this.start = 0;
+      this.end = 0;
+
     }
 
     callback() {
       // console.log('I am the call back');
     }
 
-    update () {
-      // var dt = game.time.elapsed;
-      this.graphics.clear();
-      if(this.scene.input.activePointer.isDown){
 
-        if(!this.held){
-          this.timer = this.scene.time.addEvent({
-            delay: 0,
-            callback: this.callback,
-            //args: [],
-            callbackScope: this,
-            repeat: 0,
-            loop: true,
-          });
-          this.held = true;
-        }else{
-          console.log(this.timer.getElapsed(), this.timer.getOverallProgress());
-          console.log(this.scene.kitty.alive);
-        }
+    draw (size) {
+      this.circle = new Phaser.Geom.Circle(
+        this.scene.input.activePointer.worldX,
+        this.scene.input.activePointer.worldY,
+        this.full);
+      this.graphics.strokeCircleShape(this.circle);
 
-        this.circle = new Phaser.Geom.Circle(
-          this.scene.input.activePointer.worldX,
-          this.scene.input.activePointer.worldY,
-          100);
-        this.graphics.strokeCircleShape(this.circle);
-
-        this.circle = new Phaser.Geom.Circle(
-          this.scene.input.activePointer.worldX,
-          this.scene.input.activePointer.worldY,
-          50);
-        this.graphics.fillCircleShape(this.circle);
-
-      }else{
-        if(this.timer){
-          this.timer.remove();
-        }
-        this.held = false;
-      }
-
-      // if(this.body.position.x.toFixed(0) !== this.old.x || this.body.position.y.toFixed(0) !== this.old.y){
-      //   console.log(this.body.position.x.toFixed(0), this.old.x );
-      //   this.old.x = this.body.position.x.toFixed(0);
-      //   this.old.y = this.body.position.y.toFixed(0);
-      //   // console.log('update', this.old);
-      //   if(window.game.socket.connected){
-      //     window.game.socket.emit('updateServer', {
-      //       id:this.id,
-      //       x:this.old.x,
-      //       y:this.old.y
-      //     });
-      //   }
-      // }
+      this.circle = new Phaser.Geom.Circle(
+        this.scene.input.activePointer.worldX,
+        this.scene.input.activePointer.worldY,
+        size);
+      this.graphics.fillCircleShape(this.circle);
     }
 
     preUpdate (time, delta) {
-      super.preUpdate(time, delta);
-      //this.y -= 5 * (0.05 * delta);
-      console.log(this);
-      console.log(this.scene.input.activePointer.isDown);
+      // super.preUpdate(time, delta);
+      this.graphics.clear();
+      if(this.scene.kitty.alive){
+        if(this.scene.input.activePointer.isDown){
+          if(!this.held){
+            this.start = time;
+            this.end = time + this.duration;
+            this.held = true;
+            this.size = 0;
+          }else{
+
+            var change = time - this.start;
+            if(this.size < this.full){
+              //var c = Phaser.Math.Wrap(change, 50, this.full);
+              this.size = change * (this.full / this.duration);
+            }
+          }
+
+          this.draw(this.size);
+          if(this.end <= time){
+            this.scene.kitty.fly = true;
+          }
+
+        }else{
+
+          if(this.end > time){
+              console.log('shoot');
+              this.end = 0;
+          }
+          this.held = false;
+          this.size = 0;
+          this.scene.kitty.fly = false;
+        }
+      }else{
+        if(this.scene.input.activePointer.isDown){
+          this.circle = new Phaser.Geom.Circle(
+            this.scene.input.activePointer.worldX,
+            this.scene.input.activePointer.worldY,
+            50);
+          this.graphics.fillStyle(0xff0000, 0.5);
+          this.graphics.fillCircleShape(this.circle);
+        }
+      }
     }
 
     onWorldBounds(){

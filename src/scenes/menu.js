@@ -4,11 +4,12 @@ import bb from 'assets/testsmall.png';
 import ui from 'assets/UIpack_vector.svg';
 import rocket from 'assets/rocket_test.svg';
 import kitty from 'assets/kitty_test.svg';
+
 import phaser from 'phaser';
 
-import Rocket from 'object/rocket';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
+import Rocket from 'object/rocket';
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -59,8 +60,6 @@ class Menu extends phaser.Scene {
 
   create () {
 
-
-
     this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
     this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
 
@@ -73,11 +72,10 @@ class Menu extends phaser.Scene {
     this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
-    this.player = new Player( this, this.cameras.main.centerX, this.cameras.main.centerY );
+    this.player = new Player( this );
   }
 
   update(){
-    this.player.update();
     this.kitty.update();
   }
 

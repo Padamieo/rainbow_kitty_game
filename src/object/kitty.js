@@ -45,8 +45,9 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       // console.log('0x'+r+g+b);
       // this.colour = '0x'+r+g+b;
       // this.setTint('0x'+r+g+b);
-      this.alive = false;
+      this.alive = true;
       this.y_velocity = 0;
+      this.fly = false;
     }
 
     update (game) {
@@ -78,9 +79,15 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
     preUpdate (time, delta) {
       super.preUpdate(time, delta);
       // console.log(this);
-      if(this.y < this.scene.game.config.height){
-        this.y += (0.05 * delta);
+      if(this.fly){
+        this.y -= (0.05 * delta);
+      }else{
+        if(this.y < this.scene.game.config.height){
+          this.y += (0.05 * delta);
+        }
       }
+
+
 
     }
 
