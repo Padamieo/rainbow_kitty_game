@@ -29,51 +29,15 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
         this.setRotation(phaser.Math.DegToRad(this.flipX ? -90 : 0));
       }, this);
 
-      this.moving = false;
-
       this.setPosition(x, y);
       this.old = {x:0, y:0};
       this.old.x = x;
       this.old.y = y;
       */
 
-      //colours
-      // var c = phaser.Display.Color.RandomRGB(0,256);
-      // var r = phaser.Display.Color.ComponentToHex(c.r);
-      // var g = phaser.Display.Color.ComponentToHex(c.g);
-      // var b = phaser.Display.Color.ComponentToHex(c.b);
-      // console.log('0x'+r+g+b);
-      // this.colour = '0x'+r+g+b;
-      // this.setTint('0x'+r+g+b);
       this.alive = true;
       this.y_velocity = 0;
       this.fly = false;
-    }
-
-    update (game) {
-      // var dt = game.time.elapsed;
-      // this.x += toPlayerX * (0.05 * dt);
-
-      // if(this.body.position.x.toFixed(0) !== this.old.x || this.body.position.y.toFixed(0) !== this.old.y){
-      //   console.log(this.body.position.x.toFixed(0), this.old.x );
-      //   this.old.x = this.body.position.x.toFixed(0);
-      //   this.old.y = this.body.position.y.toFixed(0);
-      //   // console.log('update', this.old);
-      //   if(window.game.socket.connected){
-      //     window.game.socket.emit('updateServer', {
-      //       id:this.id,
-      //       x:this.old.x,
-      //       y:this.old.y
-      //     });
-      //   }
-      // }
-      // var dt = this.scene.time.timeScale;
-      // this.y = this.y - this.y_velocity;
-      // this.y_velocity = this.y_velocity - 0.01 / dt;
-
-      // if(this.y > game.height-(game.height/10)){
-      //   this.dead = true;
-      // }
     }
 
     preUpdate (time, delta) {
@@ -86,8 +50,9 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
           this.y += (0.05 * delta);
         }
       }
-
-
+      // if(this.y > game.height-(game.height/10)){
+      //   this.dead = true;
+      // }
 
     }
 
