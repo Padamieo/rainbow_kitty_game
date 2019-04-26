@@ -113,11 +113,16 @@ class Menu extends phaser.Scene {
     //graphics.Smooth();
     graphics.fillStyle(0xaa0000);
     graphics.fillPoints(polygon.points, true);
+    graphics.generateTexture('test', 100, 100);
 
     //graphics.closePath();
     //graphics.strokePath();
 
     graphics.setScale(4);
+    console.log(graphics);
+    var sprite = this.add.sprite(100, 400, 'test');
+
+    var emitter = particles.createEmitter();
   }
 
   update(){
