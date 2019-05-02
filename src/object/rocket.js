@@ -12,13 +12,14 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
 
       //colours
-      var c = phaser.Display.Color.RandomRGB(0,256);
-      var r = phaser.Display.Color.ComponentToHex(c.r);
-      var g = phaser.Display.Color.ComponentToHex(c.g);
-      var b = phaser.Display.Color.ComponentToHex(c.b);
-      console.log('0x'+r+g+b);
-      this.colour = '0x'+r+g+b;
-      this.setTint('0x'+r+g+b);
+      // var c = phaser.Display.Color.RandomRGB(0,256);
+      // var r = phaser.Display.Color.ComponentToHex(c.r);
+      // var g = phaser.Display.Color.ComponentToHex(c.g);
+      // var b = phaser.Display.Color.ComponentToHex(c.b);
+      // console.log('0x'+r+g+b);
+      // this.colour = '0x'+r+g+b;
+
+      this.setTint(this.colour());
 
       this.type = 0;
       this.max = 0.1;
@@ -45,8 +46,19 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
       this.y = this.scene.game.config.height;
     }
 
-    onWorldBounds(){
-      console.log('onWorldBounds');
+    colour (type) {
+      var colour = '';
+      switch (type) {
+        case 1:
+          colour = 0x4EF24E;
+          break;
+        case 2:
+          colour = 0xFEFF0D;
+          break;
+        default:
+          colour = 0xf24e90;
+      }
+      return colour;
     }
 }
 

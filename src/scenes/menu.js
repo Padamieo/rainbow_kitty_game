@@ -123,6 +123,23 @@ class Menu extends phaser.Scene {
     var sprite = this.add.sprite(100, 400, 'test');
 
     var emitter = particles.createEmitter();
+
+    // this.add.text(50, 50, 'Hello World', { fontFamily: '"Arial"' });
+    // new Text(this, 50, 50, 'hallo', { fontFamily: '"Arial"' });
+
+    this.enemy_number = 2;
+    this.enemy_limit = 10;
+    this.enemies = [];
+    this.tick = scene.time.addEvent({
+      delay: 2000,
+      callback: this.callback,
+      loop: true
+    });
+
+  }
+
+  callback(){
+
   }
 
   update(){
