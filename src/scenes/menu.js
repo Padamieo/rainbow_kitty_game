@@ -74,7 +74,6 @@ class Menu extends phaser.Scene {
 
     // console.log(this.game.config.height);
 
-    this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
     this.player = new Player( this );
@@ -122,24 +121,37 @@ class Menu extends phaser.Scene {
     console.log(graphics);
     var sprite = this.add.sprite(100, 400, 'test');
 
-    var emitter = particles.createEmitter();
+    // var emitter = particles.createEmitter();
 
     // this.add.text(50, 50, 'Hello World', { fontFamily: '"Arial"' });
     // new Text(this, 50, 50, 'hallo', { fontFamily: '"Arial"' });
 
     this.enemy_number = 2;
     this.enemy_limit = 10;
-    this.enemies = [];
-    this.tick = scene.time.addEvent({
+    //this.enemies = [];
+    this.enemies = this.add.group();
+
+    this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
+
+    this.tick = this.time.addEvent({
       delay: 2000,
-      callback: this.callback,
+      callback: this.callback.bind(this),
       loop: true
     });
 
+    // this.keys = this.input.keyboard.addKeys('S,P');
+     // this.scene.resume('Menu');
+     // this.scene.pause("Menu");
+     // if(this.keys.S.isDown){
+     //   console.log('S');
+     // }
   }
 
   callback(){
-
+    //console.log('add');
+    if(this.enemies.getLength() < this.enemy_limit){
+      //new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
+    }
   }
 
   update(){
