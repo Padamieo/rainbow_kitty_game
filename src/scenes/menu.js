@@ -48,6 +48,7 @@ class Menu extends phaser.Scene {
 
     //this.load.image('all', turtle);
     console.log('preload - Menu');
+    /*
     var camera = this.cameras.main;
     var w = window.innerWidth;
     var h = window.innerHeight;
@@ -62,6 +63,7 @@ class Menu extends phaser.Scene {
     // console.log(this);
     // this.scene.setScale(2);
     // camera.setScale(2);
+    */
   }
 
   create () {
@@ -76,7 +78,6 @@ class Menu extends phaser.Scene {
 
     // console.log(this.game.config.height);
 
-    this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
     this.player = new Player( this );
@@ -128,6 +129,36 @@ class Menu extends phaser.Scene {
     this.input.on('pointerdown', function (pointer) {
       particles.emitParticleAt(100, 500);
     });
+
+    // this.add.text(50, 50, 'Hello World', { fontFamily: '"Arial"' });
+    // new Text(this, 50, 50, 'hallo', { fontFamily: '"Arial"' });
+
+    this.enemy_number = 2;
+    this.enemy_limit = 10;
+    //this.enemies = [];
+    this.enemies = this.add.group();
+
+    this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
+
+    this.tick = this.time.addEvent({
+      delay: 2000,
+      callback: this.callback.bind(this),
+      loop: true
+    });
+
+    // this.keys = this.input.keyboard.addKeys('S,P');
+     // this.scene.resume('Menu');
+     // this.scene.pause("Menu");
+     // if(this.keys.S.isDown){
+     //   console.log('S');
+     // }
+  }
+
+  callback(){
+    //console.log('add');
+    if(this.enemies.getLength() < this.enemy_limit){
+      //new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
+    }
   }
 
   update(){
