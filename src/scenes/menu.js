@@ -48,15 +48,17 @@ class Menu extends phaser.Scene {
 
     //this.load.image('all', turtle);
     console.log('preload - Menu');
-    //var camera = this.cameras.main;
-    // var w = window.innerWidth;
-    // var h = window.innerHeight;
-    // var scale = Math.min(w / 405, h / 720);
-    // var width = w / scale;
-    // var height = h / scale;
-    // camera.setViewport(0, 0, 405, 405);
-    // camera.setBackgroundColor(0x001111);
-    // camera.setZoom(1);
+    var camera = this.cameras.main;
+    var w = window.innerWidth;
+    var h = window.innerHeight;
+    var scale = Math.min(w / 405, h / 720);
+    var width = w / scale;
+    var height = h / scale;
+    camera.setViewport(0, 0, 405, 405);
+    camera.setBackgroundColor(0x001111);
+    camera.setZoom(1);
+    camera.setViewport(10,10,600,600);
+    // camera.scaleManager(Phaser.Scale.FIT);
     // console.log(this);
     // this.scene.setScale(2);
     // camera.setScale(2);
@@ -83,7 +85,6 @@ class Menu extends phaser.Scene {
 
     var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
 
-
     var polygon = new Phaser.Geom.Polygon([
       50, 5,
       20, 68,
@@ -100,29 +101,33 @@ class Menu extends phaser.Scene {
 
     var graphics = this.add.graphics({ x: 0, y: 0 });
 
-    //graphics.lineStyle(2, 0x00aa00);
-
-    //graphics.beginPath();
-
-    //graphics.moveTo(polygon.points[0].x, polygon.points[0].y);
-
-    // for (var i = 1; i < polygon.points.length; i++)
-    // {
-    // graphics.lineTo(polygon.points[i].x, polygon.points[i].y);
-    // }
-    //graphics.Smooth();
     graphics.fillStyle(0xaa0000);
     graphics.fillPoints(polygon.points, true);
     graphics.generateTexture('test', 100, 100);
 
-    //graphics.closePath();
-    //graphics.strokePath();
-
     graphics.setScale(4);
     console.log(graphics);
+
     var sprite = this.add.sprite(100, 400, 'test');
 
-    var emitter = particles.createEmitter();
+    var particles = this.add.particles('test');
+    var emitter = particles.createEmitter({
+        x: 100,
+        y: 500,
+        angle: { min: 0, max: -180 },
+        lifespan: 2000,
+        speed: 20,
+        accelerationY: { min:0, max: 100 },
+        gravityY: 200,
+        scale: { start: 0, end: 2 },
+        blendMode: 0,
+        frequency: 90,
+        on: true,
+        active: true
+    });
+    this.input.on('pointerdown', function (pointer) {
+      particles.emitParticleAt(100, 500);
+    });
   }
 
   update(){

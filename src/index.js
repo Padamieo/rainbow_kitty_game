@@ -15,7 +15,7 @@ var config = {
     scale:{
       width: 405,
       height: 720,
-      mode: Phaser.Scale.FIT, // Phaser.Scale.RESIZE,
+      mode: Phaser.Scale.RESIZE,
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
     version: pkg.version,
