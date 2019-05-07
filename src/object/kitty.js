@@ -5,16 +5,12 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
   constructor (scene, x, y) {
     super(scene, x, y, 'kitty_frames');
 
-    //this.setTexture('all').setOrigin(0.5, 0.5);
     scene.add.existing(this);
+
     /*
     this.setRotation(phaser.Math.DegToRad(180));
 
     this.anims.play('vertical_out', true);
-    this.flipX = false;
-    this.flipY = false;
-
-    this.direction = 0;
 
     this.on('animationupdate-vertical_crawl', () => {
       //console.log(this.anims.currentAnim.key);
@@ -29,10 +25,6 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       this.setRotation(phaser.Math.DegToRad(this.flipX ? -90 : 0));
     }, this);
 
-    this.setPosition(x, y);
-    this.old = {x:0, y:0};
-    this.old.x = x;
-    this.old.y = y;
     */
 
     this.alive = true;
@@ -41,17 +33,19 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
     this.speed = 0;
 
     this.half = this.height/2;
+    this.distance = this.scene.game.config.height-this.half;
     this.fall = 0.05;
   }
 
   preUpdate (time, delta) {
     super.preUpdate(time, delta);
-    // console.log(this);
+
     if(this.fly & this.alive){
       if(this.y < this.half){
         this.speed = 0;
       }else{
-        this.speed = 0.05;
+        var screen = Phaser.Math.Percent(this.y, this.half, this.distance);
+        this.speed = this.fall + screen/4;
       }
 
       this.y -= (this.speed * delta);
@@ -63,9 +57,6 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
         // dead
       }
     }
-    // if(this.y > game.height-(game.height/10)){
-    //   this.dead = true;
-    // }
 
   }
 }

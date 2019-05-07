@@ -82,9 +82,10 @@ class Menu extends phaser.Scene {
 
     this.player = new Player( this );
 
-    this.rainbow = new Rainbow( this );
-
     var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
+
+    //rainbow
+    this.rainbow = new Rainbow( this );
 
     var polygon = new Phaser.Geom.Polygon([
       50, 5,
@@ -105,37 +106,40 @@ class Menu extends phaser.Scene {
     graphics.fillStyle(0xaa0000);
     graphics.fillPoints(polygon.points, true);
     graphics.generateTexture('test', 100, 100);
-
     graphics.setScale(4);
-    console.log(graphics);
-
     var sprite = this.add.sprite(100, 400, 'test');
 
     var particles = this.add.particles('test');
     var emitter = particles.createEmitter({
         x: 100,
-        y: 500,
-        angle: { min: 0, max: -180 },
+        y: 100,
+        angle: { min: 140, max: 40 },
         lifespan: 2000,
         speed: 20,
-        accelerationY: { min:0, max: 100 },
+        accelerationY: { min:20, max: 100 },
         gravityY: 200,
         scale: { start: 0, end: 2 },
         blendMode: 0,
-        frequency: 90,
+        frequency: 140,
         on: true,
         active: true
     });
-    this.input.on('pointerdown', function (pointer) {
-      particles.emitParticleAt(100, 500);
+    console.log(this.kitty.x, this.kitty.y);
+
+    this.input.on('pointerdown', (pointer) => {
+      particles.emitParticleAt(this.kitty.x, this.kitty.y);
     });
 
-    // this.add.text(50, 50, 'Hello World', { fontFamily: '"Arial"' });
-    // new Text(this, 50, 50, 'hallo', { fontFamily: '"Arial"' });
+    // text
+    var text = this.add.text(this.game.config.width-80, 0, '999', { fontFamily: '"Arial"', fill: '#fff', fontSize: 30, align: 'right' });
+    // text.setOrigin(1);
+    text.setStroke('#de77ae', 5);
 
-    this.enemy_number = 2;
-    this.enemy_limit = 10;
-    //this.enemies = [];
+    // enemy manager
+    this.enemy = {};
+    this.enemy.number = 2;
+    this.enemy.limit = 10;
+    this.enemy.list = [];
     this.enemies = this.add.group();
 
     this.single_rocket = new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
@@ -156,7 +160,7 @@ class Menu extends phaser.Scene {
 
   callback(){
     //console.log('add');
-    if(this.enemies.getLength() < this.enemy_limit){
+    if(this.enemies.getLength() < this.enemy.limit){
       //new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     }
   }
