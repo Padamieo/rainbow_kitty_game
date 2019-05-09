@@ -27,6 +27,7 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
 
     */
 
+    this.dodge = true;
     this.alive = true;
     this.y_velocity = 0;
     this.fly = false;
@@ -55,6 +56,17 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
         this.y += (this.fall * delta);
       }else{
         // dead
+      }
+    }
+
+    if(this.dodge){
+      if(this.fly & this.alive){
+        // left and right limits
+        //if(this.y < this.half){
+      }else{
+
+        // reset center position
+        //this.x -= (0.01 * delta);
       }
     }
 

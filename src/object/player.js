@@ -68,6 +68,13 @@ class Player extends phaser.GameObjects.Graphics {
 
         if(this.end > time){
             console.log('shoot');
+
+            var bullet = this.scene.bullets.get();
+            console.log('hello', bullet);
+            if (bullet) {
+              bullet.fire(this.scene.kitty.x, this.scene.kitty.y);
+            }
+
             this.end = 0;
         }
         this.held = false;

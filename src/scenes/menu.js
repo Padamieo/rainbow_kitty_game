@@ -9,10 +9,11 @@ import wall from 'assets/background_wall_temp.png';
 import phaser from 'phaser';
 
 import Background from 'object/background';
+import Bullet from 'object/bullet';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
-import Rocket from 'object/rocket';
 import Rainbow from 'object/rainbow';
+import Rocket from 'object/rocket';
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -82,9 +83,12 @@ class Menu extends phaser.Scene {
 
     this.player = new Player( this );
 
-    var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
+    // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
+    this.bullets = new Bullet( this );
+
 
     //rainbow
+    /*
     this.rainbow = new Rainbow( this );
 
     var polygon = new Phaser.Geom.Polygon([
@@ -129,6 +133,7 @@ class Menu extends phaser.Scene {
     this.input.on('pointerdown', (pointer) => {
       particles.emitParticleAt(this.kitty.x, this.kitty.y);
     });
+    */
 
     // text
     var text = this.add.text(this.game.config.width-80, 0, '999', { fontFamily: '"Arial"', fill: '#fff', fontSize: 30, align: 'right' });
