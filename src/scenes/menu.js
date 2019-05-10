@@ -9,7 +9,7 @@ import wall from 'assets/background_wall_temp.png';
 import phaser from 'phaser';
 
 import Background from 'object/background';
-import Bullet from 'object/bullet';
+import Bullets from 'object/bullets';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
@@ -84,7 +84,7 @@ class Menu extends phaser.Scene {
     this.player = new Player( this );
 
     // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
-    this.bullets = new Bullet( this );
+    this.bullets = new Bullets( this );
 
 
     //rainbow
