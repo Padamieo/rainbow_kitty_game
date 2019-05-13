@@ -1,3 +1,4 @@
+import SAT from 'sat';
 
 var c = {
 
@@ -8,18 +9,22 @@ var c = {
     var x = obj.x;
     var y = obj.y;
     var a = obj.angle;
-    var l = obj.left;
-    var r = obj.right;
-    var t = obj.top;
-    var b = obj.bottom;
+
+    var l = x-(obj.width/2);
+    var r = x+obj.width-(obj.width/2);
+    var t = y-(obj.height/2);
+    var b = y+obj.height-(obj.height/2);
+
+    //console.log(l,r,t,b);
 
     var tl = c.rotate(x, y, l, t, a);
-    var tr = c.rotate(x, y, r, t, a);
-    var br = c.rotate(x, y, r, b, a);
-    var bl = c.rotate(x, y, l, b, a);
+    // var tr = c.rotate(x, y, r, t, a);
+    // var br = c.rotate(x, y, r, b, a);
+    // var bl = c.rotate(x, y, l, b, a);
+    //
+    // obj.poly = new P(new V(x, y), [ new V(tl[0], tl[1]), new V(tr[0], tr[1]), new V(br[0], br[1]), new V(bl[0], bl[1]) ]);
 
-    obj.poly = new P(new V(x, y), [ new V(tl[0], tl[1]), new V(tr[0], tr[1]), new V(br[0], br[1]), new V(bl[0], bl[1]) ]);
-
+    obj.poly = new P(new V(tl[0], tl[1]), [ new V(l, t), new V(r, t), new V(r, b), new V(l, b) ]);
   },
 
   ollision_square_square: function(obj_a, obj_b){
@@ -52,10 +57,10 @@ var c = {
 
   rotate: function(cx, cy, x, y, angle){
 
-    var posangle = (angle < 0 ? angle+Math.PI*2 : angle);
-    var radians = (Math.PI / 180) * posangle;
-    var cos = Math.cos(radians);
-    var sin = Math.sin(radians);
+    // var posangle = (angle < 0 ? angle+Math.PI*2 : angle);
+    // var radians = (Math.PI / 180) * posangle;
+    var cos = Math.cos(angle);
+    var sin = Math.sin(angle);
     var nx = (x - cx) * cos - (y - cy) * sin;
     var ny = (y - cy) * cos + (x - cx) * sin;
 

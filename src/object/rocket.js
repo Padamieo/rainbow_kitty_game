@@ -26,14 +26,15 @@ class Rocket extends phaser.GameObjects.Sprite {
       this.setDepth(2);
 
       // hide
-      this.rect = scene.add.rectangle(0, 0, this.width, this.width, 0xfffff0);
-      this.rect.setFillStyle(0xfffff0, 0.4);
+      this.rect = scene.add.rectangle(0, 0, this.width, this.height, 0xfffff0);
+      this.rect.setFillStyle(0x00ff00, 0.4);
       this.rect.setDepth(3);
 
       // exhaust to be replaced by shape
       this.exhaust = scene.add.rectangle(0, 0, this.width/2, this.width, 0xfeffcf);
       this.exhaust.setFillStyle(0xfeffcf, 0.8);
       this.exhaust.setDepth(1);
+
 
       this.setTint(this.colour(this.type));
       this.reset();

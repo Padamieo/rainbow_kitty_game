@@ -171,33 +171,60 @@ class Menu extends phaser.Scene {
   }
 
   update(){
-    //console.log('a');
-    // c.alculate_cordinates(this.bullets);
-    // c.alculate_cordinates(this.enemies);
-    //
-    // console.log(this.bullets.countActive());
-    // for (var b = 0, b = this.bullets.getLength(); b < b; b++){
-    //   if(this.bullets.children[b].alive){
-    //     console.log(b);
-    //   }
-    // }
 
-    // for (var i3 = 0, l3 = this.game.bulletPool.children.length; i3 < l3; i3++){
-    //   if(this.game.bulletPool.children[i3].alive){
-    //     for (var i4 = 0, l4 = this.game.enemies.children.length; i4 < l4; i4++){
-    //       if(this.game.enemies.children[i4].alive){
-    //         var c_bullet_enemies = c.ollision_square_square(this.game.enemies.children[i4], this.game.bulletPool.children[i3]);
-    //         if(c_bullet_enemies){
-    //           this.game.enemies.children[i4].kill();
-    //           this.game.bulletPool.children[i3].kill();
-    //           this.game.score = this.game.score + 1;
-    //           this.game.kills = this.game.kills + 1;
-    //           text_score.setText(this.game.score);
-    //         }
-    //       }
-    //     }
-    //   }
-    // }
+    if (this.bullets.countActive() > 0 ){
+      for (var b = 0, l = this.bullets.countActive(); b < l; b++){
+        c.alculate_rotated_square(this.bullets.children.entries[b]);
+      }
+    }
+
+    if (this.enemies.countActive() > 0 ){
+      for (var e = 0, l = this.enemies.countActive(); e < l; e++){
+        c.alculate_rotated_square(this.enemies.children.entries[e]);
+
+        /*
+        //console.log(this.scene.enemies.children.entries[e]);
+        var ee = this.enemies.children.entries[e];
+        var d = Phaser.Math.Distance.Between(this.x, this.y, ee.x, ee.y);
+        if(d < 100){
+          c.alculate_rotated_square(this);
+          c.alculate_rotated_square(this.scene.enemies.children.entries[e]);
+          // c.alculate_cordinates(this.scene.bullets.children.entries);
+          var c_bullet_enemies = c.ollision_square_square(this.scene.enemies.children.entries[e], this);
+
+          if(c_bullet_enemies){
+            this.create(this.scene.enemies.children.entries[e].poly);
+            this.create(this.poly);
+
+
+            this.setActive(false);
+            this.scene.enemies.children.entries[e].setActive(false);
+          }
+        }
+        */
+      }
+    }
+
+    if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
+      for (var b = 0, l = this.bullets.countActive(); b <= l; b++){
+        for (var e = 0, i = this.enemies.countActive(); e <= i; e++){
+          console.log(this.enemies);
+          var d = Phaser.Math.Distance.Between(
+            this.enemies.children.entries[e].x,
+            this.enemies.children.entries[e].y,
+            this.bullets.children.entries[b].x,
+            this.bullets.children.entries[b].y
+          );
+          console.log(d);
+          if(d < 100){
+            this.enemies.children.entries[e].setActive(false);
+            this.bullets.children.entries[b].setActive(false);
+          }
+        }
+      }
+    }
+
+
 
   }
 }

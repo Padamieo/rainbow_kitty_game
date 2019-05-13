@@ -1,4 +1,5 @@
 import phaser from 'phaser';
+import c from '../collision';
 
 // class Turt extends phaser.GameObjects.Sprite {
 class Bullets extends Phaser.GameObjects.Group {
@@ -59,25 +60,61 @@ class Bullets extends Phaser.GameObjects.Group {
             this.setActive(false);
             // this.setVisible(false);
           }
-
+          /*
           if (this.scene.enemies.countActive() > 0 ){
-            var group = this.scene.enemies.getChildren();
-            //console.log(group);
             for (var e = 0, l = this.scene.enemies.countActive(); e < l; e++){
               //console.log(this.scene.enemies.children.entries[e]);
               var ee = this.scene.enemies.children.entries[e];
               var d = Phaser.Math.Distance.Between(this.x, this.y, ee.x, ee.y);
-              if(d < 10){
-                console.log('boom');
-                this.setActive(false);
-                this.scene.enemies.children.entries[e].setActive(false);
+              if(d < 100){
+                c.alculate_rotated_square(this);
+                c.alculate_rotated_square(this.scene.enemies.children.entries[e]);
+                // c.alculate_cordinates(this.scene.bullets.children.entries);
+                var c_bullet_enemies = c.ollision_square_square(this.scene.enemies.children.entries[e], this);
+
+                if(c_bullet_enemies){
+                  this.create(this.scene.enemies.children.entries[e].poly);
+                  this.create(this.poly);
+
+
+                  this.setActive(false);
+                  this.scene.enemies.children.entries[e].setActive(false);
+                }
               }
 
             }
           }
+          */
 
+        },
 
+        createOutline: function (polygon) {
+          console.log(polygon);
+          // console.log(poly)
+          // var polygon = new Phaser.Geom.Polygon([
+          //   poly.points[0].x, poly.points[0].y,
+          //   poly.points[1].x, poly.points[1].y,
+          //   poly.points[2].x, poly.points[2].y,
+          //   poly.points[3].x, poly.points[3].y,
+          // ]);
+
+          var graphics = this.scene.add.graphics({ x: 0, y: 0 });
+
+          graphics.lineStyle(1, 0xff0000);
+
+          graphics.beginPath();
+
+          graphics.moveTo(polygon.points[0].x, polygon.points[0].y);
+
+          for (var i = 1; i < polygon.points.length; i++) {
+            graphics.lineTo(polygon.points[i].x, polygon.points[i].y);
+          }
+
+          graphics.closePath();
+          graphics.strokePath();
+          graphics.setDepth(8);
         }
+
     });
 
     super(scene, Bullet, {
