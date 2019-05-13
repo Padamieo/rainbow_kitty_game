@@ -10,6 +10,7 @@ import phaser from 'phaser';
 
 import Background from 'object/background';
 import Bullets from 'object/bullets';
+import Bullet from 'object/bullet';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
@@ -67,6 +68,19 @@ class Menu extends phaser.Scene {
     // this.scene.setScale(2);
     // camera.setScale(2);
     */
+
+    var polygon = new Phaser.Geom.Polygon([
+      0, 0,
+      10, 0,
+      10, 20,
+      0, 20
+    ]);
+    var graphics = this.add.graphics({ x: 0, y: 0 });
+    graphics.fillStyle(0x99ff22);
+    graphics.fillPoints(polygon.points, true);
+    graphics.generateTexture('laser_bullet', 10, 20);
+    graphics.clear();
+
   }
 
   create () {
@@ -85,7 +99,8 @@ class Menu extends phaser.Scene {
     this.player = new Player( this );
 
     // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
-    this.bullets = new Bullets( this );
+    this.bullets = this.add.group();
+    this.bullet = new Bullet( this );
 
     //rainbow
     /*
@@ -208,24 +223,34 @@ class Menu extends phaser.Scene {
     if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
       for (var b = 0, l = this.bullets.countActive(); b <= l; b++){
         for (var e = 0, i = this.enemies.countActive(); e <= i; e++){
-          console.log(this.enemies);
-          var d = Phaser.Math.Distance.Between(
-            this.enemies.children.entries[e].x,
-            this.enemies.children.entries[e].y,
-            this.bullets.children.entries[b].x,
-            this.bullets.children.entries[b].y
-          );
-          console.log(d);
-          if(d < 100){
-            this.enemies.children.entries[e].setActive(false);
-            this.bullets.children.entries[b].setActive(false);
-          }
+          // console.log(this.enemies);
+          // var d = Phaser.Math.Distance.Between(
+          //   this.enemies.children.entries[e].x,
+          //   this.enemies.children.entries[e].y,
+          //   this.bullets.children.entries[b].x,
+          //   this.bullets.children.entries[b].y
+          // );
+          // console.log(d);
+          // if(d < 100){
+          //   this.enemies.children.entries[e].setActive(false);
+          //   this.bullets.children.entries[b].setActive(false);
+          // }
         }
       }
     }
+  }
 
-
-
+  bulletFire(ax, ay){
+    var x = this.kitty.x + this.kitty.half/2;
+    var y = this.kitty.y;
+    //this.setPosition(x, y);
+    new Bullet( this, x, y );
+    console.log(this.bullets);
+    // var direction = phaser.Math.Angle.Between(x, y, ax, ay);
+    // this.direction = direction;
+    // this.setRotation(this.direction + Math.PI/2);
+    // this.setActive(true);
+    // this.setVisible(true);
   }
 }
 export default Menu;
