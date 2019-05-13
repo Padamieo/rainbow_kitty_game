@@ -1,26 +1,17 @@
 import phaser from 'phaser';
 
 // class Turt extends phaser.GameObjects.Sprite {
-class Rocket extends phaser.Physics.Arcade.Sprite {
+// phaser.Physics.Arcade.Sprite
+class Rocket extends phaser.GameObjects.Sprite {
     constructor (scene) {
       super(scene, 0, 0,'rocket_frames');
 
       //this.setTexture('all').setOrigin(0.5, 0.5);
       scene.add.existing(this);
-      scene.physics.add.existing(this);
+      // scene.physics.add.existing(this);
       // this.setRotation(phaser.Math.DegToRad(45));
 
-      //colours
-      // var c = phaser.Display.Color.RandomRGB(0,256);
-      // var r = phaser.Display.Color.ComponentToHex(c.r);
-      // var g = phaser.Display.Color.ComponentToHex(c.g);
-      // var b = phaser.Display.Color.ComponentToHex(c.b);
-      // console.log('0x'+r+g+b);
-      // this.colour = '0x'+r+g+b;
-
-      this.setTint(this.colour());
-
-      this.type = 2;
+      this.type = 0;
       this.max = 0.1;
       this.speed = 0;
 
@@ -32,6 +23,19 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
       this.gap = this.scene.game.config.width/28;
 
+      this.setDepth(2);
+
+      // hide
+      this.rect = scene.add.rectangle(0, 0, this.width, this.width, 0xfffff0);
+      this.rect.setFillStyle(0xfffff0, 0.4);
+      this.rect.setDepth(3);
+
+      // exhaust to be replaced by shape
+      this.exhaust = scene.add.rectangle(0, 0, this.width/2, this.width, 0xfeffcf);
+      this.exhaust.setFillStyle(0xfeffcf, 0.8);
+      this.exhaust.setDepth(1);
+
+      this.setTint(this.colour(this.type));
       this.reset();
     }
 
@@ -45,15 +49,26 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
         }
         this.y -= (this.speed * delta);
 
-        if(this.type === 1){
-          this.aim();
-        }
-        if(this.type === 2){
-          this.winder(time);
-        }
+        this.movement(time, delta);
 
       }else{
         this.reset();
+      }
+      this.rect.x = this.x;
+      this.rect.y = this.y;
+      this.rect.rotation = this.rotation;
+      //console.log(this.rect);
+
+      this.exhaust.x = this.x;
+      this.exhaust.y = this.y+this.height/2;
+    }
+
+    movement(time, delta){
+      if(this.type === 1){
+        this.aim();
+      }
+      if(this.type === 2){
+        this.winder(time);
       }
     }
 
@@ -96,13 +111,22 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
       var colour = '';
       switch (type) {
         case 1:
-          colour = 0x4EF24E;
+          colour = 0x00DFFC;
           break;
         case 2:
+          colour = 0x4EF24E;
+          break;
+        case 3:
           colour = 0xFEFF0D;
           break;
-        default:
+        case 4:
+          colour = 0xFFAA00;
+          break;
+        case 5:
           colour = 0xf24e90;
+          break;
+        default:
+          colour = 0xFF003C;
       }
       return colour;
     }

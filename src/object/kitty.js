@@ -53,7 +53,7 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
 
     }else{
       if(this.y < this.scene.game.config.height){
-        this.y += (this.fall * delta);
+        //this.y += (this.fall * delta);
       }else{
         // dead
       }

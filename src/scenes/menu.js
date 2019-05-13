@@ -15,6 +15,8 @@ import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Rocket from 'object/rocket';
 
+import c from 'collision';
+
 class Menu extends phaser.Scene {
   constructor(test) {
     super({
@@ -68,7 +70,6 @@ class Menu extends phaser.Scene {
   }
 
   create () {
-
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
 
     this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
@@ -85,7 +86,6 @@ class Menu extends phaser.Scene {
 
     // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
     this.bullets = new Bullets( this );
-
 
     //rainbow
     /*
@@ -171,8 +171,34 @@ class Menu extends phaser.Scene {
   }
 
   update(){
+    //console.log('a');
+    // c.alculate_cordinates(this.bullets);
+    // c.alculate_cordinates(this.enemies);
+    //
+    // console.log(this.bullets.countActive());
+    // for (var b = 0, b = this.bullets.getLength(); b < b; b++){
+    //   if(this.bullets.children[b].alive){
+    //     console.log(b);
+    //   }
+    // }
+
+    // for (var i3 = 0, l3 = this.game.bulletPool.children.length; i3 < l3; i3++){
+    //   if(this.game.bulletPool.children[i3].alive){
+    //     for (var i4 = 0, l4 = this.game.enemies.children.length; i4 < l4; i4++){
+    //       if(this.game.enemies.children[i4].alive){
+    //         var c_bullet_enemies = c.ollision_square_square(this.game.enemies.children[i4], this.game.bulletPool.children[i3]);
+    //         if(c_bullet_enemies){
+    //           this.game.enemies.children[i4].kill();
+    //           this.game.bulletPool.children[i3].kill();
+    //           this.game.score = this.game.score + 1;
+    //           this.game.kills = this.game.kills + 1;
+    //           text_score.setText(this.game.score);
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
 
   }
-
 }
 export default Menu;

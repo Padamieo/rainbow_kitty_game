@@ -15,7 +15,7 @@ var config = {
     scale:{
       width: 405,
       height: 720,
-      mode: Phaser.Scale.FIT, // Phaser.Scale.RESIZE,
+      mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH
     },
     version: pkg.version,
@@ -42,3 +42,8 @@ var config = {
   window.game = new phaser.Game(config);
 //});
 // game.setGameSize(600,600);
+
+// window.onresize = function () {
+//   window.game.renderer.resize(window.innerWidth, window.innerHeight);
+//   window.game.events.emit('resize');
+// }
