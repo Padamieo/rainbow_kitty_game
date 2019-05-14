@@ -68,7 +68,10 @@ class Menu extends phaser.Scene {
     // this.scene.setScale(2);
     // camera.setScale(2);
     */
+    this.generateBulletShape();
+  }
 
+  generateBulletShape () {
     var polygon = new Phaser.Geom.Polygon([
       0, 0,
       10, 0,
@@ -80,7 +83,6 @@ class Menu extends phaser.Scene {
     graphics.fillPoints(polygon.points, true);
     graphics.generateTexture('laser_bullet', 10, 20);
     graphics.clear();
-
   }
 
   create () {
@@ -99,8 +101,18 @@ class Menu extends phaser.Scene {
     this.player = new Player( this );
 
     // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
-    this.bullets = this.add.group();
-    this.bullet = new Bullet( this );
+    this.bullets = this.add.group({
+      classType: Bullet,
+      defaultKey: null,
+      defaultFrame: null,
+      active: true,
+      maxSize: 1,
+      runChildUpdate: false,
+      createCallback: null,
+      removeCallback: null,
+      createMultipleCallback: null
+    });
+    // this.bullet = new Bullet( this );
 
     //rainbow
     /*
@@ -185,72 +197,70 @@ class Menu extends phaser.Scene {
     }
   }
 
+  creates (polygon, color) {
+    //console.log(polygon);
+    var graphics = this.add.graphics({ x: 0, y: 0 });
+    // var color = new Phaser.Display.Color(0, 100, 100);
+    // color.random();
+    graphics.lineStyle(1, ( color ? color : 0xfff000));
+
+    graphics.beginPath();
+
+    graphics.moveTo(polygon.points[0].x, polygon.points[0].y);
+
+    for (var i = 1; i < polygon.points.length; i++) {
+      graphics.lineTo(polygon.points[i].x, polygon.points[i].y);
+    }
+
+    graphics.closePath();
+    graphics.strokePath();
+    graphics.setDepth(8);
+  }
+
   update(){
 
-    if (this.bullets.countActive() > 0 ){
-      for (var b = 0, l = this.bullets.countActive(); b < l; b++){
+    //if (this.bullets.countActive() > 0 ){
+      for (var b = 0, l = this.bullets.getLength(); b < l; b++){
         c.alculate_rotated_square(this.bullets.children.entries[b]);
       }
-    }
+    //}
 
-    if (this.enemies.countActive() > 0 ){
-      for (var e = 0, l = this.enemies.countActive(); e < l; e++){
+    //if (this.enemies.countActive() > 0 ){
+      for (var e = 0, l = this.enemies.getLength(); e < l; e++){
         c.alculate_rotated_square(this.enemies.children.entries[e]);
+      }
+    //}
 
-        /*
-        //console.log(this.scene.enemies.children.entries[e]);
-        var ee = this.enemies.children.entries[e];
-        var d = Phaser.Math.Distance.Between(this.x, this.y, ee.x, ee.y);
-        if(d < 100){
-          c.alculate_rotated_square(this);
-          c.alculate_rotated_square(this.scene.enemies.children.entries[e]);
-          // c.alculate_cordinates(this.scene.bullets.children.entries);
-          var c_bullet_enemies = c.ollision_square_square(this.scene.enemies.children.entries[e], this);
+    //if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
+      for (var bx = 0, l = this.bullets.getLength(); bx < l; bx++){
+        for (var ex = 0, i = this.enemies.getLength(); ex < i; ex++){
+          // console.log(this.enemies);
+          var d = Phaser.Math.Distance.Between(
+            this.enemies.children.entries[ex].x,
+            this.enemies.children.entries[ex].y,
+            this.bullets.children.entries[bx].x,
+            this.bullets.children.entries[bx].y
+          );
+          if(d < 30){
+            this.creates(this.enemies.children.entries[ex].poly, 0xff0000);
+            this.creates(this.bullets.children.entries[bx].poly, 0xff0000);
 
-          if(c_bullet_enemies){
-            this.create(this.scene.enemies.children.entries[e].poly);
-            this.create(this.poly);
+            var c_bullet_enemies = c.ollision_square_square(
+              this.enemies.children.entries[ex],
+              this.bullets.children.entries[bx]
+            );
+            if (c_bullet_enemies){
+              this.creates(this.enemies.children.entries[ex].poly);
+              this.creates(this.bullets.children.entries[bx].poly);
+              this.enemies.children.entries[ex].setActive(false);
+              this.bullets.children.entries[bx].setActive(false);
+            }
 
-
-            this.setActive(false);
-            this.scene.enemies.children.entries[e].setActive(false);
           }
         }
-        */
       }
-    }
+    //}
 
-    if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
-      for (var b = 0, l = this.bullets.countActive(); b <= l; b++){
-        for (var e = 0, i = this.enemies.countActive(); e <= i; e++){
-          // console.log(this.enemies);
-          // var d = Phaser.Math.Distance.Between(
-          //   this.enemies.children.entries[e].x,
-          //   this.enemies.children.entries[e].y,
-          //   this.bullets.children.entries[b].x,
-          //   this.bullets.children.entries[b].y
-          // );
-          // console.log(d);
-          // if(d < 100){
-          //   this.enemies.children.entries[e].setActive(false);
-          //   this.bullets.children.entries[b].setActive(false);
-          // }
-        }
-      }
-    }
-  }
-
-  bulletFire(ax, ay){
-    var x = this.kitty.x + this.kitty.half/2;
-    var y = this.kitty.y;
-    //this.setPosition(x, y);
-    new Bullet( this, x, y );
-    console.log(this.bullets);
-    // var direction = phaser.Math.Angle.Between(x, y, ax, ay);
-    // this.direction = direction;
-    // this.setRotation(this.direction + Math.PI/2);
-    // this.setActive(true);
-    // this.setVisible(true);
-  }
+  }//update
 }
 export default Menu;

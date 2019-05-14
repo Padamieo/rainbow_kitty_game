@@ -5,7 +5,7 @@ class Bullet extends phaser.GameObjects.Sprite {
     super(scene, 0, 0,'laser_bullet');
 
     scene.add.existing(this);
-    scene.bullets.add(this);
+    // scene.bullets.add(this);
 
     this.direction = this.rotation;
   }
@@ -25,7 +25,7 @@ class Bullet extends phaser.GameObjects.Sprite {
     }
   }
 
-  bulletFire(ax, ay){
+  fire(ax, ay){
     var x = this.scene.kitty.x + this.scene.kitty.half/2;
     var y = this.scene.kitty.y;
     this.setPosition(x, y);

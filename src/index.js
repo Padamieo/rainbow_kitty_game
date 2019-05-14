@@ -21,14 +21,14 @@ var config = {
     version: pkg.version,
     backgroundColor: 0x333333,
     fps: {
-      target: 60,
+      target: 5,
     },
     queue: true,
     physics: {
       default: 'arcade',
       arcade: {
         debug: true,
-        fps: 60,
+        fps: 5,
       }
     },
     scene: [
