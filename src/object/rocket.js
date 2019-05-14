@@ -11,7 +11,7 @@ class Rocket extends phaser.GameObjects.Sprite {
       // scene.physics.add.existing(this);
       // this.setRotation(phaser.Math.DegToRad(45));
 
-      this.type = 0;
+      this.type = 2;
       this.max = 0.1;
       this.speed = 0;
 

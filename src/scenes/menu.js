@@ -16,7 +16,8 @@ import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Rocket from 'object/rocket';
 
-import c from 'collision';
+// import c from 'collision';
+import SAT from 'sat';
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -220,20 +221,40 @@ class Menu extends phaser.Scene {
   update(){
 
     //if (this.bullets.countActive() > 0 ){
-      for (var b = 0, l = this.bullets.getLength(); b < l; b++){
-        c.alculate_rotated_square(this.bullets.children.entries[b]);
-      }
+      // for (var b = 0, l = this.bullets.getLength(); b < l; b++){
+      //   c.alculate_rotated_square(this.bullets.children.entries[b]);
+      // }
     //}
 
     //if (this.enemies.countActive() > 0 ){
-      for (var e = 0, l = this.enemies.getLength(); e < l; e++){
-        c.alculate_rotated_square(this.enemies.children.entries[e]);
-      }
+      // for (var e = 0, l = this.enemies.getLength(); e < l; e++){
+      //   c.alculate_rotated_square(this.enemies.children.entries[e]);
+      // }
     //}
 
     //if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
       for (var bx = 0, l = this.bullets.getLength(); bx < l; bx++){
+        var V = SAT.Vector;
+        var P = SAT.Polygon;
+        var x = this.bullets.children.entries[bx].x;
+        var y = this.bullets.children.entries[bx].y;
+        var tl = this.bullets.children.entries[bx].getTopLeft();
+        var tr = this.bullets.children.entries[bx].getTopRight();
+        var br = this.bullets.children.entries[bx].getBottomRight();
+        var bl = this.bullets.children.entries[bx].getBottomLeft();
+        var objB = new P(new V(x, y), [ new V(tl.x, tl.y), new V(tr.x, tr.y), new V(br.x, br.y), new V(bl.x, bl.y) ]);
+
         for (var ex = 0, i = this.enemies.getLength(); ex < i; ex++){
+
+          var V = SAT.Vector;
+          var P = SAT.Polygon;
+          var x = this.enemies.children.entries[ex].x;
+          var y = this.enemies.children.entries[ex].y;
+          var tl = this.enemies.children.entries[ex].getTopLeft();
+          var tr = this.enemies.children.entries[ex].getTopRight();
+          var br = this.enemies.children.entries[ex].getBottomRight();
+          var bl = this.enemies.children.entries[ex].getBottomLeft();
+          var objA = new P(new V(x, y), [ new V(tl.x+10, tl.y), new V(tr.x-10, tr.y), new V(br.x, br.y), new V(bl.x, bl.y) ]);
           // console.log(this.enemies);
           var d = Phaser.Math.Distance.Between(
             this.enemies.children.entries[ex].x,
@@ -242,16 +263,20 @@ class Menu extends phaser.Scene {
             this.bullets.children.entries[bx].y
           );
           if(d < 30){
-            this.creates(this.enemies.children.entries[ex].poly, 0xff0000);
-            this.creates(this.bullets.children.entries[bx].poly, 0xff0000);
 
-            var c_bullet_enemies = c.ollision_square_square(
-              this.enemies.children.entries[ex],
-              this.bullets.children.entries[bx]
-            );
-            if (c_bullet_enemies){
-              this.creates(this.enemies.children.entries[ex].poly);
-              this.creates(this.bullets.children.entries[bx].poly);
+
+            // var c_bullet_enemies = c.ollision_square_square(
+            //   this.enemies.children.entries[ex],
+            //   this.bullets.children.entries[bx]
+            // );
+            var response = new SAT.Response();
+            var result = SAT.testPolygonPolygon(objA, objB, response);
+            if(this.enemies.children.entries[ex].active){
+              console.log(response, result);
+            }
+            if (result){
+              this.creates(objB, 0xff0000);
+              this.creates(objA, 0xffff00);
               this.enemies.children.entries[ex].setActive(false);
               this.bullets.children.entries[bx].setActive(false);
             }
