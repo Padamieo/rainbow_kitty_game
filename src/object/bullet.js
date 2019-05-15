@@ -1,12 +1,12 @@
 import phaser from 'phaser';
 
-class Bullet extends phaser.GameObjects.Sprite {
+class Bullet extends phaser.Physics.Arcade.Sprite {
   constructor (scene) {
     super(scene, 0, 0,'laser_bullet');
 
     scene.add.existing(this);
     // scene.bullets.add(this);
-
+    scene.physics.add.existing(this);
     this.direction = this.rotation;
   }
 

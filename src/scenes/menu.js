@@ -70,6 +70,7 @@ class Menu extends phaser.Scene {
     // camera.setScale(2);
     */
     this.generateBulletShape();
+    this.generateExhaustShape();
   }
 
   generateBulletShape () {
@@ -86,7 +87,26 @@ class Menu extends phaser.Scene {
     graphics.clear();
   }
 
+  generateExhaustShape () {
+    var polygon = new Phaser.Geom.Polygon([
+      25, 0,
+      45, 20,
+      50, 40,
+      25, 100,
+      0, 40,
+      5, 20,
+      25, 0
+    ]);
+    var graphics = this.add.graphics({ x: 0, y: 0 });
+    graphics.fillStyle(0xfeffcf);
+    graphics.fillPoints(polygon.points, true);
+    // graphics.setScale(0.4);
+    graphics.generateTexture('exhaust', 50, 100);
+    // graphics.clear();
+  }
+
   create () {
+
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
 
     this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
@@ -94,7 +114,6 @@ class Menu extends phaser.Scene {
 
     this.add.image(0, 160, 'rocket_frames').setOrigin(0).setScale(1);
     //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
-
     // console.log(this.game.config.height);
 
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
@@ -113,6 +132,8 @@ class Menu extends phaser.Scene {
       removeCallback: null,
       createMultipleCallback: null
     });
+
+    this.generateExhaustShape();
     // this.bullet = new Bullet( this );
 
     //rainbow
@@ -171,7 +192,7 @@ class Menu extends phaser.Scene {
     // enemy manager
     this.enemy = {};
     this.enemy.number = 2;
-    this.enemy.limit = 10;
+    this.enemy.limit = 2;
     this.enemy.list = [];
     this.enemies = this.add.group();
 
@@ -189,6 +210,66 @@ class Menu extends phaser.Scene {
      // if(this.keys.S.isDown){
      //   console.log('S');
      // }
+
+     this.physics.add.overlap(this.enemies, this.bullets, this.spriteHitHealth.bind(this));
+  }
+
+  spriteHitHealth(a, b) {
+    if(a.active === true && b.active === true){
+      console.log('awkward', a, b);
+
+      var V = SAT.Vector;
+      var P = SAT.Polygon;
+      var B = SAT.Box;
+
+      var x = a.x;
+      var y = a.y;
+      var tl = a.getTopLeft();
+      var tr = a.getTopRight();
+      var br = a.getBottomRight();
+      var bl = a.getBottomLeft();
+      // var objA = new P(new V(x, y), [
+      //   new V(tl.x+10, tl.y),
+      //   new V(tr.x-10, tr.y),
+      //   new V(br.x, br.y),
+      //   new V(bl.x, bl.y)
+      // ]);
+      var objA = new P(new V(x, y), [
+        new V(tl.x, tl.y),
+        new V(bl.x, bl.y),
+        new V(br.x, br.y),
+        new V(tr.x, tr.y),
+      ]);
+      //console.log(x, y, tl, br, objA);
+
+      var x = b.x;
+      var y = b.y;
+      var tl = b.getTopLeft();
+      var tr = b.getTopRight();
+      var br = b.getBottomRight();
+      var bl = b.getBottomLeft();
+      var objB = new P(new V(x, y), [
+        new V(tl.x, tl.y),
+        new V(bl.x, bl.y),
+        new V(br.x, br.y),
+        new V(tr.x, tr.y),
+      ]);
+      //console.log(x, y, tl, br, objB);
+
+      //console.log(this);
+      this.creates(objA, 0x44ff66);
+      this.creates(objB, 0xffff66);
+
+      var response = new SAT.Response();
+      var result = SAT.testPolygonPolygon(objA, objB, response);
+
+      console.log(response, result);
+      if(result){
+        a.setActive(false);
+        b.setActive(false);
+      }
+
+    }
   }
 
   callback(){
@@ -233,6 +314,7 @@ class Menu extends phaser.Scene {
     //}
 
     //if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
+    /*
       for (var bx = 0, l = this.bullets.getLength(); bx < l; bx++){
         var V = SAT.Vector;
         var P = SAT.Polygon;
@@ -264,7 +346,6 @@ class Menu extends phaser.Scene {
           );
           if(d < 30){
 
-
             // var c_bullet_enemies = c.ollision_square_square(
             //   this.enemies.children.entries[ex],
             //   this.bullets.children.entries[bx]
@@ -272,7 +353,7 @@ class Menu extends phaser.Scene {
             var response = new SAT.Response();
             var result = SAT.testPolygonPolygon(objA, objB, response);
             if(this.enemies.children.entries[ex].active){
-              console.log(response, result);
+              console.log(objA, objB, response, result);
             }
             if (result){
               this.creates(objB, 0xff0000);
@@ -284,6 +365,7 @@ class Menu extends phaser.Scene {
           }
         }
       }
+    */
     //}
 
   }//update
