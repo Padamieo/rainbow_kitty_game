@@ -22,13 +22,7 @@ class Rocket extends phaser.GameObjects.Sprite {
       this.ay = this.scene.kitty.y;
 
       this.gap = this.scene.game.config.width/28;
-
       this.setDepth(2);
-
-      // hide
-      this.rect = scene.add.rectangle(0, 0, this.width, this.height, 0xfffff0);
-      this.rect.setFillStyle(0x00ff00, 0.4);
-      this.rect.setDepth(3);
 
       // exhaust to be replaced by shape
       // this.exhaust = scene.add.rectangle(0, 0, this.width/2, this.width, 0xfeffcf);
@@ -37,9 +31,11 @@ class Rocket extends phaser.GameObjects.Sprite {
 
       this.exhaust = scene.add.image(0, 0, 'exhaust');
       this.exhaust.setOrigin(0.5, 0);
+      this.exhaust.setScale(0.5);
+      console.log(this.exhaust);
       // this.exhaust.originY(0);
 
-      //this.setRotation(Math.PI/2);
+      this.setRotation(Math.PI/5);
       this.body.setSize(this.height, this.height, true);
 
       this.setTint(this.colour(this.type));
@@ -61,13 +57,10 @@ class Rocket extends phaser.GameObjects.Sprite {
       }else{
         this.reset();
       }
-      this.rect.x = this.x;
-      this.rect.y = this.y;
-      this.rect.rotation = this.rotation;
-      //console.log(this.rect);
 
       this.exhaust.x = this.x;
-      this.exhaust.y = this.y;
+      this.exhaust.y = this.y//;+this.height/3;
+      this.exhaust.setRotation((Math.PI/3)*this.rotation);
     }
 
     movement(time, delta){
