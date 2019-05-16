@@ -16,9 +16,6 @@ import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Rocket from 'object/rocket';
 
-// import c from 'collision';
-import SAT from 'sat';
-
 class Menu extends phaser.Scene {
   constructor(test) {
     super({
@@ -89,20 +86,21 @@ class Menu extends phaser.Scene {
 
   generateExhaustShape () {
     var polygon = new Phaser.Geom.Polygon([
-      25, 0,
-      45, 20,
-      50, 40,
-      25, 100,
-      0, 40,
-      5, 20,
-      25, 0
+      15, 0,
+      4, 8,
+      0, 20,
+      4, 40,
+      15, 60,
+      26, 40,
+      30, 20,
+      26, 8,
+      15, 0
     ]);
     var graphics = this.add.graphics({ x: 0, y: 0 });
     graphics.fillStyle(0xfeffcf);
     graphics.fillPoints(polygon.points, true);
-    // graphics.setScale(0.4);
-    graphics.generateTexture('exhaust', 50, 100);
-    // graphics.clear();
+    graphics.generateTexture('exhaust', 30, 60);
+    graphics.clear();
   }
 
   create () {
@@ -211,59 +209,37 @@ class Menu extends phaser.Scene {
      //   console.log('S');
      // }
 
-     this.physics.add.overlap(this.enemies, this.bullets, this.spriteHitHealth.bind(this));
+     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
   }
 
-  spriteHitHealth(a, b) {
+  detailedCollision(a, b) {
     if(a.active === true && b.active === true){
-      console.log('awkward', a, b);
 
-      var V = SAT.Vector;
-      var P = SAT.Polygon;
-      var B = SAT.Box;
-
-      var x = a.x;
-      var y = a.y;
       var tl = a.getTopLeft();
       var tr = a.getTopRight();
       var br = a.getBottomRight();
       var bl = a.getBottomLeft();
-      // var objA = new P(new V(x, y), [
-      //   new V(tl.x+10, tl.y),
-      //   new V(tr.x-10, tr.y),
-      //   new V(br.x, br.y),
-      //   new V(bl.x, bl.y)
-      // ]);
-      var objA = new P(new V(x, y), [
-        new V(tl.x, tl.y),
-        new V(bl.x, bl.y),
-        new V(br.x, br.y),
-        new V(tr.x, tr.y),
-      ]);
-      //console.log(x, y, tl, br, objA);
 
-      var x = b.x;
-      var y = b.y;
+      var graphics = this.add.graphics({ lineStyle: { width: 1, color: 0x00ff00 } });
+      var triangle = new Phaser.Geom.Triangle((tl.x+tr.x)/2, (tl.y+tr.y)/2, bl.x, bl.y, br.x, br.y);
+      graphics.strokeTriangleShape(triangle);
+
       var tl = b.getTopLeft();
       var tr = b.getTopRight();
       var br = b.getBottomRight();
       var bl = b.getBottomLeft();
-      var objB = new P(new V(x, y), [
-        new V(tl.x, tl.y),
-        new V(bl.x, bl.y),
-        new V(br.x, br.y),
-        new V(tr.x, tr.y),
-      ]);
-      //console.log(x, y, tl, br, objB);
 
-      //console.log(this);
-      this.creates(objA, 0x44ff66);
-      this.creates(objB, 0xffff66);
+      var graphics2 = this.add.graphics({ lineStyle: { width: 1, color: 0xffff66 } });
+      var line = new Phaser.Geom.Line(tl.x, tl.y, br.x, br.y);
+      var lineA = new Phaser.Geom.Line(tr.x, tr.y, bl.x, bl.y);
+      graphics2.strokeLineShape(line);
+      graphics2.strokeLineShape(lineA);
 
-      var response = new SAT.Response();
-      var result = SAT.testPolygonPolygon(objA, objB, response);
+      var result = Phaser.Geom.Intersects.TriangleToLine(triangle, line);
+      console.log(result);
 
-      console.log(response, result);
+      //var result = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle);
+
       if(result){
         a.setActive(false);
         b.setActive(false);
@@ -300,73 +276,6 @@ class Menu extends phaser.Scene {
   }
 
   update(){
-
-    //if (this.bullets.countActive() > 0 ){
-      // for (var b = 0, l = this.bullets.getLength(); b < l; b++){
-      //   c.alculate_rotated_square(this.bullets.children.entries[b]);
-      // }
-    //}
-
-    //if (this.enemies.countActive() > 0 ){
-      // for (var e = 0, l = this.enemies.getLength(); e < l; e++){
-      //   c.alculate_rotated_square(this.enemies.children.entries[e]);
-      // }
-    //}
-
-    //if (this.bullets.countActive() > 0  && this.enemies.countActive() > 0 ){
-    /*
-      for (var bx = 0, l = this.bullets.getLength(); bx < l; bx++){
-        var V = SAT.Vector;
-        var P = SAT.Polygon;
-        var x = this.bullets.children.entries[bx].x;
-        var y = this.bullets.children.entries[bx].y;
-        var tl = this.bullets.children.entries[bx].getTopLeft();
-        var tr = this.bullets.children.entries[bx].getTopRight();
-        var br = this.bullets.children.entries[bx].getBottomRight();
-        var bl = this.bullets.children.entries[bx].getBottomLeft();
-        var objB = new P(new V(x, y), [ new V(tl.x, tl.y), new V(tr.x, tr.y), new V(br.x, br.y), new V(bl.x, bl.y) ]);
-
-        for (var ex = 0, i = this.enemies.getLength(); ex < i; ex++){
-
-          var V = SAT.Vector;
-          var P = SAT.Polygon;
-          var x = this.enemies.children.entries[ex].x;
-          var y = this.enemies.children.entries[ex].y;
-          var tl = this.enemies.children.entries[ex].getTopLeft();
-          var tr = this.enemies.children.entries[ex].getTopRight();
-          var br = this.enemies.children.entries[ex].getBottomRight();
-          var bl = this.enemies.children.entries[ex].getBottomLeft();
-          var objA = new P(new V(x, y), [ new V(tl.x+10, tl.y), new V(tr.x-10, tr.y), new V(br.x, br.y), new V(bl.x, bl.y) ]);
-          // console.log(this.enemies);
-          var d = Phaser.Math.Distance.Between(
-            this.enemies.children.entries[ex].x,
-            this.enemies.children.entries[ex].y,
-            this.bullets.children.entries[bx].x,
-            this.bullets.children.entries[bx].y
-          );
-          if(d < 30){
-
-            // var c_bullet_enemies = c.ollision_square_square(
-            //   this.enemies.children.entries[ex],
-            //   this.bullets.children.entries[bx]
-            // );
-            var response = new SAT.Response();
-            var result = SAT.testPolygonPolygon(objA, objB, response);
-            if(this.enemies.children.entries[ex].active){
-              console.log(objA, objB, response, result);
-            }
-            if (result){
-              this.creates(objB, 0xff0000);
-              this.creates(objA, 0xffff00);
-              this.enemies.children.entries[ex].setActive(false);
-              this.bullets.children.entries[bx].setActive(false);
-            }
-
-          }
-        }
-      }
-    */
-    //}
 
   }//update
 }
