@@ -11,7 +11,7 @@ class Rocket extends phaser.GameObjects.Sprite {
       // scene.physics.add.existing(this);
       // this.setRotation(phaser.Math.DegToRad(45));
       scene.physics.add.existing(this);
-      this.type = 0;
+      this.type = 2;
       this.max = 0.1;
       this.speed = 0;
 
@@ -32,10 +32,9 @@ class Rocket extends phaser.GameObjects.Sprite {
       this.exhaust = scene.add.image(0, 0, 'exhaust');
       this.exhaust.setOrigin(0.5, 0);
       this.exhaust.setScale(0.5);
-      console.log(this.exhaust);
       // this.exhaust.originY(0);
 
-      this.setRotation(Math.PI/5);
+      // this.setRotation(Math.PI/5);
       this.body.setSize(this.height, this.height, true);
 
       this.setTint(this.colour(this.type));
@@ -59,7 +58,7 @@ class Rocket extends phaser.GameObjects.Sprite {
       }
 
       this.exhaust.x = this.x;
-      this.exhaust.y = this.y//;+this.height/3;
+      this.exhaust.y = this.y;
       this.exhaust.setRotation((Math.PI/3)*this.rotation);
     }
 
@@ -129,6 +128,15 @@ class Rocket extends phaser.GameObjects.Sprite {
           colour = 0xFF003C;
       }
       return colour;
+    }
+
+    hit(){
+      this.scene.add.sprite(this.x, this.y, 'explostion_0').play('explostion');
+      
+      this.setActive(false);
+      this.setVisible(false);
+      this.exhaust.destroy();
+      this.destroy();
     }
 }
 

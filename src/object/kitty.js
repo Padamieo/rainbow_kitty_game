@@ -27,11 +27,15 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
 
     */
 
+    scene.physics.add.existing(this);
+    this.body.setSize(this.height/1.5, this.height/1.5, true);
+
     this.dodge = true;
     this.alive = true;
     this.y_velocity = 0;
     this.fly = false;
     this.speed = 0;
+    this.eye = true;
 
     this.half = this.height/2;
     this.distance = this.scene.game.config.height-this.half;
@@ -70,6 +74,11 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       }
     }
 
+  }
+
+  shot(){
+    this.alive = false;
+    // trigger animation
   }
 }
 

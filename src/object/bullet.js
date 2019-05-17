@@ -18,22 +18,37 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
     this.x += x * 20;
 
     if(this.y > this.scene.game.config.height || this.y < 0 || this.x < 0 || this.x > this.scene.game.config.width){
-      // console.log('out');
-      this.direction = this.direction + Math.PI;
-      this.setActive(false);
-      // this.setVisible(false);
+      this.onOutOfBounds();
     }
   }
 
+  onOutOfBounds(){
+    //this.direction = this.direction + Math.PI;
+    this.hit();
+  }
+
   fire(ax, ay){
-    var x = this.scene.kitty.x + this.scene.kitty.half/2;
-    var y = this.scene.kitty.y;
-    this.setPosition(x, y);
-    var direction = phaser.Math.Angle.Between(x, y, ax, ay);
-    this.direction = direction;
-    this.setRotation(this.direction + Math.PI/2);
-    this.setActive(true);
-    this.setVisible(true);
+    if(this.scene.kitty){
+      if(this.scene.kitty.eye){
+        var x = this.scene.kitty.x + this.scene.kitty.half/2;
+        this.scene.kitty.eye = false;
+      }else{
+        var x = this.scene.kitty.x - this.scene.kitty.half/2;
+        this.scene.kitty.eye = true;
+      }
+      var y = this.scene.kitty.y;
+      this.setPosition(x, y);
+      var direction = phaser.Math.Angle.Between(x, y, ax, ay);
+      this.direction = direction;
+      this.setRotation(this.direction + Math.PI/2);
+      this.setActive(true);
+      this.setVisible(true);
+    }
+  }
+
+  hit(){
+    this.setActive(false);
+    this.setVisible(false);
   }
 }
 
