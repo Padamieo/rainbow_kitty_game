@@ -103,6 +103,43 @@ class Menu extends phaser.Scene {
     graphics.clear();
   }
 
+  generateExplostionFrames () {
+    var graphics = this.add.graphics({ x: 0, y: 0, fillStyle: { color: 0xffffff } });
+    var i = 0;
+    for (var f = 0; f < 5; f++) {
+      var circle = new Phaser.Geom.Circle(50, 50, 5*f+i);
+
+      var points = circle.getPoints(f+3);
+      for (var i = 0; i < points.length; i++) {
+        graphics.fillCircle(points[i].x, points[i].y, 10+i+f);
+      }
+
+      graphics.generateTexture('explostion_'+f, 100, 100);
+      graphics.clear();
+    }
+
+    this.anims.create({
+      key: 'explostion',
+      frames: [
+        { key: 'explostion_0' },
+        { key: 'explostion_1' },
+        { key: 'explostion_2' },
+        { key: 'explostion_3' },
+        { key: 'explostion_4' }
+      ],
+      frameRate: 8,
+      repeat: -1
+    });
+
+    this.add.sprite(100, 100, 'explostion_0').play('explostion');
+
+    // this.add.image(100, 100, 'explostion_0');
+    // this.add.image(100, 200, 'explostion_1');
+    // this.add.image(100, 300, 'explostion_2');
+    // this.add.image(100, 400, 'explostion_4');
+    // graphics.clear();
+  }
+
   create () {
 
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
@@ -131,7 +168,7 @@ class Menu extends phaser.Scene {
       createMultipleCallback: null
     });
 
-    this.generateExhaustShape();
+    this.generateExplostionFrames();
     // this.bullet = new Bullet( this );
 
     //rainbow
@@ -230,17 +267,15 @@ class Menu extends phaser.Scene {
       var bl = b.getBottomLeft();
 
       var graphics2 = this.add.graphics({ lineStyle: { width: 1, color: 0xffff66 } });
-      var line = new Phaser.Geom.Line(tl.x, tl.y, br.x, br.y);
+      var lineB = new Phaser.Geom.Line(tl.x, tl.y, br.x, br.y);
       var lineA = new Phaser.Geom.Line(tr.x, tr.y, bl.x, bl.y);
-      graphics2.strokeLineShape(line);
+      graphics2.strokeLineShape(lineB);
       graphics2.strokeLineShape(lineA);
 
-      var result = Phaser.Geom.Intersects.TriangleToLine(triangle, line);
-      console.log(result);
+      var resultB = Phaser.Geom.Intersects.TriangleToLine(triangle, lineB);
+      var resultA = Phaser.Geom.Intersects.TriangleToLine(triangle, lineA);
 
-      //var result = Phaser.Geom.Intersects.GetRectangleToTriangle(rect, triangle);
-
-      if(result){
+      if(resultB | resultA){
         a.setActive(false);
         b.setActive(false);
       }
@@ -253,26 +288,6 @@ class Menu extends phaser.Scene {
     if(this.enemies.getLength() < this.enemy.limit){
       //new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
     }
-  }
-
-  creates (polygon, color) {
-    //console.log(polygon);
-    var graphics = this.add.graphics({ x: 0, y: 0 });
-    // var color = new Phaser.Display.Color(0, 100, 100);
-    // color.random();
-    graphics.lineStyle(1, ( color ? color : 0xfff000));
-
-    graphics.beginPath();
-
-    graphics.moveTo(polygon.points[0].x, polygon.points[0].y);
-
-    for (var i = 1; i < polygon.points.length; i++) {
-      graphics.lineTo(polygon.points[i].x, polygon.points[i].y);
-    }
-
-    graphics.closePath();
-    graphics.strokePath();
-    graphics.setDepth(8);
   }
 
   update(){
