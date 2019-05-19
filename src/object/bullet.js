@@ -24,7 +24,7 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
 
   onOutOfBounds(){
     //this.direction = this.direction + Math.PI;
-    this.hit();
+    this.reset();
   }
 
   fire(ax, ay){
@@ -47,6 +47,11 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
   }
 
   hit(){
+    this.reset();
+    this.scene.score.add(); // could provide hight points for harder targets
+  }
+
+  reset(){
     this.setActive(false);
     this.setVisible(false);
   }

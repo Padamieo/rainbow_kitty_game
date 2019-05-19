@@ -10,11 +10,13 @@ import phaser from 'phaser';
 
 import Background from 'object/background';
 import Bullets from 'object/bullets';
-// import Bullet from 'object/bullet';
+import Explosions from 'object/explosions';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Rocket from 'object/rocket';
+
+import Score from 'object/score';
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -65,10 +67,11 @@ class Menu extends phaser.Scene {
     // this.scene.setScale(2);
     // camera.setScale(2);
     */
-    //this.generateBulletShape();
+
     this.generateExhaustShape();
-    this.generateExplostionFrames();
     this.bullets = new Bullets( this );
+    this.explosions = new Explosions( this );
+
   }
 
   generateExhaustShape () {
@@ -88,43 +91,6 @@ class Menu extends phaser.Scene {
     graphics.fillPoints(polygon.points, true);
     graphics.generateTexture('exhaust', 30, 60);
     graphics.clear();
-  }
-
-  generateExplostionFrames () {
-    var graphics = this.add.graphics({ x: 0, y: 0, fillStyle: { color: 0xffffff } });
-    var i = 0;
-    for (var f = 0; f < 5; f++) {
-      var circle = new Phaser.Geom.Circle(50, 50, 5*f+i);
-
-      var points = circle.getPoints(f+3);
-      for (var i = 0; i < points.length; i++) {
-        graphics.fillCircle(points[i].x, points[i].y, 10+i+f);
-      }
-
-      graphics.generateTexture('explostion_'+f, 100, 100);
-      graphics.clear();
-    }
-
-    this.anims.create({
-      key: 'explostion',
-      frames: [
-        { key: 'explostion_0' },
-        { key: 'explostion_1' },
-        { key: 'explostion_2' },
-        { key: 'explostion_3' },
-        { key: 'explostion_4' }
-      ],
-      frameRate: 12,
-      repeat: 0
-    });
-
-    // this.add.sprite(100, 100, 'explostion_0').play('explostion');
-
-    // this.add.image(100, 100, 'explostion_0');
-    // this.add.image(100, 200, 'explostion_1');
-    // this.add.image(100, 300, 'explostion_2');
-    // this.add.image(100, 400, 'explostion_4');
-    // graphics.clear();
   }
 
   generateRainbowTearShape() {
@@ -164,7 +130,6 @@ class Menu extends phaser.Scene {
     // console.log(this.game.config.height);
 
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
-
     this.player = new Player( this );
 
     // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
@@ -207,10 +172,7 @@ class Menu extends phaser.Scene {
     });
     */
 
-    // text
-    var text = this.add.text(this.game.config.width-5, 0, '999', { fontFamily: '"Arial"', fill: '#fff', fontSize: 30, align: 'right' });
-    text.setOrigin(1, 0);
-    text.setStroke('#de77ae', 5);
+    this.score = new Score( this );
 
     // enemy manager
     this.enemy = {};
@@ -233,6 +195,7 @@ class Menu extends phaser.Scene {
      // if(this.keys.S.isDown){
      //   console.log('S');
      // }
+
      this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
      this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
   }
@@ -292,7 +255,6 @@ class Menu extends phaser.Scene {
         rocket.hit();
         //rocket.setActive(false);
       }
-
     }
   }
 

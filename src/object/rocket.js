@@ -11,7 +11,7 @@ class Rocket extends phaser.GameObjects.Sprite {
       // scene.physics.add.existing(this);
       // this.setRotation(phaser.Math.DegToRad(45));
       scene.physics.add.existing(this);
-      this.type = 2;
+      this.type = 0;
       this.max = 0.1;
       this.speed = 0;
 
@@ -24,15 +24,9 @@ class Rocket extends phaser.GameObjects.Sprite {
       this.gap = this.scene.game.config.width/28;
       this.setDepth(2);
 
-      // exhaust to be replaced by shape
-      // this.exhaust = scene.add.rectangle(0, 0, this.width/2, this.width, 0xfeffcf);
-      // this.exhaust.setFillStyle(0xfeffcf, 0.8);
-      // this.exhaust.setDepth(1);
-
       this.exhaust = scene.add.image(0, 0, 'exhaust');
       this.exhaust.setOrigin(0.5, 0);
       this.exhaust.setScale(0.5);
-      // this.exhaust.originY(0);
 
       // this.setRotation(Math.PI/5);
       this.body.setSize(this.height, this.height, true);
@@ -57,9 +51,10 @@ class Rocket extends phaser.GameObjects.Sprite {
         this.reset();
       }
 
-      this.exhaust.x = this.x;
-      this.exhaust.y = this.y;
-      this.exhaust.setRotation((Math.PI/3)*this.rotation);
+      this.exhaust.x = this.x + this.exhaust.height/3 * Math.cos((Math.PI/2)+this.rotation);
+      this.exhaust.y = this.y + this.exhaust.height/3 * Math.sin((Math.PI/2)+this.rotation);
+      this.exhaust.setRotation(this.rotation);
+      //this.exhaust.setRotation((Math.PI/3)*this.rotation);
     }
 
     movement(time, delta){
@@ -68,6 +63,10 @@ class Rocket extends phaser.GameObjects.Sprite {
       }
       if(this.type === 2){
         this.winder(time);
+      }
+      if(this.type === 3){
+
+        this.setRotation(this.rotation-0.01);
       }
     }
 
@@ -131,8 +130,12 @@ class Rocket extends phaser.GameObjects.Sprite {
     }
 
     hit(){
-      this.scene.add.sprite(this.x, this.y, 'explostion_0').play('explostion');
-      
+
+      var explosion = this.scene.explosions.get();
+      if (explosion) {
+        explosion.start(this.x, this.y);
+      }
+
       this.setActive(false);
       this.setVisible(false);
       this.exhaust.destroy();
