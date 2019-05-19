@@ -15,3 +15,6 @@ Regenboog fonkeling katje bil
 flatulant kitty . . . rainbow
 farty kitty?
 rainbow kitty sparklebutt
+
+https://labs.phaser.io/edit.html?src=src%5Crenderer%5CCustom%20Pipeline.js
+https://labs.phaser.io/index.html?dir=camera/&q=

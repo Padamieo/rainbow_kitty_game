@@ -11,6 +11,7 @@ import phaser from 'phaser';
 import Background from 'object/background';
 import Bullets from 'object/bullets';
 import Explosions from 'object/explosions';
+import Enemies from 'object/enemies';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
@@ -49,8 +50,6 @@ class Menu extends phaser.Scene {
     //   { frameWidth: 16, frameHeight: 16, endFrame: 11 }
     // );
 
-    //this.load.image('all', turtle);
-    console.log('preload - Menu');
     /*
     var camera = this.cameras.main;
     var w = window.innerWidth;
@@ -68,30 +67,11 @@ class Menu extends phaser.Scene {
     // camera.setScale(2);
     */
 
-    this.generateExhaustShape();
+    // this.generateExhaustShape();
     this.bullets = new Bullets( this );
     this.explosions = new Explosions( this );
-
   }
 
-  generateExhaustShape () {
-    var polygon = new Phaser.Geom.Polygon([
-      15, 0,
-      4, 8,
-      0, 20,
-      4, 40,
-      15, 60,
-      26, 40,
-      30, 20,
-      26, 8,
-      15, 0
-    ]);
-    var graphics = this.add.graphics({ x: 0, y: 0 });
-    graphics.fillStyle(0xfeffcf);
-    graphics.fillPoints(polygon.points, true);
-    graphics.generateTexture('exhaust', 30, 60);
-    graphics.clear();
-  }
 
   generateRainbowTearShape() {
     var polygon = new Phaser.Geom.Polygon([
@@ -124,33 +104,17 @@ class Menu extends phaser.Scene {
 
     this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
     this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
-    //this.add.image(0, 160, 'rocket_frames').setOrigin(0).setScale(1);
 
     //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
-    // console.log(this.game.config.height);
 
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.player = new Player( this );
 
-    // var rect = this.add.rectangle(this.cameras.main.centerX/3, this.cameras.main.centerY/3, 10, 20, 0x99ff22);
-    // this.bullets = this.add.group({
-    //   classType: Bullet,
-    //   defaultKey: null,
-    //   defaultFrame: null,
-    //   active: true,
-    //   maxSize: 20,
-    //   runChildUpdate: false,
-    //   createCallback: null,
-    //   removeCallback: null,
-    //   createMultipleCallback: null
-    // });
-
     //rainbow
     this.generateRainbowTearShape();
     /*
-    this.rainbow = new Rainbow( this );
-
-    var particles = this.add.particles('test');
+    //this.rainbow = new Rainbow( this );
+    var particles = this.add.particles('tear');
     var emitter = particles.createEmitter({
         x: 100,
         y: 100,
@@ -163,12 +127,13 @@ class Menu extends phaser.Scene {
         blendMode: 0,
         frequency: 140,
         on: true,
-        active: true
+        active: false
     });
-    console.log(this.kitty.x, this.kitty.y);
 
     this.input.on('pointerdown', (pointer) => {
-      particles.emitParticleAt(this.kitty.x, this.kitty.y);
+      emitter.setPosition(this.kitty.x, this.kitty.y);
+      emitter.resume();
+      //emitter.explode(10, this.kitty.x, this.kitty.y);
     });
     */
 
@@ -179,7 +144,8 @@ class Menu extends phaser.Scene {
     this.enemy.number = 2;
     this.enemy.limit = 2;
     this.enemy.list = [];
-    this.enemies = this.add.group();
+    // this.enemies = this.add.group();
+    this.enemies = new Enemies( this, Rocket );
 
     new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
@@ -190,14 +156,14 @@ class Menu extends phaser.Scene {
     });
 
     // this.keys = this.input.keyboard.addKeys('S,P');
-     // this.scene.resume('Menu');
-     // this.scene.pause("Menu");
-     // if(this.keys.S.isDown){
-     //   console.log('S');
-     // }
+    // this.scene.resume('Menu');
+    // this.scene.pause("Menu");
+    // if(this.keys.S.isDown){
+    //   console.log('S');
+    // }
 
-     this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
-     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
+    this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
+    this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
   }
 
   kittyCollision(rocket, kitty){
