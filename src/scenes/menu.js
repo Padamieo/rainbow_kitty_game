@@ -15,9 +15,39 @@ import Enemies from 'object/enemies';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
-import Rocket from 'object/rocket';
+// import Rocket from 'object/rocket';
 
 import Score from 'object/score';
+
+var CustomPipeline = new Phaser.Class({
+    Extends: Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline,
+    initialize:
+    function CustomPipeline (game) {
+      Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
+          game: game,
+          renderer: game.renderer,
+          fragShader: [
+            "precision mediump float;",
+
+            "uniform float     time;",
+            "uniform vec2      resolution;",
+            "uniform sampler2D uMainSampler;",
+            "varying vec2 outTexCoord;",
+
+            "void main( void ) {",
+
+                "vec2 uv = outTexCoord;",
+                //"uv.y += (sin((uv.y - (time * 1.8)) * 5.0) * 0.1);",
+                "uv.x += (sin((uv.y - (time * 1.8)) * 10.0) * 0.1);",
+                "vec4 texColor = texture2D(uMainSampler, uv);",
+                "gl_FragColor = texColor;",
+
+            "}"
+          ].join('\n')
+      });
+    }
+});
+
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -44,6 +74,7 @@ class Menu extends phaser.Scene {
     );
 
     this.add.text(0, 180, "Signature: " + 'test', { fill: '#ffffff' });
+
     // this.load.image('bg', bg);
     // this.load.spritesheet('all',
     //   all,
@@ -70,8 +101,10 @@ class Menu extends phaser.Scene {
     // this.generateExhaustShape();
     this.bullets = new Bullets( this );
     this.explosions = new Explosions( this );
-  }
 
+    this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
+    // this.customPipeline.setFloat2('uResolution', this.game.config.width, this.game.config.height);
+  }
 
   generateRainbowTearShape() {
     var polygon = new Phaser.Geom.Polygon([
@@ -102,13 +135,23 @@ class Menu extends phaser.Scene {
 
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
 
-    this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
-    this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
+    this.test = this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
+
+    this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
 
     //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
 
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.player = new Player( this );
+
+
+
+    //console.log(this.customPipeline);
+    // this.cameras.main.setRenderToTexture(this.customPipeline);
+    // this.cameras.main.ignore([ this.kitty, this.background, this.player ]);
+    // var cam1 = this.cameras.main;
+    // var cam2 = this.cameras.add(0, 0, 800, 600);
+    //this.add.image(50, 180, 'exhaust').setPipeline('Custom');
 
     //rainbow
     this.generateRainbowTearShape();
@@ -140,20 +183,10 @@ class Menu extends phaser.Scene {
     this.score = new Score( this );
 
     // enemy manager
-    this.enemy = {};
-    this.enemy.number = 2;
-    this.enemy.limit = 2;
-    this.enemy.list = [];
-    // this.enemies = this.add.group();
-    this.enemies = new Enemies( this, Rocket );
+    this.enemies = new Enemies( this );
+    // new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
-    new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
 
-    this.tick = this.time.addEvent({
-      delay: 2000,
-      callback: this.callback.bind(this),
-      loop: true
-    });
 
     // this.keys = this.input.keyboard.addKeys('S,P');
     // this.scene.resume('Menu');
@@ -164,6 +197,7 @@ class Menu extends phaser.Scene {
 
     this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
+    this.time = 0;
   }
 
   kittyCollision(rocket, kitty){
@@ -224,15 +258,10 @@ class Menu extends phaser.Scene {
     }
   }
 
-  callback(){
-    //console.log('add');
-    if(this.enemies.getLength() < this.enemy.limit){
-      new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
-    }
-  }
-
   update(){
-
+    this.time += 0.005;
+    // console.log(this.time);
+    this.customPipeline.setFloat1('time', this.time);
   }//update
 }
 export default Menu;

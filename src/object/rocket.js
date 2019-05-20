@@ -24,9 +24,10 @@ class Rocket extends phaser.GameObjects.Sprite {
       this.gap = this.scene.game.config.width/28;
       this.setDepth(2);
 
-      this.exhaust = scene.add.image(0, 0, 'exhaust');
+      this.exhaust = scene.add.image(0, 0, 'exhaust').setPipeline('Custom');
       this.exhaust.setOrigin(0.5, 0);
       this.exhaust.setScale(0.5);
+      //this.exhaust
 
       // this.setRotation(Math.PI/5);
       this.body.setSize(this.height, this.height, true);
