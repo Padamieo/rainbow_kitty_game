@@ -6,6 +6,8 @@ import rocket from 'assets/rocket_test.svg';
 import kitty from 'assets/kitty_test.svg';
 import wall from 'assets/background_wall_temp.png';
 
+// import shader from 'object/shader.glsl.js';
+
 import phaser from 'phaser';
 
 import Background from 'object/background';
@@ -15,8 +17,6 @@ import Enemies from 'object/enemies';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
-// import Rocket from 'object/rocket';
-
 import Score from 'object/score';
 
 var CustomPipeline = new Phaser.Class({
@@ -29,16 +29,18 @@ var CustomPipeline = new Phaser.Class({
           fragShader: [
             "precision mediump float;",
 
-            "uniform float     time;",
-            "uniform vec2      resolution;",
+            "uniform float time;",
+            "uniform vec2 resolution;",
             "uniform sampler2D uMainSampler;",
             "varying vec2 outTexCoord;",
 
             "void main( void ) {",
-
+                "vec2 uvv = resolution;",
                 "vec2 uv = outTexCoord;",
-                //"uv.y += (sin((uv.y - (time * 1.8)) * 5.0) * 0.1);",
-                "uv.x += (sin((uv.y - (time * 1.8)) * 10.0) * 0.1);",
+                // "uv.x += (sin((u_mouse.y - (time * 1.0)) * 10.0) * 0.1);",
+                "uv.x += (sin((uv.y - (time * 1.8)) * 6.0) * 0.1);",
+                // "uv.x += (sin((gl_FragCoord.y - (time * 0.1)) * 0.1) * 0.1);",
+                // "uv.y += (sin((gl_FragCoord.x - (time * 0.1)) * 0.1) * 0.1);",
                 "vec4 texColor = texture2D(uMainSampler, uv);",
                 "gl_FragColor = texColor;",
 
@@ -49,10 +51,11 @@ var CustomPipeline = new Phaser.Class({
 });
 
 
+
 class Menu extends phaser.Scene {
   constructor(test) {
     super({
-        key: 'Menu'
+      key: 'Menu'
     });
   }
 
@@ -74,6 +77,8 @@ class Menu extends phaser.Scene {
     );
 
     this.add.text(0, 180, "Signature: " + 'test', { fill: '#ffffff' });
+
+    // this.load.glsl('Custom', shader);
 
     // this.load.image('bg', bg);
     // this.load.spritesheet('all',
@@ -143,7 +148,6 @@ class Menu extends phaser.Scene {
 
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
     this.player = new Player( this );
-
 
 
     //console.log(this.customPipeline);
