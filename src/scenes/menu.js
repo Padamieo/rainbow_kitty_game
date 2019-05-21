@@ -26,7 +26,8 @@ var CustomPipeline = new Phaser.Class({
       Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
           game: game,
           renderer: game.renderer,
-          fragShader: [
+          fragShader:
+          /*[
             "precision mediump float;",
 
             "uniform float time;",
@@ -38,17 +39,44 @@ var CustomPipeline = new Phaser.Class({
                 "vec2 uvv = resolution;",
                 "vec2 uv = outTexCoord;",
                 // "uv.x += (sin((u_mouse.y - (time * 1.0)) * 10.0) * 0.1);",
-                "uv.x += (sin((uv.y - (time * 1.8)) * 6.0) * 0.1);",
-                // "uv.x += (sin((gl_FragCoord.y - (time * 0.1)) * 0.1) * 0.1);",
+                //"uv.x += (sin((uv.y - (time * 1.8)) * 6.0) * 0.1);",
+                "uv.x += (sin((gl_FragCoord.y - time) * 0.2) * 0.05);",
+                "uv.y += cos(time) * 0.05;",
+                // "uv.y = gl_FragCoord.y;",
+                //"uv.y += (sin((uv.y - (gl_FragCoord.y)) * 6.0) * 0.1);",
                 // "uv.y += (sin((gl_FragCoord.x - (time * 0.1)) * 0.1) * 0.1);",
                 "vec4 texColor = texture2D(uMainSampler, uv);",
                 "gl_FragColor = texColor;",
 
             "}"
           ].join('\n')
+          */
+          [
+            "precision mediump float;",
+            "uniform sampler2D tex1;",
+            "uniform sampler2D uMainSampler;",
+            "uniform float time;",
+            "void main(){",
+                "vec4 color = vec4(0.5, 0.0, 0.0, 1.0);",
+                "color.r = texture2D(uMainSampler).r;",
+                // "color.r = texture2D(uMainSampler, gl_TexCoord[0].st).r;",
+                // "color.g = texture2D(uMainSampler, gl_TexCoord[0].st).g;",
+                // "color.b = texture2D(uMainSampler, gl_TexCoord[0].st).b;",
+                "color.r = color.r - time * 0.3;",
+                "color.g = color.g - time * 0.3;",
+                "color.b = color.b - time * 0.3;",
+                //"color.r = max( texture2D(tex1, gl_TexCoord[0].st).r, color.r );",
+                // "color.g = max( texture2D(tex1, gl_TexCoord[0].st).g, color.g );",
+                // "color.b = max( texture2D(tex1, gl_TexCoord[0].st).b, color.b );",
+
+              "gl_FragColor = color;",
+            "}"
+          ].join('\n')
       });
     }
 });
+
+
 
 
 
@@ -76,15 +104,7 @@ class Menu extends phaser.Scene {
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
     );
 
-    this.add.text(0, 180, "Signature: " + 'test', { fill: '#ffffff' });
-
     // this.load.glsl('Custom', shader);
-
-    // this.load.image('bg', bg);
-    // this.load.spritesheet('all',
-    //   all,
-    //   { frameWidth: 16, frameHeight: 16, endFrame: 11 }
-    // );
 
     /*
     var camera = this.cameras.main;
@@ -159,9 +179,10 @@ class Menu extends phaser.Scene {
 
     //rainbow
     this.generateRainbowTearShape();
-    /*
+/*
     //this.rainbow = new Rainbow( this );
     var particles = this.add.particles('tear');
+    //particles.setPipeline('Custom');
     var emitter = particles.createEmitter({
         x: 100,
         y: 100,
@@ -174,15 +195,16 @@ class Menu extends phaser.Scene {
         blendMode: 0,
         frequency: 140,
         on: true,
-        active: false
+        active: true
     });
+
 
     this.input.on('pointerdown', (pointer) => {
       emitter.setPosition(this.kitty.x, this.kitty.y);
       emitter.resume();
       //emitter.explode(10, this.kitty.x, this.kitty.y);
     });
-    */
+*/
 
     this.score = new Score( this );
 
