@@ -1,84 +1,11 @@
-// import phaser from 'phaser';
+import phaser from 'phaser';
 
 import bb from 'assets/testsmall.png';
 import ui from 'assets/UIpack_vector.svg';
+import uis from 'assets/UIpack_vector.png';
 import rocket from 'assets/rocket_test.svg';
-import kitty from 'assets/kitty_test.svg';
-import wall from 'assets/background_wall_temp.png';
 
-// import shader from 'object/shader.glsl.js';
-
-import phaser from 'phaser';
-
-import Background from 'object/background';
-import Bullets from 'object/bullets';
-import Explosions from 'object/explosions';
-import Enemies from 'object/enemies';
-import Kitty from 'object/kitty';
-import Player from 'object/player';
-import Rainbow from 'object/rainbow';
-import Score from 'object/score';
-
-var CustomPipeline = new Phaser.Class({
-    Extends: Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline,
-    initialize:
-    function CustomPipeline (game) {
-      Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
-          game: game,
-          renderer: game.renderer,
-          fragShader:
-          /*[
-            "precision mediump float;",
-
-            "uniform float time;",
-            "uniform vec2 resolution;",
-            "uniform sampler2D uMainSampler;",
-            "varying vec2 outTexCoord;",
-
-            "void main( void ) {",
-                "vec2 uvv = resolution;",
-                "vec2 uv = outTexCoord;",
-                // "uv.x += (sin((u_mouse.y - (time * 1.0)) * 10.0) * 0.1);",
-                //"uv.x += (sin((uv.y - (time * 1.8)) * 6.0) * 0.1);",
-                "uv.x += (sin((gl_FragCoord.y - time) * 0.2) * 0.05);",
-                "uv.y += cos(time) * 0.05;",
-                // "uv.y = gl_FragCoord.y;",
-                //"uv.y += (sin((uv.y - (gl_FragCoord.y)) * 6.0) * 0.1);",
-                // "uv.y += (sin((gl_FragCoord.x - (time * 0.1)) * 0.1) * 0.1);",
-                "vec4 texColor = texture2D(uMainSampler, uv);",
-                "gl_FragColor = texColor;",
-
-            "}"
-          ].join('\n')
-          */
-          [
-            "precision mediump float;",
-            "uniform sampler2D tex1;",
-            "uniform sampler2D uMainSampler;",
-            "uniform float time;",
-            "void main(){",
-                "vec4 color = vec4(0.5, 0.0, 0.0, 1.0);",
-                "color.r = texture2D(uMainSampler).r;",
-                // "color.r = texture2D(uMainSampler, gl_TexCoord[0].st).r;",
-                // "color.g = texture2D(uMainSampler, gl_TexCoord[0].st).g;",
-                // "color.b = texture2D(uMainSampler, gl_TexCoord[0].st).b;",
-                "color.r = color.r - time * 0.3;",
-                "color.g = color.g - time * 0.3;",
-                "color.b = color.b - time * 0.3;",
-                //"color.r = max( texture2D(tex1, gl_TexCoord[0].st).r, color.r );",
-                // "color.g = max( texture2D(tex1, gl_TexCoord[0].st).g, color.g );",
-                // "color.b = max( texture2D(tex1, gl_TexCoord[0].st).b, color.b );",
-
-              "gl_FragColor = color;",
-            "}"
-          ].join('\n')
-      });
-    }
-});
-
-
-
-
+import TextButton from 'ui/button';
 
 class Menu extends phaser.Scene {
   constructor(test) {
@@ -89,22 +16,12 @@ class Menu extends phaser.Scene {
 
   preload() {
     this.load.image('bb', bb);
-    this.load.image('wall', wall);
-    this.load.svg('ui', ui, { width: 1000, height:1000 });
-    this.load.svg('rocket', rocket, { width: 150, height:56 });
-    this.load.svg('kitty', kitty, { width: 400, height:400 });
 
-    this.load.spritesheet('rocket_frames',
-    rocket,
-      { frameWidth: 1, frameHeight: 56, frameWidth: 30 }
-    );
+    this.load.image('uis', uis);
 
-    this.load.spritesheet('kitty_frames',
-    kitty,
-      { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
-    );
+    this.load.svg('ui', ui, { width: 510, height:162 });
 
-    // this.load.glsl('Custom', shader);
+    //this.load.svg('rocket', rocket, { width: 150, height:56 });
 
     /*
     var camera = this.cameras.main;
@@ -122,172 +39,53 @@ class Menu extends phaser.Scene {
     // this.scene.setScale(2);
     // camera.setScale(2);
     */
-
-    // this.generateExhaustShape();
-    this.bullets = new Bullets( this );
-    this.explosions = new Explosions( this );
-
-    this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
-    // this.customPipeline.setFloat2('uResolution', this.game.config.width, this.game.config.height);
-  }
-
-  generateRainbowTearShape() {
-    var polygon = new Phaser.Geom.Polygon([
-      50, 5,
-      20, 68,
-      22, 80,
-      30, 90,
-      50, 100,
-      70, 90,
-      78, 80,
-      80, 68,
-      50, 5
-    ]);
-
-    // var polygon = Phaser.Geom.Polygon.Smooth(p);
-
-    var graphics = this.add.graphics({ x: 0, y: 0 });
-
-    graphics.fillStyle(0xffffff);
-    graphics.fillPoints(polygon.points, true);
-    graphics.generateTexture('tear', 100, 100);
-    // graphics.setScale(4);
-    graphics.clear();
-    // var sprite = this.add.sprite(100, 400, 'tear');
   }
 
   create () {
 
-    this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
-
     this.test = this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
 
-    this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
+    //this.ui = this.add.image(0, 0, 'ui').setOrigin(0).setScale(2);
 
-    //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
+    this.uis = this.add.image(0, 0, 'uis').setOrigin(0).setScale(1).setTint(0x9CB88C);
 
-    this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
-    this.player = new Player( this );
+    //this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
 
-
-    //console.log(this.customPipeline);
-    // this.cameras.main.setRenderToTexture(this.customPipeline);
-    // this.cameras.main.ignore([ this.kitty, this.background, this.player ]);
-    // var cam1 = this.cameras.main;
-    // var cam2 = this.cameras.add(0, 0, 800, 600);
-    //this.add.image(50, 180, 'exhaust').setPipeline('Custom');
-
-    //rainbow
-    this.generateRainbowTearShape();
-/*
-    //this.rainbow = new Rainbow( this );
-    var particles = this.add.particles('tear');
-    //particles.setPipeline('Custom');
-    var emitter = particles.createEmitter({
-        x: 100,
-        y: 100,
-        angle: { min: 140, max: 40 },
-        lifespan: 2000,
-        speed: 20,
-        accelerationY: { min:20, max: 100 },
-        gravityY: 200,
-        scale: { start: 0, end: 2 },
-        blendMode: 0,
-        frequency: 140,
-        on: true,
-        active: true
-    });
-
-
-    this.input.on('pointerdown', (pointer) => {
-      emitter.setPosition(this.kitty.x, this.kitty.y);
-      emitter.resume();
-      //emitter.explode(10, this.kitty.x, this.kitty.y);
-    });
-*/
-
-    this.score = new Score( this );
-
-    // enemy manager
-    this.enemies = new Enemies( this );
-    // new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
-
-
-
-    // this.keys = this.input.keyboard.addKeys('S,P');
+    this.keys = this.input.keyboard.addKeys('S');
     // this.scene.resume('Menu');
     // this.scene.pause("Menu");
-    // if(this.keys.S.isDown){
-    //   console.log('S');
-    // }
 
-    this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
-    this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
-    this.time = 0;
+    this.clickButton = new TextButton(this, this.cameras.main.centerX, this.cameras.main.centerY, 'Click me!', {
+      fontFamily: '"Arial"',
+      fill: '#fff',
+      fontSize: 30,
+      align: 'right',
+      wordWrap: {
+        width: 150
+      }
+    });
+
+    this.single = true;
+    this.camera = this.cameras.main;
+    this.cameras.main.on('camerafadeoutcomplete', this.end.bind(this));
   }
 
-  kittyCollision(rocket, kitty){
-    if(rocket.active === true){
-      var tl = rocket.getTopLeft();
-      var tr = rocket.getTopRight();
-      var br = rocket.getBottomRight();
-      var bl = rocket.getBottomLeft();
-
-      //var graphics = this.add.graphics({ lineStyle: { width: 1, color: 0x00ff00 } });
-      var triangle = new Phaser.Geom.Triangle((tl.x+tr.x)/2, (tl.y+tr.y)/2, bl.x, bl.y, br.x, br.y);
-      //graphics.strokeTriangleShape(triangle);
-
-      //var graphics2 = this.add.graphics({ lineStyle: { width: 1, color: 0xffff66 } });
-      var circle = new Phaser.Geom.Circle(kitty.x, kitty.y, kitty.body.width/2);
-      //graphics2.strokeCircleShape(circle);
-
-      var result = Phaser.Geom.Intersects.TriangleToCircle(triangle, circle);
-
-      if(result){
-        rocket.hit();
-        this.kitty.shot();
-      }
-    }
+  end(){
+    console.log(this);
+    console.log('end');
+    this.scene.start('Game');
   }
 
-  detailedCollision(rocket, bullet) {
-    if(rocket.active === true && bullet.active === true){
-
-      var tl = rocket.getTopLeft();
-      var tr = rocket.getTopRight();
-      var br = rocket.getBottomRight();
-      var bl = rocket.getBottomLeft();
-
-      // var graphics = this.add.graphics({ lineStyle: { width: 1, color: 0x00ff00 } });
-      var triangle = new Phaser.Geom.Triangle((tl.x+tr.x)/2, (tl.y+tr.y)/2, bl.x, bl.y, br.x, br.y);
-      //graphics.strokeTriangleShape(triangle);
-
-      var tl = bullet.getTopLeft();
-      var tr = bullet.getTopRight();
-      var br = bullet.getBottomRight();
-      var bl = bullet.getBottomLeft();
-
-      //var graphics2 = this.add.graphics({ lineStyle: { width: 1, color: 0xffff66 } });
-      var lineB = new Phaser.Geom.Line(tl.x, tl.y, br.x, br.y);
-      var lineA = new Phaser.Geom.Line(tr.x, tr.y, bl.x, bl.y);
-      // graphics2.strokeLineShape(lineB);
-      // graphics2.strokeLineShape(lineA);
-
-      var resultB = Phaser.Geom.Intersects.TriangleToLine(triangle, lineB);
-      var resultA = Phaser.Geom.Intersects.TriangleToLine(triangle, lineA);
-
-      if(resultB | resultA){
-        bullet.hit();
-        rocket.hit();
-        //rocket.setActive(false);
-      }
-    }
+  start(){
+    this.cameras.main.fadeOut(250, 0, 0, 0);
+    //this.scene.start('Game');
   }
 
   update(){
-    this.time += 0.005;
-    // console.log(this.time);
-    this.customPipeline.setFloat1('time', this.time);
+    if(this.keys.S.isDown && this.single){
+      this.single = false;
+      this.start();
+    }
   }//update
 }
 export default Menu;
