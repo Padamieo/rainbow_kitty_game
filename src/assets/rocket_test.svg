@@ -1,146 +1,564 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 16.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="150px"
-	 height="56.4px" viewBox="0 0 150 56.4" enable-background="new 0 0 150 56.4" xml:space="preserve">
-<g id="Layer_2">
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="150px" height="56.4px" viewBox="0 0 150 56.4" enable-background="new 0 0 150 56.4" xml:space="preserve">
+<g id="Layer_2" display="none">
 	
-		<image overflow="visible" width="125" height="47" xlink:href="data:image/png;base64,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
-QmCC" transform="matrix(1.2 0 0 1.2 0 0)">
+		<image display="inline" overflow="visible" enable-background="new    " width="125" height="47" xlink:href="A05FFB86.png"  transform="matrix(1.2 0 0 1.2 9.765625e-004 7.324219e-004)">
 	</image>
 </g>
-<g id="Layer_1">
+<g id="Layer_1_1_">
+	<path fill="#FBD6A4" d="M-14.382,21.286l4.639,4.288l0.438,13.127c0,0-1.139-2.877-5.076-3.412L-14.382,21.286L-14.382,21.286z"/>
 	<g>
-		<rect display="none" fill="#F4D7D7" width="30" height="56.4"/>
 		<path fill="#9B8A8A" d="M5.703,50.843c0,0-0.071-19.021,0-28.177C5.773,13.511,15,1.942,15,1.942l0,0
-			c0,0,9.226,11.568,9.297,20.724c0.071,9.156,0,28.176,0,28.176L5.703,50.843z"/>
+			c0,0,9.227,11.568,9.297,20.724c0.071,9.156,0,28.176,0,28.176L5.703,50.843z"/>
+		<path opacity="0.2" d="M8.633,50.825h2.775c0.719-0.343,1.6-0.622,2.669-0.755V36.068l-5.063,4.287L8.633,50.825z"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<rect x="13.999" y="36.135" fill="#E0BF93" width="2" height="4.284"/>
+					</g>
+					<g>
+						<rect x="13.999" y="40.419" fill="#DBBB8F" width="2" height="13.131"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<path fill="#917C5F" d="M5.667,50.463V36.459V50.463z"/>
+					</g>
+					<g>
+						<path fill="#DABA8E" d="M5.667,36.459v14.004c-3.942,0.531-5.02,3.268-5.076,3.411l0.432-13.131L5.667,36.459z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path fill="#FBD6A4" d="M24.329,36.287l4.639,4.288l0.438,13.128c0,0-1.138-2.878-5.076-3.413L24.329,36.287L24.329,36.287z"/>
+		<path opacity="0.1" fill="#2D2D2D" d="M5.703,50.843c0,0-0.071-19.021,0-28.177C5.773,13.511,15,1.942,15,1.942l0,0
+			c0,0-3.773,11.568-3.703,20.724c0.071,9.156,0,28.176,0,28.176L5.703,50.843z"/>
+		<path opacity="0.1" fill="#FFFFFF" d="M18.974,34.597c0,0-3.974-2.741-3.902-11.897C15.141,13.546,15,8.95,15,8.95V1.942
+			c0,0,6.918,11.353,6.988,20.508C22.06,31.606,18.974,34.597,18.974,34.597L18.974,34.597z"/>
 	</g>
-	<path fill="#FBD6A4" d="M24.329,36.271l4.639,4.288l0.438,13.128c0,0-1.138-2.878-5.076-3.413V36.271z"/>
-	<rect x="13.6" y="36.271" fill="#E5D4C1" width="2.8" height="4.497"/>
-	<rect x="13.6" y="40.768" fill="#FBD6A4" width="2.8" height="12.1"/>
 	<g>
-		<rect x="30" fill="#D8E7BF" width="30" height="56.4"/>
+		<rect x="30" y="0" display="none" fill="#D8E7BF" width="30" height="56.4"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_1_" enable-background="new    " d="M32.433,52.983h-0.618c0.054-0.144,1.079-2.88,4.828-3.411h0.618
+								C33.512,50.103,32.487,52.84,32.433,52.983z"/>
+						</defs>
+						<clipPath id="SVGID_2_">
+							<use xlink:href="#SVGID_1_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_2_)" enable-background="new    ">
+							<path fill="#9C8566" d="M32.433,52.983h-0.618c0.005-0.013,0.018-0.047,0.04-0.1h0.618
+								C32.451,52.936,32.438,52.97,32.433,52.983"/>
+							<path fill="#978062" d="M32.473,52.884h-0.618c0.028-0.064,0.07-0.157,0.129-0.271h0.618
+								C32.543,52.726,32.501,52.819,32.473,52.884"/>
+							<path fill="#927C5F" d="M32.602,52.613h-0.618c0.054-0.104,0.122-0.224,0.206-0.356h0.618
+								C32.724,52.389,32.656,52.51,32.602,52.613"/>
+							<path fill="#8D785C" d="M32.808,52.257H32.19c0.083-0.131,0.182-0.273,0.298-0.422h0.618
+								C32.99,51.983,32.891,52.126,32.808,52.257"/>
+							<path fill="#887459" d="M33.106,51.835h-0.618c0.128-0.164,0.277-0.336,0.451-0.51h0.618
+								C33.384,51.499,33.234,51.671,33.106,51.835"/>
+							<path fill="#836F55" d="M33.557,51.325h-0.618c0.738-0.738,1.909-1.498,3.704-1.753h0.618
+								C35.466,49.827,34.295,50.587,33.557,51.325"/>
+						</g>
+					</g>
+					<g>
+						<rect x="36.643" y="35.568" fill="#BFA37D" width="0.618" height="14.004"/>
+					</g>
+					<g>
+						<path fill="#C5A880" d="M36.643,35.568v14.004c-3.749,0.531-4.774,3.268-4.828,3.411l0.419-13.131L36.643,35.568z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_3_" enable-background="new    " d="M49.275,53.487h-1.902c-0.018-0.144-0.353-2.88-1.568-3.42h1.902
+								C48.922,50.607,49.258,53.344,49.275,53.487z"/>
+						</defs>
+						<clipPath id="SVGID_4_">
+							<use xlink:href="#SVGID_3_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_4_)" enable-background="new    ">
+							<path fill="#A18969" d="M49.275,53.487h-1.902c-0.002-0.016-0.007-0.06-0.017-0.127h1.902
+								C49.268,53.427,49.273,53.471,49.275,53.487"/>
+							<path fill="#9C8566" d="M49.258,53.36h-1.902c-0.009-0.063-0.021-0.145-0.038-0.241h1.902
+								C49.237,53.216,49.25,53.298,49.258,53.36"/>
+							<path fill="#978062" d="M49.221,53.119h-1.902c-0.015-0.089-0.034-0.189-0.056-0.301h1.902
+								C49.187,52.929,49.206,53.03,49.221,53.119"/>
+							<path fill="#927C5F" d="M49.165,52.818h-1.902c-0.021-0.106-0.047-0.223-0.076-0.345h1.902
+								C49.118,52.595,49.143,52.712,49.165,52.818"/>
+							<path fill="#8D785C" d="M49.089,52.473h-1.902c-0.03-0.124-0.063-0.255-0.102-0.389h1.902
+								C49.026,52.219,49.06,52.349,49.089,52.473"/>
+							<path fill="#887459" d="M48.988,52.085h-1.902c-0.043-0.15-0.092-0.306-0.148-0.46h1.902
+								C48.895,51.779,48.944,51.934,48.988,52.085"/>
+							<path fill="#836F55" d="M48.84,51.625h-1.902c-0.242-0.672-0.604-1.322-1.133-1.558h1.902
+								C48.235,50.302,48.598,50.953,48.84,51.625"/>
+						</g>
+					</g>
+					<g>
+						<rect x="45.805" y="36.08" fill="#C5A880" width="1.902" height="13.987"/>
+					</g>
+					<g>
+						<path fill="#BFA37D" d="M49.139,40.356l0.136,13.131c-0.018-0.144-0.354-2.88-1.569-3.42V36.08L49.139,40.356z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#917C5F" points="47.707,36.08 45.805,36.08 45.802,36.072 47.704,36.072 						"/>
+					</g>
+					<g>
+						<polygon fill="#7E6B52" points="47.704,36.072 47.707,36.08 47.707,36.072 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
 		<path fill="#9B8A8A" d="M35.703,50.843c0,0-0.071-19.021,0-28.177C35.773,13.511,45,1.942,45,1.942l0,0
 			c0,0,9.226,11.568,9.297,20.724c0.071,9.156,0,28.176,0,28.176L35.703,50.843z"/>
+		<path opacity="0.2" d="M38.251,50.742h2.669c0.615-0.304,1.347-0.55,2.229-0.672V36.068l-4.556,4.287L38.251,50.742z"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#CEB087" points="42.984,36.072 44.886,36.072 43.454,40.356 41.552,40.356 						"/>
+					</g>
+					<g>
+						<polygon fill="#C6A981" points="41.552,40.356 43.454,40.356 43.317,53.487 41.416,53.487 						"/>
+					</g>
+					<g>
+						<path fill="#BFA37D" d="M44.886,36.072v13.995c-1.215,0.54-1.551,3.276-1.569,3.42l0.137-13.131L44.886,36.072z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#C3A67F" points="53.181,36.08 53.799,36.08 58.207,40.356 57.589,40.356 						"/>
+					</g>
+					<g>
+						<polygon fill="#C1A57E" points="57.589,40.356 58.207,40.356 58.626,53.487 58.008,53.487 						"/>
+					</g>
+					<g>
+						<path fill="#C5A880" d="M57.589,40.356l0.419,13.131c-0.054-0.144-1.087-2.88-4.827-3.42V36.08L57.589,40.356z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#7E6B52" points="53.79,36.072 53.799,36.072 53.799,36.08 						"/>
+					</g>
+					<g>
+						<polygon fill="#C1A47E" points="53.172,36.072 53.181,36.08 53.799,36.08 53.79,36.072 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path opacity="0.1" fill="#2D2D2D" d="M35.703,50.843c0,0-0.071-19.021,0-28.177C35.773,13.511,45,1.942,45,1.942l0,0
+			c0,0-3.773,11.568-3.703,20.724c0.071,9.156,0,28.176,0,28.176L35.703,50.843z"/>
+		<path opacity="0.1" fill="#FFFFFF" d="M48.974,34.597c0,0-3.974-2.741-3.902-11.897C45.141,13.546,45,8.95,45,8.95V1.942
+			c0,0,6.918,11.353,6.988,20.508C52.06,31.606,48.974,34.597,48.974,34.597L48.974,34.597z"/>
 	</g>
 	<g>
-		<rect x="60" fill="#C0D8E8" width="30" height="56.4"/>
-		<path fill="#9B8A8A" d="M65.703,50.843c0,0-0.071-19.021,0-28.177C65.773,13.511,75,1.942,75,1.942l0,0
+		<rect x="60" y="0" display="none" fill="#C0D8E8" width="30" height="56.4"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_5_" enable-background="new    " d="M80.46,53.487h-1.618c-0.033-0.144-0.672-2.88-2.983-3.42h1.618
+								C79.788,50.607,80.427,53.344,80.46,53.487z"/>
+						</defs>
+						<clipPath id="SVGID_6_">
+							<use xlink:href="#SVGID_5_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_6_)" enable-background="new    ">
+							<path fill="#8D785C" d="M80.46,53.487h-1.618c-0.003-0.014-0.012-0.053-0.027-0.11h1.618
+								C80.448,53.434,80.457,53.473,80.46,53.487"/>
+							<path fill="#887459" d="M80.433,53.377h-1.618c-0.033-0.125-0.098-0.342-0.201-0.607h1.617
+								C80.335,53.035,80.398,53.252,80.433,53.377"/>
+							<path fill="#836F55" d="M80.23,52.769h-1.617c-0.349-0.89-1.147-2.326-2.755-2.702h1.618
+								C79.084,50.443,79.882,51.88,80.23,52.769"/>
+						</g>
+					</g>
+					<g>
+						<rect x="75.858" y="36.071" fill="#AA916F" width="1.618" height="13.996"/>
+					</g>
+					<g>
+						<path fill="#E2C194" d="M80.201,40.356l0.259,13.131c-0.033-0.144-0.672-2.88-2.983-3.42V36.071L80.201,40.356z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#857157" points="77.477,36.071 75.858,36.071 75.854,36.063 77.472,36.063 						"/>
+					</g>
+					<g>
+						<polygon fill="#7E6B52" points="77.472,36.063 77.477,36.063 77.477,36.071 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_7_" enable-background="new    " d="M64.284,53.487h-1.175c0.046-0.144,0.917-2.88,4.107-3.42h1.175
+								C65.202,50.607,64.33,53.344,64.284,53.487z"/>
+						</defs>
+						<clipPath id="SVGID_8_">
+							<use xlink:href="#SVGID_7_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_8_)" enable-background="new    ">
+							<path fill="#B59A76" d="M64.284,53.487h-1.175c0.002-0.006,0.005-0.017,0.01-0.03h1.176
+								C64.29,53.47,64.286,53.481,64.284,53.487"/>
+							<path fill="#B09673" d="M64.294,53.457h-1.176c0.01-0.029,0.025-0.074,0.048-0.133h1.176
+								C64.319,53.383,64.304,53.427,64.294,53.457"/>
+							<path fill="#AB9270" d="M64.342,53.324h-1.176c0.019-0.05,0.043-0.11,0.073-0.179h1.176
+								C64.386,53.214,64.361,53.274,64.342,53.324"/>
+							<path fill="#A68D6C" d="M64.416,53.145H63.24c0.027-0.063,0.06-0.133,0.097-0.208h1.176
+								C64.475,53.012,64.443,53.083,64.416,53.145"/>
+							<path fill="#A18969" d="M64.512,52.937h-1.176c0.035-0.071,0.075-0.148,0.12-0.229h1.176
+								C64.587,52.789,64.547,52.866,64.512,52.937"/>
+							<path fill="#9C8566" d="M64.632,52.709h-1.176c0.043-0.078,0.091-0.16,0.144-0.245h1.176
+								C64.723,52.549,64.675,52.631,64.632,52.709"/>
+							<path fill="#978062" d="M64.776,52.464H63.6c0.053-0.084,0.11-0.171,0.173-0.26h1.175
+								C64.886,52.293,64.828,52.38,64.776,52.464"/>
+							<path fill="#927C5F" d="M64.948,52.204h-1.175c0.064-0.091,0.134-0.184,0.209-0.276h1.176
+								C65.082,52.02,65.013,52.113,64.948,52.204"/>
+							<path fill="#8D785C" d="M65.158,51.927h-1.176c0.083-0.102,0.171-0.205,0.268-0.307h1.176
+								C65.329,51.722,65.24,51.826,65.158,51.927"/>
+							<path fill="#887459" d="M65.426,51.621H64.25c0.114-0.121,0.238-0.24,0.373-0.357h1.175
+								C65.663,51.381,65.54,51.5,65.426,51.621"/>
+							<path fill="#836F55" d="M65.798,51.263h-1.175c0.615-0.533,1.457-1.004,2.593-1.196h1.175
+								C67.255,50.26,66.413,50.73,65.798,51.263"/>
+						</g>
+					</g>
+					<g>
+						<rect x="67.216" y="36.063" fill="#E2C194" width="1.175" height="14.004"/>
+					</g>
+					<g>
+						<path fill="#AA916F" d="M67.216,36.063v14.004c-3.189,0.54-4.061,3.276-4.107,3.42l0.35-13.131L67.216,36.063z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path fill="#9B8A8A" d="M65.703,50.843c0,0-0.071-19.021,0-28.177C65.772,13.511,75,1.942,75,1.942l0,0
 			c0,0,9.227,11.568,9.297,20.724c0.07,9.156,0,28.176,0,28.176L65.703,50.843z"/>
+		<path opacity="0.1" fill="#2D2D2D" d="M65.784,50.843c0,0-0.071-19.021,0-28.177c0.07-9.154,9.297-20.724,9.297-20.724l0,0
+			c0,0-3.773,11.568-3.703,20.724c0.071,9.156,0,28.176,0,28.176L65.784,50.843z"/>
+		<path opacity="0.2" d="M67.545,50.825h1.964c0.509-0.343,1.132-0.622,1.889-0.755V36.069l-3.582,4.286L67.545,50.825z"/>
+		<path opacity="0.2" d="M79.436,50.825h1.201c0.158-0.158,0.332-0.286,0.528-0.363v-14l-1.611,4.285L79.436,50.825z"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#E0BF92" points="81.064,36.288 82.239,36.288 85.989,40.572 84.813,40.572 						"/>
+					</g>
+					<g>
+						<polygon fill="#E4C295" points="84.813,40.572 85.989,40.572 86.346,53.703 85.171,53.703 						"/>
+					</g>
+					<g>
+						<path fill="#AA916F" d="M81.064,36.288l3.749,4.284l0.357,13.131c-0.047-0.144-0.926-2.88-4.106-3.411V36.288z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#B69B77" points="71.509,36.135 73.126,36.135 70.397,40.419 68.779,40.419 						"/>
+					</g>
+					<g>
+						<polygon fill="#AB9270" points="68.779,40.419 70.397,40.419 70.143,53.55 68.525,53.55 						"/>
+					</g>
+					<g>
+						<path fill="#E2C194" d="M73.126,36.135v14.005c-2.317,0.53-2.95,3.267-2.983,3.41l0.254-13.131L73.126,36.135z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path opacity="0.1" fill="#FFFFFF" d="M78.974,34.597c0,0-3.974-2.741-3.902-11.897C75.141,13.546,75,8.95,75,8.95V1.942
+			c0,0,6.918,11.353,6.988,20.508C82.06,31.606,78.974,34.597,78.974,34.597L78.974,34.597z"/>
 	</g>
 	<g>
-		<rect x="120" fill="#E9BEBD" width="30" height="56.4"/>
-		<path fill="#9B8A8A" d="M125.703,50.843c0,0-0.071-19.021,0-28.177C125.773,13.511,135,1.942,135,1.942l0,0
-			c0,0,9.227,11.568,9.297,20.724c0.07,9.156,0,28.176,0,28.176L125.703,50.843z"/>
-	</g>
-	<g>
-		<rect x="90" fill="#FBD6A4" width="30" height="56.4"/>
+		<rect x="90" y="0" display="none" fill="#FBD6A4" width="30" height="56.4"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_9_" enable-background="new    " d="M100.068,53.874H98.45c0.033-0.144,0.672-2.88,2.983-3.411h1.618
+								C100.74,50.994,100.102,53.73,100.068,53.874z"/>
+						</defs>
+						<clipPath id="SVGID_10_">
+							<use xlink:href="#SVGID_9_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_10_)" enable-background="new    ">
+							<path fill="#C4A780" d="M100.068,53.874H98.45c0.002-0.008,0.006-0.024,0.012-0.048h1.618
+								C100.074,53.849,100.07,53.866,100.068,53.874"/>
+							<path fill="#BFA37D" d="M100.08,53.826h-1.618c0.007-0.027,0.016-0.063,0.028-0.108h1.618
+								C100.096,53.762,100.086,53.799,100.08,53.826"/>
+							<path fill="#BA9E79" d="M100.108,53.718H98.49c0.012-0.04,0.025-0.087,0.041-0.14h1.618
+								C100.133,53.631,100.119,53.677,100.108,53.718"/>
+							<path fill="#B59A76" d="M100.149,53.578h-1.618c0.016-0.05,0.033-0.104,0.053-0.161h1.618
+								C100.182,53.474,100.165,53.528,100.149,53.578"/>
+							<path fill="#B09673" d="M100.202,53.417h-1.618c0.019-0.055,0.039-0.113,0.063-0.176h1.618
+								C100.241,53.303,100.221,53.362,100.202,53.417"/>
+							<path fill="#AB9270" d="M100.265,53.241h-1.618c0.022-0.059,0.047-0.121,0.073-0.186h1.618
+								C100.312,53.12,100.287,53.182,100.265,53.241"/>
+							<path fill="#A68D6C" d="M100.338,53.055H98.72c0.025-0.063,0.054-0.127,0.084-0.193h1.618
+								C100.392,52.928,100.363,52.993,100.338,53.055"/>
+							<path fill="#A18969" d="M100.422,52.862h-1.618c0.029-0.065,0.062-0.133,0.096-0.201h1.618
+								C100.483,52.729,100.451,52.797,100.422,52.862"/>
+							<path fill="#9C8566" d="M100.518,52.661h-1.618c0.034-0.068,0.07-0.139,0.109-0.209h1.618
+								C100.588,52.522,100.552,52.593,100.518,52.661"/>
+							<path fill="#978062" d="M100.627,52.452h-1.618c0.04-0.072,0.082-0.146,0.127-0.219h1.618
+								C100.709,52.306,100.667,52.38,100.627,52.452"/>
+							<path fill="#927C5F" d="M100.754,52.233h-1.618c0.048-0.077,0.098-0.155,0.151-0.232h1.618
+								C100.852,52.078,100.801,52.156,100.754,52.233"/>
+							<path fill="#8D785C" d="M100.905,52.001h-1.618c0.06-0.086,0.122-0.172,0.189-0.256h1.618
+								C101.027,51.829,100.965,51.915,100.905,52.001"/>
+							<path fill="#887459" d="M101.095,51.745h-1.618c0.081-0.102,0.168-0.202,0.262-0.299h1.617
+								C101.263,51.543,101.176,51.643,101.095,51.745"/>
+							<path fill="#836F55" d="M101.355,51.446h-1.617c0.426-0.444,0.98-0.819,1.695-0.983h1.618
+								C102.337,50.627,101.782,51.002,101.355,51.446"/>
+						</g>
+					</g>
+					<g>
+						<rect x="101.434" y="36.459" fill="#EDCA9B" width="1.618" height="14.004"/>
+					</g>
+					<g>
+						<path fill="#8E795D" d="M101.434,36.459v14.004c-2.312,0.531-2.95,3.268-2.983,3.411l0.26-13.122L101.434,36.459z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_11_" enable-background="new    " d="M116.263,53.874h-1.176c-0.047-0.144-0.925-2.88-4.106-3.411h1.175
+								C115.337,50.994,116.216,53.73,116.263,53.874z"/>
+						</defs>
+						<clipPath id="SVGID_12_">
+							<use xlink:href="#SVGID_11_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_12_)" enable-background="new    ">
+							<path fill="#836F55" d="M116.263,53.874h-1.176c-0.047-0.144-0.925-2.88-4.106-3.411h1.175
+								C115.337,50.994,116.216,53.73,116.263,53.874"/>
+						</g>
+					</g>
+					<g>
+						<rect x="110.98" y="36.468" fill="#8E795D" width="1.175" height="13.995"/>
+					</g>
+					<g>
+						<path fill="#EDCA9B" d="M115.905,40.743l0.357,13.131c-0.047-0.144-0.926-2.88-4.107-3.411V36.468L115.905,40.743z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#7E6B52" points="110.973,36.459 110.98,36.459 110.98,36.468 						"/>
+					</g>
+					<g>
+						<rect x="110.98" y="36.459" fill="#8E795D" width="1.175" height="0.009"/>
+					</g>
+				</g>
+			</g>
+		</g>
 		<path fill="#9B8A8A" d="M95.703,50.843c0,0-0.071-19.021,0-28.177C95.773,13.511,105,1.942,105,1.942l0,0
 			c0,0,9.227,11.568,9.297,20.724c0.07,9.156,0,28.176,0,28.176L95.703,50.843z"/>
+		<path opacity="0.1" fill="#2D2D2D" d="M95.632,50.843c0,0-0.071-19.021,0-28.177c0.069-9.154,9.297-20.724,9.297-20.724l0,0
+			c0,0-3.773,11.568-3.703,20.724c0.071,9.156,0,28.176,0,28.176L95.632,50.843z"/>
+		<path opacity="0.2" d="M104.929,50.825h1.589c0.299-0.24,0.644-0.432,1.046-0.535V36.289l-2.453,4.286L104.929,50.825z"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#9C8566" points="98.176,36.459 99.352,36.459 95.602,40.743 94.426,40.743 						"/>
+					</g>
+					<g>
+						<polygon fill="#8E795D" points="94.426,40.743 95.602,40.743 95.244,53.874 94.068,53.874 						"/>
+					</g>
+					<g>
+						<path fill="#EDCA9B" d="M99.352,36.459v14.004c-3.183,0.531-4.061,3.268-4.107,3.411l0.357-13.131L99.352,36.459z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#EDCA9B" points="107.486,36.288 109.104,36.288 111.834,40.572 110.216,40.572 						"/>
+					</g>
+					<g>
+						<polygon fill="#EFCC9C" points="110.216,40.572 111.834,40.572 112.088,53.703 110.47,53.703 						"/>
+					</g>
+					<g>
+						<path fill="#8E795D" d="M107.486,36.288l2.729,4.284l0.254,13.131c-0.033-0.144-0.666-2.88-2.983-3.411V36.288z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path opacity="0.1" fill="#FFFFFF" d="M108.902,34.597c0,0-3.974-2.741-3.902-11.897c0.069-9.154-0.071-13.75-0.071-13.75V1.942
+			c0,0,6.918,11.353,6.988,20.508C111.988,31.606,108.902,34.597,108.902,34.597L108.902,34.597z"/>
 	</g>
-	<path fill="#FBD6A4" d="M5.671,36.271l-4.639,4.288L0.595,53.687c0,0,1.138-2.878,5.076-3.413V36.271z"/>
-	<path opacity="0.2" d="M13.6,36.271l-2.89,4.903l-0.272,15.013c0,0,0.708-3.291,3.162-3.903V36.271z"/>
+	<g>
+		<rect x="120" y="0" display="none" fill="#E9BEBD" width="30" height="56.4"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_13_" enable-background="new    " d="M148.587,53.874h-0.618c-0.054-0.144-1.079-2.88-4.827-3.411h0.618
+								C147.508,50.994,148.533,53.73,148.587,53.874z"/>
+						</defs>
+						<clipPath id="SVGID_14_">
+							<use xlink:href="#SVGID_13_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_14_)" enable-background="new    ">
+							<path fill="#836F55" d="M148.587,53.874h-0.618c-0.054-0.144-1.079-2.88-4.827-3.411h0.618
+								C147.508,50.994,148.533,53.73,148.587,53.874"/>
+						</g>
+					</g>
+					<g>
+						<rect x="143.142" y="36.459" fill="#7E6B52" width="0.618" height="14.004"/>
+					</g>
+					<g>
+						<path fill="#E8C698" d="M143.76,36.459l4.416,4.284l0.411,13.131c-0.054-0.144-1.079-2.88-4.827-3.411V36.459z"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g enable-background="new    ">
+						<defs>
+							<path id="SVGID_15_" enable-background="new    " d="M133.033,53.487h-1.902c0.018-0.144,0.354-2.88,1.568-3.42h1.902
+								C133.387,50.607,133.051,53.344,133.033,53.487z"/>
+						</defs>
+						<clipPath id="SVGID_16_">
+							<use xlink:href="#SVGID_15_"  overflow="visible"/>
+						</clipPath>
+						<g clip-path="url(#SVGID_16_)" enable-background="new    ">
+							<polyline fill="#C9AB83" points="133.033,53.487 131.131,53.487 131.132,53.479 133.034,53.479 133.033,53.487 							"/>
+							<path fill="#C4A780" d="M133.034,53.479h-1.902c0.002-0.016,0.006-0.045,0.012-0.086h1.901
+								C133.04,53.434,133.036,53.464,133.034,53.479"/>
+							<path fill="#BFA37D" d="M133.045,53.393h-1.901c0.004-0.032,0.01-0.071,0.017-0.117h1.902
+								C133.056,53.322,133.05,53.361,133.045,53.393"/>
+							<path fill="#BA9E79" d="M133.063,53.276h-1.902c0.007-0.042,0.015-0.09,0.023-0.143h1.901
+								C133.076,53.186,133.068,53.234,133.063,53.276"/>
+							<path fill="#B59A76" d="M133.085,53.134h-1.901c0.008-0.05,0.018-0.104,0.028-0.161h1.902
+								C133.104,53.03,133.094,53.084,133.085,53.134"/>
+							<path fill="#B09673" d="M133.114,52.972h-1.902c0.01-0.056,0.021-0.113,0.033-0.174h1.902
+								C133.136,52.859,133.124,52.917,133.114,52.972"/>
+							<path fill="#AB9270" d="M133.147,52.799h-1.902c0.013-0.06,0.025-0.12,0.039-0.184h1.902
+								C133.173,52.678,133.159,52.739,133.147,52.799"/>
+							<path fill="#A68D6C" d="M133.187,52.615h-1.902c0.015-0.063,0.029-0.126,0.045-0.191h1.902
+								C133.215,52.489,133.2,52.552,133.187,52.615"/>
+							<path fill="#A18969" d="M133.231,52.424h-1.902c0.016-0.064,0.032-0.131,0.051-0.197h1.902
+								C133.264,52.293,133.247,52.359,133.231,52.424"/>
+							<path fill="#9C8566" d="M133.282,52.226h-1.902c0.018-0.068,0.037-0.137,0.058-0.206h1.902
+								C133.319,52.09,133.3,52.158,133.282,52.226"/>
+							<path fill="#978062" d="M133.34,52.02h-1.902c0.021-0.071,0.043-0.144,0.067-0.215h1.901
+								C133.383,51.877,133.36,51.949,133.34,52.02"/>
+							<path fill="#927C5F" d="M133.406,51.805h-1.901c0.024-0.076,0.052-0.153,0.079-0.229h1.902
+								C133.458,51.652,133.432,51.729,133.406,51.805"/>
+							<path fill="#8D785C" d="M133.486,51.576h-1.902c0.031-0.084,0.064-0.168,0.1-0.251h1.902
+								C133.551,51.408,133.518,51.492,133.486,51.576"/>
+							<path fill="#887459" d="M133.586,51.325h-1.902c0.043-0.1,0.088-0.197,0.137-0.292h1.901
+								C133.674,51.128,133.628,51.225,133.586,51.325"/>
+							<path fill="#836F55" d="M133.722,51.033h-1.901c0.223-0.436,0.51-0.802,0.879-0.966h1.902
+								C134.232,50.231,133.944,50.597,133.722,51.033"/>
+						</g>
+					</g>
+					<g>
+						<rect x="132.699" y="36.071" fill="#E8C698" width="1.902" height="13.996"/>
+					</g>
+					<g>
+						<path fill="#7E6B52" d="M131.268,40.356l1.432-4.285v13.996c-1.215,0.54-1.551,3.276-1.568,3.42L131.268,40.356z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#A08868" points="134.602,36.071 132.699,36.071 132.702,36.063 134.604,36.063 						"/>
+					</g>
+					<g>
+						<polygon fill="#7E6B52" points="132.702,36.063 132.699,36.063 132.699,36.071 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path fill="#9B8A8A" d="M125.703,50.843c0,0-0.071-19.021,0-28.177C125.773,13.511,135,1.942,135,1.942l0,0
+			c0,0,9.227,11.568,9.297,20.724c0.07,9.156,0,28.176,0,28.176L125.703,50.843z"/>
+		<path opacity="0.2" d="M131.979,50.866h2.255c0.45-0.259,0.976-0.467,1.594-0.576V36.289l-3.582,4.286L131.979,50.866z"/>
+		<path opacity="0.1" fill="#2D2D2D" d="M125.695,50.742c0,0-0.07-19.021,0-28.177c0.07-9.154,9.297-20.724,9.297-20.724l0,0
+			c0,0-3.773,11.568-3.703,20.724c0.072,9.156,0,28.176,0,28.176L125.695,50.742z"/>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#857257" points="126.021,36.297 126.64,36.297 122.231,40.572 121.613,40.572 						"/>
+					</g>
+					<g>
+						<polygon fill="#7E6B52" points="121.613,40.572 122.231,40.572 121.813,53.703 121.194,53.703 						"/>
+					</g>
+					<g>
+						<path fill="#E8C698" d="M122.231,40.572l4.408-4.275v13.995c-3.741,0.531-4.773,3.268-4.827,3.411L122.231,40.572z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#7E6B52" points="126.03,36.288 126.021,36.297 126.021,36.288 						"/>
+					</g>
+					<g>
+						<polygon fill="#857157" points="126.03,36.288 126.648,36.288 126.64,36.297 126.021,36.297 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#EBC99A" points="135.805,36.297 137.707,36.297 139.139,40.572 137.236,40.572 						"/>
+					</g>
+					<g>
+						<polygon fill="#EAC799" points="137.236,40.572 139.139,40.572 139.275,53.703 137.373,53.703 						"/>
+					</g>
+					<g>
+						<path fill="#7E6B52" d="M137.236,40.572l0.137,13.131c-0.018-0.144-0.354-2.88-1.568-3.411V36.297L137.236,40.572z"/>
+					</g>
+				</g>
+				<g enable-background="new    ">
+					<g>
+						<polygon fill="#7E6B52" points="137.704,36.288 137.707,36.297 137.707,36.288 						"/>
+					</g>
+					<g>
+						<polygon fill="#EECB9B" points="135.802,36.288 137.704,36.288 137.707,36.297 135.805,36.297 						"/>
+					</g>
+				</g>
+			</g>
+		</g>
+		<path opacity="0.1" fill="#FFFFFF" d="M138.966,34.597c0,0-3.974-2.741-3.902-11.897c0.069-9.154-0.071-13.75-0.071-13.75V1.942
+			c0,0,6.918,11.353,6.988,20.508C142.052,31.606,138.966,34.597,138.966,34.597L138.966,34.597z"/>
+	</g>
 </g>
 </svg>

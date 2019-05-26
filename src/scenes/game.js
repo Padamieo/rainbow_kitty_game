@@ -4,8 +4,6 @@ import rocket from 'assets/rocket_test.svg';
 import kitty from 'assets/kitty_test.svg';
 import wall from 'assets/background_wall_temp.png';
 
-// import shader from 'object/shader.glsl.js';
-
 import Background from 'object/background';
 import Bullets from 'object/bullets';
 import Explosions from 'object/explosions';
@@ -15,71 +13,8 @@ import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Score from 'object/score';
 
-var CustomPipeline = new Phaser.Class({
-    Extends: Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline,
-    initialize:
-    function CustomPipeline (game) {
-      Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
-          game: game,
-          renderer: game.renderer,
-          fragShader:
-          /*[
-            "precision mediump float;",
-
-            "uniform float time;",
-            "uniform vec2 resolution;",
-            "uniform sampler2D uMainSampler;",
-            "varying vec2 outTexCoord;",
-
-            "void main( void ) {",
-                "vec2 uvv = resolution;",
-                "vec2 uv = outTexCoord;",
-                // "uv.x += (sin((u_mouse.y - (time * 1.0)) * 10.0) * 0.1);",
-                //"uv.x += (sin((uv.y - (time * 1.8)) * 6.0) * 0.1);",
-                "uv.x += (sin((gl_FragCoord.y - time) * 0.2) * 0.05);",
-                "uv.y += cos(time) * 0.05;",
-                // "uv.y = gl_FragCoord.y;",
-                //"uv.y += (sin((uv.y - (gl_FragCoord.y)) * 6.0) * 0.1);",
-                // "uv.y += (sin((gl_FragCoord.x - (time * 0.1)) * 0.1) * 0.1);",
-                "vec4 texColor = texture2D(uMainSampler, uv);",
-                "gl_FragColor = texColor;",
-
-            "}"
-          ].join('\n')
-          */
-          [
-            "precision mediump float;",
-            "uniform vec2 resolution;",
-            "uniform sampler2D uMainSampler;",
-            "varying vec2 outTexCoord;",
-            "uniform float time;",
-            "void main(){",
-                // "vec4 color = vec4(0.5, 0.0, 0.0, 1.0);",
-                "vec2 uvr = outTexCoord;",
-
-                // "uvr.y -= 0.4;",
-                "vec4 tex = texture2D(uMainSampler, outTexCoord);",
-                "vec4 tex1 = texture2D(uMainSampler, uvr);",
-                "tex1.y -= .2;",
-                "tex1.a = 0.4;",
-                // "color.r = texture2D(uMainSampler, gl_TexCoord[0].st).r;",
-                // "color.g = texture2D(uMainSampler, gl_TexCoord[0].st).g;",
-                // "color.b = texture2D(uMainSampler, gl_TexCoord[0].st).b;",
-                // "color.r = color.r - time * 0.3;",
-                // "color.g = color.g - time * 0.3;",
-                // "color.b = color.b - time * 0.3;",
-                //"color.r = max( texture2D(tex1, gl_TexCoord[0].st).r, color.r );",
-                // "color.g = max( texture2D(tex1, gl_TexCoord[0].st).g, color.g );",
-                // "color.b = max( texture2D(tex1, gl_TexCoord[0].st).b, color.b );",
-
-              //"gl_FragColor = tex1 + vec4(0.5, 0.0, 0.0, 0.5)*tex.a;",
-              "gl_FragColor = tex + tex1.a;",
-            "}"
-          ].join('\n')
-      });
-    }
-});
-
+//import shader from 'object/shader.frag';
+import CustomPipeline from 'shaders/exhaust';
 
 class Game extends phaser.Scene {
   constructor(test) {
@@ -105,6 +40,7 @@ class Game extends phaser.Scene {
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
     );
 
+    //this.load.glsl('test', shader);
     // this.load.glsl('Custom', shader);
 
     /*
@@ -124,7 +60,6 @@ class Game extends phaser.Scene {
     // camera.setScale(2);
     */
 
-    // this.generateExhaustShape();
     this.bullets = new Bullets( this );
     this.explosions = new Explosions( this );
 
@@ -161,13 +96,11 @@ class Game extends phaser.Scene {
 
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
 
-    this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
+    // this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
+    // this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
 
-    //this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
-
-    this.kitty = new Kitty( this, this.cameras.main.centerX, this.cameras.main.centerY );
+    this.kitty = new Kitty( this, this.cameras.main.centerX, this.game.config.height/3 );
     this.player = new Player( this );
-
 
     //console.log(this.customPipeline);
     // this.cameras.main.setRenderToTexture(this.customPipeline);
@@ -197,7 +130,6 @@ class Game extends phaser.Scene {
         active: true
     });
 
-
     this.input.on('pointerdown', (pointer) => {
       emitter.setPosition(this.kitty.x, this.kitty.y);
       emitter.resume();
@@ -209,13 +141,12 @@ class Game extends phaser.Scene {
 
     // enemy manager
     this.enemies = new Enemies( this );
-    // new Rocket( this, this.cameras.main.centerX, this.cameras.main.centerY );
-
 
     this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
     this.time = 0;
 
+    this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
   }
 
   kittyCollision(rocket, kitty){

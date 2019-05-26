@@ -5,7 +5,6 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
     super(scene, 0, 0,'laser_bullet');
 
     scene.add.existing(this);
-    // scene.bullets.add(this);
     scene.physics.add.existing(this);
     this.direction = this.rotation;
   }

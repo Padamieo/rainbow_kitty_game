@@ -1,6 +1,5 @@
 import phaser from 'phaser';
 
-// class Turt extends phaser.GameObjects.Sprite {
 class Kitty extends phaser.Physics.Arcade.Sprite {
   constructor (scene, x, y) {
     super(scene, x, y, 'kitty_frames');

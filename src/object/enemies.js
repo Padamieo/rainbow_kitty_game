@@ -24,12 +24,12 @@ class Enemies extends Phaser.GameObjects.Group {
       loop: true
     });
 
-    this.limit = 20;
+    this.limit = 1;
     this.list = [];
   }
 
   generateExhaustShape () {
-    var polygon = new Phaser.Geom.Polygon([
+    var polygonBase = new Phaser.Geom.Polygon([
       25, 0,
       14, 8,
       10, 20,
@@ -40,6 +40,7 @@ class Enemies extends Phaser.GameObjects.Group {
       36, 8,
       25, 0
     ]);
+    var polygon = Phaser.Geom.Polygon.Smooth(polygonBase);
     var graphics = this.scene.add.graphics({ x: 0, y: 0 });
     graphics.fillStyle(0xfeffcf);
     graphics.fillPoints(polygon.points, true);
