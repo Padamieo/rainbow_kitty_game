@@ -55,14 +55,11 @@ class Menu extends phaser.Scene {
     // this.scene.resume('Menu');
     // this.scene.pause("Menu");
 
-    this.clickButton = new TextButton(this, this.cameras.main.centerX, this.cameras.main.centerY, 'Click me!', {
+    this.clickButton = new TextButton(this, 5, this.cameras.main.centerY, 'Click me!', {
       fontFamily: '"Arial"',
       fill: '#fff',
       fontSize: 30,
-      align: 'right',
-      wordWrap: {
-        width: 150
-      }
+      align: 'right'
     });
 
     this.single = true;
@@ -81,7 +78,7 @@ class Menu extends phaser.Scene {
     //this.scene.start('Game');
   }
 
-  update(){
+  update(time, delta){
     if(this.keys.S.isDown && this.single){
       this.single = false;
       this.start();

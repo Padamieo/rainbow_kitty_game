@@ -144,7 +144,6 @@ class Game extends phaser.Scene {
 
     this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
-    this.time = 0;
 
     this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
   }
@@ -207,10 +206,8 @@ class Game extends phaser.Scene {
     }
   }
 
-  update(){
-    this.time += 0.005;
-    // console.log(this.time);
-    this.customPipeline.setFloat1('time', this.time);
+  update(time, delta){
+    this.customPipeline.setFloat1('time', time);
   }//update
 }
 export default Game;
