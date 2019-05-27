@@ -1,6 +1,5 @@
 import phaser from 'phaser';
 
-import bb from 'assets/testsmall.png';
 import ui from 'assets/UIpack_vector.svg';
 import uis from 'assets/UIpack_vector.png';
 import rocket from 'assets/rocket_test.svg';
@@ -15,7 +14,6 @@ class Menu extends phaser.Scene {
   }
 
   preload() {
-    this.load.image('bb', bb);
 
     this.load.image('uis', uis);
 
@@ -43,11 +41,9 @@ class Menu extends phaser.Scene {
 
   create () {
 
-    this.test = this.add.image(0, 0, 'bb').setOrigin(0).setScale(1.2);
-
     //this.ui = this.add.image(0, 0, 'ui').setOrigin(0).setScale(2);
 
-    this.uis = this.add.image(0, 0, 'uis').setOrigin(0).setScale(1).setTint(0x9CB88C);
+    //this.uis = this.add.image(0, 0, 'uis').setOrigin(0).setScale(1).setTint(0x9CB88C);
 
     //this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
 
@@ -55,12 +51,7 @@ class Menu extends phaser.Scene {
     // this.scene.resume('Menu');
     // this.scene.pause("Menu");
 
-    this.clickButton = new TextButton(this, 5, this.cameras.main.centerY, 'Click me!', {
-      fontFamily: '"Arial"',
-      fill: '#fff',
-      fontSize: 30,
-      align: 'right'
-    });
+    this.startButton = new TextButton(this, 5, 5, 'PLAY');
 
     this.single = true;
     this.camera = this.cameras.main;
