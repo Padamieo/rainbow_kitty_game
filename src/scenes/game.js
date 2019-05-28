@@ -28,7 +28,7 @@ class Game extends phaser.Scene {
 
     this.load.image('wall', wall);
     this.load.svg('rocket', rocket, { width: 150, height:56 });
-    this.load.svg('kitty', kitty, { width: 400, height:400 });
+    this.load.svg('kitty', kitty, { width: 400, height: 400 });
 
     this.load.spritesheet('rocket_frames',
     rocket,
