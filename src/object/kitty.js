@@ -23,8 +23,13 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       //this.body.setRotation(360);
       this.setRotation(phaser.Math.DegToRad(this.flipX ? -90 : 0));
     }, this);
-
     */
+
+    this.eyeLeft = scene.add.image(this.x-this.height/4.5, this.y, 'eye').setScale(0.5);
+    this.irisLeft = scene.add.image(this.eyeLeft.x, this.y, 'iris').setScale(0.5);
+
+    this.eyeRight = scene.add.image(this.x+this.height/4.5, this.y, 'eye').setScale(0.5);
+    this.irisRight = scene.add.image(this.eyeRight.x, this.y, 'iris').setScale(0.5);
 
     scene.physics.add.existing(this);
     this.body.setSize(this.height/1.5, this.height/1.5, true);
@@ -73,6 +78,35 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
       }
     }
 
+    this.eyeFollow();
+    //this.irisLeft.setRotation( this.irisLeft.rotation + 0.05 );
+  }
+
+  getEyeX(){
+    if(this.eye){
+      var x = this.x + this.half/2;
+      //this.scene.kitty.eye = false;
+    }else{
+      var x = this.x - this.half/2;
+      //this.scene.kitty.eye = true;
+    }
+    return x;
+  }
+
+  eyeFollow(){
+    this.eyeLeft.setPosition(this.x-this.height/4.5, this.y);
+    this.irisLeft.setPosition(this.eyeLeft.x, this.eyeLeft.y);
+    this.eyeRight.setPosition(this.x+this.height/4.5, this.y);
+    this.irisRight.setPosition(this.eyeRight.x, this.eyeLeft.y);
+  }
+
+  eyeMove(direction){
+    this.eye = !this.eye;
+    if(this.eye){
+      this.irisLeft.setRotation( direction );
+    }else{
+      this.irisRight.setRotation( direction );
+    }
   }
 
   shot(){

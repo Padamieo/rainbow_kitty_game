@@ -1,7 +1,11 @@
 import phaser from 'phaser';
 
-import rocket from 'assets/rocket_test.svg';
+import rocket from 'assets/rocket_frames.svg';
+
 import kitty from 'assets/kitty_test.svg';
+import eye from 'assets/eye.svg';
+import iris from 'assets/iris.svg';
+
 import wall from 'assets/background_wall_temp.png';
 
 import Background from 'object/background';
@@ -28,7 +32,10 @@ class Game extends phaser.Scene {
 
     this.load.image('wall', wall);
     this.load.svg('rocket', rocket, { width: 150, height:56 });
+
     this.load.svg('kitty', kitty, { width: 400, height: 400 });
+    this.load.svg('eye', eye, { width: 75, height:75 });
+    this.load.svg('iris', iris, { width: 75, height:75 });
 
     this.load.spritesheet('rocket_frames',
     rocket,

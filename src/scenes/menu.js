@@ -1,9 +1,5 @@
 import phaser from 'phaser';
 
-import ui from 'assets/UIpack_vector.svg';
-import uis from 'assets/UIpack_vector.png';
-import rocket from 'assets/rocket_test.svg';
-
 import TextButton from 'ui/button';
 
 class Menu extends phaser.Scene {
@@ -15,9 +11,7 @@ class Menu extends phaser.Scene {
 
   preload() {
 
-    this.load.image('uis', uis);
-
-    this.load.svg('ui', ui, { width: 510, height:162 });
+    //this.load.svg('ui', ui, { width: 510, height:162 });
 
     //this.load.svg('rocket', rocket, { width: 150, height:56 });
 

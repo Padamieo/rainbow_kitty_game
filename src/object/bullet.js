@@ -31,16 +31,15 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
   fire(ax, ay){
     this.anims.nextFrame();
     if(this.scene.kitty){
-      if(this.scene.kitty.eye){
-        var x = this.scene.kitty.x + this.scene.kitty.half/2;
-        this.scene.kitty.eye = false;
-      }else{
-        var x = this.scene.kitty.x - this.scene.kitty.half/2;
-        this.scene.kitty.eye = true;
-      }
+
+      var x = this.scene.kitty.getEyeX();
       var y = this.scene.kitty.y;
+
       this.setPosition(x, y);
       var direction = phaser.Math.Angle.Between(x, y, ax, ay);
+
+      this.scene.kitty.eyeMove(direction - Math.PI/2);
+      
       this.direction = direction;
       this.setRotation(this.direction + Math.PI/2);
       this.setActive(true);
