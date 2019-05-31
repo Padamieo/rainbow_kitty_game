@@ -28,7 +28,7 @@ class Bullets extends Phaser.GameObjects.Group {
     scene.anims.create({
       key: 'laser',
       frames: scene.anims.generateFrameNumbers('dynamicFrames', { start: 0, end: 3 }),
-      frameRate: 12,
+      frameRate: 0,
       repeat: -1
     });
 

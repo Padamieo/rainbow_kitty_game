@@ -29,6 +29,7 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
   }
 
   fire(ax, ay){
+    this.anims.nextFrame();
     if(this.scene.kitty){
       if(this.scene.kitty.eye){
         var x = this.scene.kitty.x + this.scene.kitty.half/2;
