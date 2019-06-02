@@ -3,6 +3,7 @@ import phaser from 'phaser';
 import rocket from 'assets/rocket_frames.svg';
 
 import kitty from 'assets/kitty_test.svg';
+import kitty2 from 'assets/spritesheet.png';
 import eye from 'assets/eye.svg';
 import iris from 'assets/iris.svg';
 
@@ -34,6 +35,7 @@ class Game extends phaser.Scene {
     this.load.svg('rocket', rocket, { width: 150, height:56 });
 
     this.load.svg('kitty', kitty, { width: 400, height: 400 });
+    this.load.image('kitty2', kitty2);
     this.load.svg('eye', eye, { width: 75, height:75 });
     this.load.svg('iris', iris, { width: 75, height:75 });
 
@@ -44,6 +46,11 @@ class Game extends phaser.Scene {
 
     this.load.spritesheet('kitty_frames',
     kitty,
+      { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
+    );
+
+    this.load.spritesheet('kitty2_frames',
+    kitty2,
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
     );
 
