@@ -44,6 +44,19 @@ class Game extends phaser.Scene {
       { frameWidth: 1, frameHeight: 56, frameWidth: 30 }
     );
 
+    this.load.spritesheet('rocket_pieces', rocket, {
+      frameWidth: 1,
+      frameHeight: 28,
+      frameWidth: 15
+    }
+    // frameWidth: frameWidth,
+    // frameHeight: frameHeight,
+    // startFrame: startFrame,
+    // endFrame: endFrame,
+    // margin: margin,
+    // spacing: spacing
+    );
+
     this.load.spritesheet('kitty_frames',
     kitty,
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
@@ -116,6 +129,22 @@ class Game extends phaser.Scene {
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.game.config.height/3 );
     this.player = new Player( this );
 
+    // this.add.image(100, 60, 'rocket_pieces').setFrame(10);
+    var particles = this.add.particles('rocket_pieces');
+    var emitter = particles.createEmitter({
+        frame: 10,
+        x: 100,
+        y: 100,
+        lifespan: 2000,
+        speed: 180,
+        accelerationY: { min:20, max: 100 },
+        gravityY: 100,
+        blendMode: 0,
+        frequency: 10,
+        on: true,
+        active: true
+    });
+
     //console.log(this.customPipeline);
     // this.cameras.main.setRenderToTexture(this.customPipeline);
     // this.cameras.main.ignore([ this.kitty, this.background, this.player ]);
@@ -125,7 +154,7 @@ class Game extends phaser.Scene {
 
     //rainbow
     this.generateRainbowTearShape();
-/*
+    /*
     //this.rainbow = new Rainbow( this );
     var particles = this.add.particles('tear');
     //particles.setPipeline('Custom');
@@ -149,7 +178,15 @@ class Game extends phaser.Scene {
       emitter.resume();
       //emitter.explode(10, this.kitty.x, this.kitty.y);
     });
-*/
+
+    this.input.on('pointerup', (pointer) => {
+      //emitter.setPosition(this.kitty.x, this.kitty.y);
+      emitter.pause();
+      //emitter.explode(10, this.kitty.x, this.kitty.y);
+    });
+    */
+
+    // this.rainbow = new Rainbow( this );
 
     this.score = new Score( this );
 
