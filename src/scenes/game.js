@@ -46,8 +46,9 @@ class Game extends phaser.Scene {
 
     this.load.spritesheet('rocket_pieces', rocket, {
       frameWidth: 1,
-      frameHeight: 28,
-      frameWidth: 15
+      frameHeight: 27,
+      frameWidth: 15,
+      spacing: 1
     }
     // frameWidth: frameWidth,
     // frameHeight: frameHeight,
@@ -130,20 +131,38 @@ class Game extends phaser.Scene {
     this.player = new Player( this );
 
     // this.add.image(100, 60, 'rocket_pieces').setFrame(10);
+    // var customAngle = 0xff33cc;
+    // new Sprite(this, 0, 0, 'rocket_pieces' [10]);
+
     var particles = this.add.particles('rocket_pieces');
     var emitter = particles.createEmitter({
-        frame: 10,
-        x: 100,
-        y: 100,
+        frame: [1, 10, 11],
+        x: 0,
+        y: 0,
         lifespan: 2000,
-        speed: 180,
+        speed: 120,
+        angle: { min: 0, max: 360 },
         accelerationY: { min:20, max: 100 },
         gravityY: 100,
         blendMode: 0,
-        frequency: 10,
-        on: true,
+        frequency: -1,
+        tint: { onEmit: () => { return emitter.colour; } },
+        alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
+        on: false,
+        rotate: { min: 0, max: 360 },
         active: true
     });
+    emitter.colour = 0xff33cc;
+
+    // this.input.on('pointerdown', (pointer) => {
+    //   if(this.cameras.main.centerX/2 < pointer.x){
+    //     emitter.colour = 0xffff66;
+    //   }else{
+    //     emitter.colour = 0x66ffdd;
+    //   }
+    //   emitter.explode(5, pointer.x, pointer.y);
+    // });
+
 
     //console.log(this.customPipeline);
     // this.cameras.main.setRenderToTexture(this.customPipeline);
