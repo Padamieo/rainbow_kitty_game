@@ -7,7 +7,7 @@ class Debris extends phaser.GameObjects.Sprite {
     super(scene);
 
     var particles = scene.add.particles('rocket_pieces');
-    var config = {
+    var wreckage_config = {
       frame: [1, 10, 11],
       x: 100,
       y: 100,
@@ -18,42 +18,48 @@ class Debris extends phaser.GameObjects.Sprite {
       gravityY: 100,
       blendMode: 0,
       frequency: -1,
-      tint: { onEmit: () => { return this.emitter.colour; } },
+      tint: { onEmit: () => { return this.wreckage.colour; } },
       alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
       on: true,
       rotate: { min: 0, max: 360 },
       active: true
-    }
-    //this.emitter = emitter;
-    this.emitter = particles.createEmitter(config);
+    };
+    this.wreckage = particles.createEmitter(wreckage_config);
+    this.wreckage.colour = 0xffffff;
+
+    var particlesspark = scene.add.particles('dynamicParticleFrames');
+    var spark_config = {
+      frame: 0,
+      x: 100,
+      y: 100,
+      lifespan: 2000,
+      speed: 250,
+      angle: { min: 0, max: 360 },
+      accelerationY: { min: 20, max: 100 },
+      gravityY: 0,
+      blendMode: 0,
+      frequency: -1,
+      alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
+      on: true,
+      rotate: { min: 0, max: 90 },
+      active: true
+    };
+    this.sparks = particlesspark.createEmitter(spark_config);
+
     scene.add.existing(this);
-    this.emitter.colour = 0xfffff33;
-    // scene.add.existing(this);
-    //console.log(emitter);
-    // this.emitter = particles.createEmitter(config);
+
   }
 
-  start (x, y, tint){
-    this.emitter.colour = tint;
-    this.emitter.explode(5, x, y);
+  start (x, y, tint, frame){
+    this.sparks.setFrame(frame);
+    this.sparks.explode(4, x, y);
+    this.wreckage.colour = tint;
+    this.wreckage.explode(5, x, y);
   }
 
-  // update(){
-  //   console.log('b');
+  // preUpdate (time, delta) {
+  //   super.preUpdate(time, delta);
   // }
-
-  preUpdate (time, delta) {
-    super.preUpdate(time, delta);
-    // super.preUpdate(delta, step, processors);
-    // console.log(this, 'a');
-    // console.log(this.scene);
-    if(this.scene.kitty){
-      // this.emitter.setPosition(this.scene.kitty.x, this.scene.kitty.y);
-      //this.emitter.resume();
-    }
-
-    // this.emitter.explode(5, 100, 100);
-  }
 }
 
 export default Debris;

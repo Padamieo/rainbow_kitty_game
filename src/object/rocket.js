@@ -46,7 +46,7 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
     this.body.setSize(this.height, this.height, true);
 
     this.setTint(this.colour(this.type));
-    this.reset();
+    //this.reset();
   }
 
   preUpdate (time, delta) {
@@ -108,6 +108,9 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
     this.x = this.x + this.start;
   }
 
+  launch(){
+    console.log('launch');
+  }
 
   reset () {
     this.x = Phaser.Math.Between(this.gap, this.scene.game.config.width-this.gap);
@@ -140,11 +143,11 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
     return colour;
   }
 
-  hit(){
+  hit(frame){
 
     var explosion = this.scene.explosions.get();
     if (explosion) {
-      explosion.start(this.x, this.y, this.colour(this.type));
+      explosion.start(this.x, this.y, this.colour(this.type), frame);
     }
 
     this.setActive(false);

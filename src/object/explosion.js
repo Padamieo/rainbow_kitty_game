@@ -3,7 +3,6 @@ import phaser from 'phaser';
 class Explosion extends phaser.GameObjects.Sprite {
   constructor (scene) {
     super(scene, 0, 0,'explosion_0');
-    //this.play('explostion');
     this.on('animationcomplete', this.animComplete, this);
 
     // build array of random directions for variation
@@ -18,15 +17,14 @@ class Explosion extends phaser.GameObjects.Sprite {
     super.preUpdate(time, delta);
   }
 
-  start(x, y, tint){
+  start(x, y, tint, frame){
     this.setPosition(x, y);
     //this.setRotation(this.a);
     this.setActive(true);
     this.setVisible(true);
     this.play('explosion');
     if(this.scene.debris){
-      console.log(tint);
-      this.scene.debris.start(x, y, tint);
+      this.scene.debris.start(x, y, tint, frame);
     }
   }
 

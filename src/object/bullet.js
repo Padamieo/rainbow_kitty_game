@@ -39,7 +39,7 @@ class Bullet extends phaser.Physics.Arcade.Sprite {
       var direction = phaser.Math.Angle.Between(x, y, ax, ay);
 
       this.scene.kitty.eyeMove(direction - Math.PI/2);
-      
+
       this.direction = direction;
       this.setRotation(this.direction + Math.PI/2);
       this.setActive(true);

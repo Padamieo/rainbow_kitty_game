@@ -96,31 +96,6 @@ class Game extends phaser.Scene {
     // this.customPipeline.setFloat2('uResolution', this.game.config.width, this.game.config.height);
   }
 
-  generateRainbowTearShape() {
-    var polygon = new Phaser.Geom.Polygon([
-      50, 5,
-      20, 68,
-      22, 80,
-      30, 90,
-      50, 100,
-      70, 90,
-      78, 80,
-      80, 68,
-      50, 5
-    ]);
-
-    // var polygon = Phaser.Geom.Polygon.Smooth(p);
-
-    var graphics = this.add.graphics({ x: 0, y: 0 });
-
-    graphics.fillStyle(0xffffff);
-    graphics.fillPoints(polygon.points, true);
-    graphics.generateTexture('tear', 100, 100);
-    // graphics.setScale(4);
-    graphics.clear();
-    // var sprite = this.add.sprite(100, 400, 'tear');
-  }
-
   create () {
 
     this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
@@ -133,7 +108,6 @@ class Game extends phaser.Scene {
 
     this.debris = new Debris( this );
 
-
     //console.log(this.customPipeline);
     // this.cameras.main.setRenderToTexture(this.customPipeline);
     // this.cameras.main.ignore([ this.kitty, this.background, this.player ]);
@@ -142,7 +116,6 @@ class Game extends phaser.Scene {
     //this.add.image(50, 180, 'exhaust').setPipeline('Custom');
 
     //rainbow
-    this.generateRainbowTearShape();
     /*
     //this.rainbow = new Rainbow( this );
     var particles = this.add.particles('tear');
@@ -240,7 +213,7 @@ class Game extends phaser.Scene {
 
       if(resultB | resultA){
         bullet.hit();
-        rocket.hit();
+        rocket.hit(bullet.frame.name);
         //rocket.setActive(false);
       }
     }

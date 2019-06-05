@@ -19,25 +19,31 @@ class Bullets extends Phaser.GameObjects.Group {
     this.amount = 5;
     this.width = 10;
     this.height = 20;
+    this.sparkSize = 5;
     this.colours = this.generateColours();
 
     this.generateBulletShape();
 
-    //this.generateBulletShape2();
+    this.generateBulletParticles();
 
     scene.anims.create({
       key: 'laser',
-      frames: scene.anims.generateFrameNumbers('dynamicFrames', { start: 0, end: 3 }),
+      frames: scene.anims.generateFrameNumbers('dynamicLaserFrames', { start: 0, end: 3 }),
       frameRate: 0,
       repeat: -1
     });
 
-    //var ball = this.scene.add.sprite(50, 400, 'dynamicFrames').play('laser');
-    //scene.add.sprite(200, 500, 'pulse');
+    scene.anims.create({
+      key: 'laserParticles',
+      frames: scene.anims.generateFrameNumbers('dynamicParticleFrames', { start: 0, end: 3 }),
+      frameRate: 0,
+      repeat: -1
+    });
+
   }
 
   generateBulletShape () {
-    var canvasFrame = this.scene.textures.createCanvas('dynamicFrames', this.width*this.colours.length, this.height);
+    var canvasFrame = this.scene.textures.createCanvas('dynamicLaserFrames', this.width*this.colours.length, this.height);
     var ctx = canvasFrame.context;
     for (var i = 0; i < this.colours.length; i++){
       ctx.beginPath();
@@ -50,26 +56,27 @@ class Bullets extends Phaser.GameObjects.Group {
     // this.scene.add.image(200, 600, 'dynamicFrames', '__BASE').setOrigin(0);
   }
 
-  generateBulletShape2 () {
-    var length = 1;//this.colours.length;
-    var graphics = this.scene.add.graphics({ x: 0, y: 0 });
-    for (var i = 0; i < length; i++) {
-      graphics.fillStyle('0x'+this.colours[i]);
-      graphics.fillRect(this.width * i, 0, this.width, this.height);
+  generateBulletParticles () {
+    var canvasFrame = this.scene.textures.createCanvas('dynamicParticleFrames', this.sparkSize*this.colours.length, this.sparkSize);
+    var ctx = canvasFrame.context;
+    for (var i = 0; i < this.colours.length; i++){
+      ctx.beginPath();
+      ctx.fillStyle = '#'+this.colours[i];
+      ctx.fillRect(i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
+      ctx.closePath();
+      canvasFrame.add(i, 0, i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
     }
-    graphics.generateTexture('laser_bullets', this.width*length, this.height);
-    graphics.clear();
-    //this.scene.add.sprite(200, 500, 'laser_bullets');
+    canvasFrame.refresh();
+    // this.scene.add.image(200, 600, 'dynamicParticleFrames', '__BASE').setOrigin(0);
   }
 
   generateColours() {
     return ['99ff22', 'ff0099', '5588ff'];
   }
 
-  preUpdate (delta, step, processors) {
-    super.preUpdate(delta, step, processors);
-    // Bullet.update(delta);
-  }
+  // preUpdate (delta, step, processors) {
+  //   super.preUpdate(delta, step, processors);
+  // }
 }
 
 export default Bullets;
