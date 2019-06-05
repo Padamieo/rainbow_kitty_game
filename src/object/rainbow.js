@@ -1,7 +1,7 @@
 import phaser from 'phaser';
 
 // class Turt extends phaser.GameObjects.Sprite {
-class Rainbow extends phaser.GameObjects.Particles.Particle {
+class Rainbow extends phaser.GameObjects.Sprite {
   constructor (scene) {
     var particles = scene.add.particles('tear');
     var emitter = particles.createEmitter({
@@ -18,18 +18,22 @@ class Rainbow extends phaser.GameObjects.Particles.Particle {
         on: true,
         active: true
     });
-    super(emitter);
+    super(scene);
     this.emitter = emitter;
-    // scene.add.existing(this);
+    scene.add.existing(this);
     console.log(emitter);
   }
 
   preUpdate (time, delta) {
     super.preUpdate(time, delta);
-    // super.preUpdate(delta, step, processors);
-    console.log('a');
-    if(this.kitty){
-      this.emitter.setPosition(this.kitty.x, this.kitty.y);
+
+    if(this.scene.kitty){
+      this.emitter.setPosition(this.scene.kitty.x, this.scene.kitty.y+(this.scene.kitty.half/2));
+      if(this.fly & this.alive){
+        this.emitter.resume();
+      }else{
+        // this.emitter.pause();
+      }
     }
   }
 }

@@ -17,6 +17,7 @@ class Explosions extends Phaser.GameObjects.Group {
     });
 
     this.generateExplostionFrames();
+
   }
 
   generateExplostionFrames() {

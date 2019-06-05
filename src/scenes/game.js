@@ -17,6 +17,7 @@ import Kitty from 'object/kitty';
 import Player from 'object/player';
 import Rainbow from 'object/rainbow';
 import Score from 'object/score';
+import Debris from 'object/debris';
 
 //import shader from 'object/shader.frag';
 import CustomPipeline from 'shaders/exhaust';
@@ -130,38 +131,7 @@ class Game extends phaser.Scene {
     this.kitty = new Kitty( this, this.cameras.main.centerX, this.game.config.height/3 );
     this.player = new Player( this );
 
-    // this.add.image(100, 60, 'rocket_pieces').setFrame(10);
-    // var customAngle = 0xff33cc;
-    // new Sprite(this, 0, 0, 'rocket_pieces' [10]);
-
-    var particles = this.add.particles('rocket_pieces');
-    var emitter = particles.createEmitter({
-        frame: [1, 10, 11],
-        x: 0,
-        y: 0,
-        lifespan: 2000,
-        speed: 120,
-        angle: { min: 0, max: 360 },
-        accelerationY: { min:20, max: 100 },
-        gravityY: 100,
-        blendMode: 0,
-        frequency: -1,
-        tint: { onEmit: () => { return emitter.colour; } },
-        alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
-        on: false,
-        rotate: { min: 0, max: 360 },
-        active: true
-    });
-    emitter.colour = 0xff33cc;
-
-    // this.input.on('pointerdown', (pointer) => {
-    //   if(this.cameras.main.centerX/2 < pointer.x){
-    //     emitter.colour = 0xffff66;
-    //   }else{
-    //     emitter.colour = 0x66ffdd;
-    //   }
-    //   emitter.explode(5, pointer.x, pointer.y);
-    // });
+    this.debris = new Debris( this );
 
 
     //console.log(this.customPipeline);
@@ -205,7 +175,7 @@ class Game extends phaser.Scene {
     });
     */
 
-    // this.rainbow = new Rainbow( this );
+    this.rainbow = new Rainbow( this );
 
     this.score = new Score( this );
 

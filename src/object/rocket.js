@@ -144,7 +144,7 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
     var explosion = this.scene.explosions.get();
     if (explosion) {
-      explosion.start(this.x, this.y);
+      explosion.start(this.x, this.y, this.colour(this.type));
     }
 
     this.setActive(false);

@@ -18,12 +18,16 @@ class Explosion extends phaser.GameObjects.Sprite {
     super.preUpdate(time, delta);
   }
 
-  start(x, y){
+  start(x, y, tint){
     this.setPosition(x, y);
     //this.setRotation(this.a);
     this.setActive(true);
     this.setVisible(true);
     this.play('explosion');
+    if(this.scene.debris){
+      console.log(tint);
+      this.scene.debris.start(x, y, tint);
+    }
   }
 
   animComplete() {
