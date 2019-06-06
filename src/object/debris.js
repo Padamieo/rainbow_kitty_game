@@ -51,8 +51,10 @@ class Debris extends phaser.GameObjects.Sprite {
   }
 
   start (x, y, tint, frame){
-    this.sparks.setFrame(frame);
-    this.sparks.explode(4, x, y);
+    if(frame !== undefined){
+      this.sparks.setFrame(frame);
+      this.sparks.explode(4, x, y);
+    }
     this.wreckage.colour = tint;
     this.wreckage.explode(5, x, y);
   }
