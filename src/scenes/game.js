@@ -47,9 +47,8 @@ class Game extends phaser.Scene {
 
     this.load.spritesheet('rocket_pieces', rocket, {
       frameWidth: 1,
-      frameHeight: 27,
-      frameWidth: 15,
-      spacing: 1
+      frameHeight: 28,
+      frameWidth: 15
     }
     // frameWidth: frameWidth,
     // frameHeight: frameHeight,

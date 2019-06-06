@@ -24,7 +24,7 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
     scene.add.existing(this);
 
     scene.physics.add.existing(this);
-    this.type = 2;
+    this.type = 0;
     this.max = 0.1;
     this.speed = 0;
 
@@ -47,27 +47,32 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
     this.setTint(this.colour(this.type));
     //this.reset();
+    this.setActive(false);
+    this.setVisible(false);
   }
 
   preUpdate (time, delta) {
     super.preUpdate(time, delta);
-    if(this.y > (0 - this.height)){
-      if(this.scene.kitty.fly){
-        this.speed = 0.05;
+    console.log(this.active);
+    if(this.active){
+      if(this.y > (0 - this.height)){
+        if(this.scene.kitty.fly){
+          this.speed = 0.05;
+        }else{
+          this.speed = 0.1;
+        }
+        this.y -= (this.speed * delta);
+
+        this.movement(time, delta);
+
       }else{
-        this.speed = 0.1;
+        this.reset();
       }
-      this.y -= (this.speed * delta);
 
-      this.movement(time, delta);
-
-    }else{
-      this.reset();
+      this.exhaust.x = this.x + this.exhaust.height/3 * Math.cos((Math.PI/2)+this.rotation);
+      this.exhaust.y = this.y + this.exhaust.height/3 * Math.sin((Math.PI/2)+this.rotation);
+      this.exhaust.setRotation(this.rotation);
     }
-
-    this.exhaust.x = this.x + this.exhaust.height/3 * Math.cos((Math.PI/2)+this.rotation);
-    this.exhaust.y = this.y + this.exhaust.height/3 * Math.sin((Math.PI/2)+this.rotation);
-    this.exhaust.setRotation(this.rotation);
     //this.exhaust.setRotation((Math.PI/3)*this.rotation);
   }
 
@@ -122,19 +127,19 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
   colour (type) {
     var colour = '';
     switch (type) {
-      case 1:
+      case 0:
         colour = 0x00DFFC;
         break;
-      case 2:
+      case 1:
         colour = 0x4EF24E;
         break;
-      case 3:
+      case 2:
         colour = 0xFEFF0D;
         break;
-      case 4:
+      case 3:
         colour = 0xFFAA00;
         break;
-      case 5:
+      case 4:
         colour = 0xf24e90;
         break;
       default:

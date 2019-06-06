@@ -59,7 +59,7 @@ class Enemies extends Phaser.GameObjects.Group {
       if (enemy) {
         //console.log(this.scene.bullets.getLength());
         enemy.launch(200, 600);
-        }
+      }
     }
   }
 
