@@ -2,7 +2,7 @@ import phaser from 'phaser';
 
 class Bullet extends phaser.Physics.Arcade.Sprite {
   constructor (scene) {
-    super(scene, 0, 0, 'dynamicFrames');
+    super(scene, 0, 0, 'dynamicLaserFrames');
 
     this.play('laser');
 

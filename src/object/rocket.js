@@ -53,7 +53,7 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
 
   preUpdate (time, delta) {
     super.preUpdate(time, delta);
-    console.log(this.active);
+    //console.log(this.active, this.visible);
     if(this.active){
       if(this.y > (0 - this.height)){
         if(this.scene.kitty.fly){
@@ -74,6 +74,13 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
       this.exhaust.setRotation(this.rotation);
     }
     //this.exhaust.setRotation((Math.PI/3)*this.rotation);
+  }
+
+  typeSet(type) {
+    if(type !== this.type){
+      this.type = type;
+      this.setTint(this.colour(this.type));
+    }
   }
 
   movement(time, delta){
@@ -113,8 +120,9 @@ class Rocket extends phaser.Physics.Arcade.Sprite {
     this.x = this.x + this.start;
   }
 
-  launch(){
+  launch(type){
     console.log('launch');
+    this.typeSet(type);
   }
 
   reset () {

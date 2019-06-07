@@ -181,6 +181,8 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
         //this.anims.play('kitty_fall', true);
       }else{
         // dead
+        console.log('dead');
+        //this.scene.start('Menu');
       }
     }
 
