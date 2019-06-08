@@ -22,9 +22,12 @@ class Bullets extends Phaser.GameObjects.Group {
     this.sparkSize = 5;
     this.colours = this.generateColours();
 
-    this.generateBulletShape();
-
-    this.generateBulletParticles();
+    if(!scene.textures.exists('dynamicLaserFrames')){
+      this.generateBulletShape();
+    }
+    if(!scene.textures.exists('dynamicParticleFrames')){
+      this.generateBulletParticles();
+    }
 
     scene.anims.create({
       key: 'laser',
@@ -73,10 +76,6 @@ class Bullets extends Phaser.GameObjects.Group {
   generateColours() {
     return ['99ff22', 'ff0099', '5588ff'];
   }
-
-  // preUpdate (delta, step, processors) {
-  //   super.preUpdate(delta, step, processors);
-  // }
 }
 
 export default Bullets;

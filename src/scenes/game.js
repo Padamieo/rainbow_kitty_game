@@ -31,6 +31,7 @@ class Game extends phaser.Scene {
 
   preload() {
     this.cameras.main.fadeIn(250, 0, 0, 0);
+    this.cameras.main.on('camerafadeoutcomplete', this.end.bind(this));
 
     this.load.image('wall', wall);
     this.load.svg('rocket', rocket, { width: 150, height:56 });
@@ -97,7 +98,7 @@ class Game extends phaser.Scene {
 
   create () {
 
-    this.background = new Background( this, this.game.config.height/2, 10, this.game.config.height, this.game.config.height, 'wall' );
+    this.background = new Background( this, this.game.config.width/2, this.game.config.height/2, this.game.config.width, this.game.config.height, 'wall' );
 
     // this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
     // this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
@@ -158,6 +159,23 @@ class Game extends phaser.Scene {
     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
 
     this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+
+    this.events.once('returnMenu', () => {
+      this.starts();
+    }, this);
+  }
+
+  end() {
+    this.scene.start('Menu');
+  }
+
+  starts() {
+    console.log('score', this.score.score)
+    if(this.score.score > window.game.score){
+      window.game.score = this.score.score;
+    }
+    window.game.lives = window.game.lives-1;
+    this.cameras.main.fadeOut(250, 0, 0, 0);
   }
 
   kittyCollision(rocket, kitty){

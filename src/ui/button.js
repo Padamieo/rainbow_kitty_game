@@ -1,45 +1,63 @@
 
 class TextButton extends Phaser.GameObjects.Text {
-  constructor(scene, x, y, text, style) {
+  constructor(scene, x, y, text, action) {
+
     super(scene, x, y, text, {
       fontFamily: '"Arial"',
       fill: '#fff',
       fontSize: 30,
-      align: 'left',
+      align: 'right',
     });
 
-    // console.log(this.style, this.style.metrics.fontSize);
-    // console.log(this);
+    this.action = action;
 
-    this.buttonColour = Phaser.Display.Color.IntegerToColor('0x999900');
-    // Phaser.Display.Color.HexStringToColor('0x555500').color;
-    console.log(this.buttonColour);
-    this.buttonColourDark = this.buttonColour.darken('20');
+    var button = '0x997700';
 
-    console.log(this.buttonColourDark);
+    this.buttonColour = Phaser.Display.Color.IntegerToColor(button);
+    this.buttonColourDark = Phaser.Display.Color.IntegerToColor(button);
+
+    this.buttonColourDark.darken(15);
+
     this.graphics = scene.add.graphics();
     this.generateButton(scene);
 
-    // this.setPosition(x+this.height/2, y);
+    this.setOrigin(0.5, 0);
+    this.xInput = x;
+    this.yInput = y;
     scene.add.existing(this);
 
     this.setInteractive({ useHandCursor: true })
       .on('pointerdown', () => this.enterButtonActiveState() )
   }
 
-  generateButton(){
+  generateButton(down){
+    var offset = (down == true ? 1 : 5 );
+    this.graphics.fillStyle(this.buttonColourDark._color, 1);
+    this.graphics.fillRoundedRect(
+      this.x-(this.width/2+this.height/2),
+      this.y+offset,
+      this.width+this.height,
+      this.style.metrics.fontSize, { tl: 5, tr: 5, bl: 5, br: 5 }
+    );
 
-    this.graphics.fillStyle(this.buttonColourDark._rgba, 1);
-    this.graphics.fillRoundedRect(this.x, this.y+5, this.width+this.height, this.style.metrics.fontSize, { tl: 5, tr: 5, bl: 5, br: 5 });
-    this.graphics.fillStyle(this.buttonColour._rgba, 1);
-    this.graphics.fillRoundedRect(this.x, this.y, this.width+this.height, this.style.metrics.fontSize, { tl: 5, tr: 5, bl: 5, br: 5 });
+    this.graphics.fillStyle(this.buttonColour._color, 1);
+    this.graphics.fillRoundedRect(
+      this.x-(this.width/2+this.height/2),
+      this.y,
+      this.width+this.height,
+      this.style.metrics.fontSize, { tl: 5, tr: 5, bl: 5, br: 5 }
+    );
+    //this.graphics.setOrigin(0.5, 0);
+    //this.graphics.setPosition(this.xInput, this.yInput);
   }
 
   enterButtonActiveState() {
-    this.setStyle({ fill: '#0ff' });
+    this.setStyle({ alpha: 0.8 });
 
     this.graphics.clear();
-    this.generateButton();
+    this.setPosition(this.x, this.yInput+5);
+    this.generateButton(true);
+    this.action();
   }
 }
 

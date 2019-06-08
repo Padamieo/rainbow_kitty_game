@@ -177,12 +177,17 @@ class Kitty extends phaser.Physics.Arcade.Sprite {
 
     }else{
       if(this.y < this.scene.game.config.height){
-        this.y += (this.fall * delta);
-        //this.anims.play('kitty_fall', true);
+        if(this.alive){
+          this.y += (this.fall * delta);
+          //this.anims.play('kitty_fall', true);
+        }else{
+          // not sure on the speed of this
+          var screen = Phaser.Math.Percent(this.y, this.half, this.distance);
+          this.speed = this.fall + screen/4;
+          this.y += (this.speed * delta);
+        }
       }else{
-        // dead
-        console.log('dead');
-        //this.scene.start('Menu');
+        this.scene.events.emit('returnMenu', 'a');
       }
     }
 

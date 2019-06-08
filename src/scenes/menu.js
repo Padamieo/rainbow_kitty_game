@@ -10,7 +10,7 @@ class Menu extends phaser.Scene {
   }
 
   preload() {
-
+    this.cameras.main.fadeIn(250, 0, 0, 0);
     //this.load.svg('ui', ui, { width: 510, height:162 });
 
     //this.load.svg('rocket', rocket, { width: 150, height:56 });
@@ -45,20 +45,48 @@ class Menu extends phaser.Scene {
     // this.scene.resume('Menu');
     // this.scene.pause("Menu");
 
-    this.startButton = new TextButton(this, 5, 5, 'PLAY');
+    var seperation = this.game.config.height/8;
+
+    var commonStyle = {
+      fontFamily: '"Arial"',
+      fill: '#fff',
+      fontSize: 30,
+      align: 'right',
+    };
+
+    var lives = window.game.lives || 9;
+    this.lives = this.add.text(this.game.config.width/2, seperation, lives+' lives', commonStyle);
+    this.lives.setOrigin(0.5, 0);
+
+    var topscore = window.game.score || 0;
+    this.topScore = this.add.text(this.game.config.width/2, seperation*2, topscore+' top score', commonStyle);
+    this.topScore.setOrigin(0.5, 0);
+
+    this.startButton = new TextButton(this, this.game.config.width/2, seperation*3, 'START', () => {
+      console.log('STARTING GAME');
+      this.startFade();
+    });
+
+    this.startButtonTwo = new TextButton(this, this.game.config.width/2, seperation*4, 'start', () => {
+      console.log('STARTING GAME');
+      this.startFade();
+    });
+
+    this.startButtonThree = new TextButton(this, this.game.config.width/2, seperation*5, 'START', () => {
+      console.log('STARTING GAME');
+      this.startFade();
+    });
 
     this.single = true;
     this.camera = this.cameras.main;
-    this.cameras.main.on('camerafadeoutcomplete', this.end.bind(this));
+    this.cameras.main.on('camerafadeoutcomplete', this.startGame.bind(this));
   }
 
-  end(){
-    console.log(this);
-    console.log('end');
+  startGame(){
     this.scene.start('Game');
   }
 
-  start(){
+  startFade(){
     this.cameras.main.fadeOut(250, 0, 0, 0);
     //this.scene.start('Game');
   }
@@ -66,7 +94,7 @@ class Menu extends phaser.Scene {
   update(time, delta){
     if(this.keys.S.isDown && this.single){
       this.single = false;
-      this.start();
+      this.startFade();
     }
   }//update
 }

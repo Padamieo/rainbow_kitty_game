@@ -19,13 +19,23 @@ class Enemies extends Phaser.GameObjects.Group {
     this.generateExhaustShape();
 
     this.scene.tick = this.scene.time.addEvent({
-      delay: 3000,
+      delay: 2500,
       callback: this.callback.bind(this),
       loop: true
     });
 
     this.limit = 2;
-    this.list = [];
+    this.list = new Array(2).fill(0);
+    console.log(this.list);
+    this.list.push(1);
+    this.list.push(2);
+    console.log(this.list);
+    this.index = 0;
+
+    // console.log(b.next().value);
+    // console.log(b.next().value);
+    // console.log(b.next().value);
+    // console.log(b.next().value);
   }
 
   generateExhaustShape () {
@@ -48,17 +58,30 @@ class Enemies extends Phaser.GameObjects.Group {
     graphics.clear();
   }
 
+  incrementIndex(){
+    //
+  }
+
   callback(){
 
     //console.log('add');
     if(this.getLength() <= this.limit){
     // console.log('spawn', this.getLength());
     // new Rocket( this.scene, this.scene.cameras.main.centerX, this.scene.cameras.main.centerY );
-
       var enemy = this.get();
       if (enemy) {
+
+
+        if(this.index+1 < this.list.length){
+          this.index = this.index+1;
+        }else{
+          this.index = 0;
+        }
+        var v = this.list[this.index];
+        console.log(v);
+
         //console.log(this.scene.bullets.getLength());
-        enemy.launch(0);
+        enemy.launch(v);
       }
     }
   }

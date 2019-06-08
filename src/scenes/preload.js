@@ -1,4 +1,5 @@
 import phaser from 'phaser';
+import Bullets from 'object/bullets';
 
 class Preload extends phaser.Scene {
   constructor(test) {
@@ -27,14 +28,15 @@ class Preload extends phaser.Scene {
   //
   //   game.start();
   //   this.startGame();
-  //   //this.scene.start('Menu');
   // });
 
     this.startGame();
+    window.game.lives = 9;
+    window.game.score = 0;
   }
 
   startGame () {
-    this.scene.start('Game');
+    this.scene.start('Menu');
   }
 }
 export default Preload;
