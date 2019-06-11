@@ -36,7 +36,7 @@ class Preload extends phaser.Scene {
   }
 
   startGame () {
-    this.scene.start('Menu');
+    this.scene.start('Game');
   }
 }
 export default Preload;

@@ -47,7 +47,6 @@ class Game extends phaser.Scene {
     );
 
     this.load.spritesheet('rocket_pieces', rocket, {
-      frameWidth: 1,
       frameHeight: 28,
       frameWidth: 15
     }
@@ -68,6 +67,12 @@ class Game extends phaser.Scene {
     kitty2,
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
     );
+
+    // var rt = this.add.renderTexture(0, 0, 30, 30);
+    // rt.draw('rocket_pieces', 0, 0, 2, 0xffffff);
+    // console.log(rt.texture.key);
+    // var tt = rt.saveTexture('doodle');
+    // console.log(rt.texture.key);
 
     //this.load.glsl('test', shader);
     // this.load.glsl('Custom', shader);
