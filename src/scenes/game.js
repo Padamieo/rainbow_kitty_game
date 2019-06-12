@@ -19,6 +19,8 @@ import Rainbow from 'object/rainbow';
 import Score from 'object/score';
 import Debris from 'object/debris';
 
+import Test from 'object/test';
+
 //import shader from 'object/shader.frag';
 import CustomPipeline from 'shaders/exhaust';
 
@@ -68,6 +70,11 @@ class Game extends phaser.Scene {
       { frameWidth: 1, frameHeight: 200, frameWidth: 200 }
     );
 
+
+    this.test = new Test( this, 0, 0, 100, 100 );
+
+    this.generateTestParticles();
+
     // var rt = this.add.renderTexture(0, 0, 30, 30);
     // rt.draw('rocket_pieces', 0, 0, 2, 0xffffff);
     // console.log(rt.texture.key);
@@ -95,6 +102,9 @@ class Game extends phaser.Scene {
     */
 
     this.bullets = new Bullets( this );
+
+    //this.debris = new Debris( this );
+
     this.explosions = new Explosions( this );
 
     this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
@@ -152,6 +162,28 @@ class Game extends phaser.Scene {
       //emitter.explode(10, this.kitty.x, this.kitty.y);
     });
     */
+    /*
+    var particles = this.add.particles('dynamicTestFrames');
+    var wreckage_config = {
+      frame: 0,
+      x: 100,
+      y: 100,
+      lifespan: 2000,
+      speed: 120,
+      angle: { min: 0, max: 360 },
+      accelerationY: { min: 20, max: 100 },
+      gravityY: 100,
+      blendMode: 0,
+      frequency: 100,
+      tint: { onEmit: () => { return this.wreckage.colour; } },
+      alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
+      on: true,
+      rotate: { min: 0, max: 360 },
+      active: true
+    };
+    this.wreckage = particles.createEmitter(wreckage_config);
+    this.wreckage.colour = 0xffffff;
+    */
 
     this.rainbow = new Rainbow( this );
 
@@ -159,6 +191,7 @@ class Game extends phaser.Scene {
 
     // enemy manager
     this.enemies = new Enemies( this );
+
 
     this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
     this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
@@ -181,6 +214,50 @@ class Game extends phaser.Scene {
     }
     window.game.lives = window.game.lives-1;
     this.cameras.main.fadeOut(250, 0, 0, 0);
+  }
+
+  generateTestParticles () {
+    var canvasFrame = this.textures.createCanvas('dynamicTestFrames', 15, 30);
+    var ctx = canvasFrame.context;
+    var img = new Image();
+    console.log(rocket);
+    img.src = '.'+rocket;
+    //for (var i = 0; i < this.colours.length; i++){
+    //console.log(rocket);
+    img.onload = () => {
+      ctx.save();
+      // ctx.beginPath();
+      //ctx.rect(0, 10, 12, 12);
+      ctx.rotate(10 * Math.PI / 180);
+      //ctx.rect(0, 10, 12, 12);
+      //ctx.fillStyle = '#ffffff';
+
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.lineTo(15, 0);
+
+      ctx.lineTo(18, 18);
+      ctx.lineTo(12, 20);
+      ctx.lineTo(15, 25);
+
+      ctx.lineTo(15, 28);
+      ctx.lineTo(0, 28);
+      ctx.closePath();
+
+      ctx.clip();
+      // ctx.closePath();
+
+      ctx.drawImage(img, -10, -20);
+      //ctx.closePath();
+      //ctx.beginPath();
+      //ctx.fillStyle = '#ffffff';
+
+      canvasFrame.add(0, 0, .0, 0, 15, 28);
+      ctx.restore();
+    //}
+    canvasFrame.refresh();
+    }
+    //this.scene.add.image(200, 600, 'dynamicTestFrames', '__BASE').setOrigin(0);
   }
 
   kittyCollision(rocket, kitty){

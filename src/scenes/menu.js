@@ -2,6 +2,9 @@ import phaser from 'phaser';
 
 import TextButton from 'ui/button';
 
+import rocket from 'assets/rocket_frames.svg';
+import Test from 'object/test';
+
 class Menu extends phaser.Scene {
   constructor(test) {
     super({
@@ -14,6 +17,8 @@ class Menu extends phaser.Scene {
     //this.load.svg('ui', ui, { width: 510, height:162 });
 
     //this.load.svg('rocket', rocket, { width: 150, height:56 });
+
+    this.load.svg('rocket', rocket, { width: 150, height:56 });
 
     /*
     var camera = this.cameras.main;
@@ -34,6 +39,8 @@ class Menu extends phaser.Scene {
   }
 
   create () {
+
+    this.test = new Test( this, 0, 0, 100, 200 );
 
     //this.ui = this.add.image(0, 0, 'ui').setOrigin(0).setScale(2);
 

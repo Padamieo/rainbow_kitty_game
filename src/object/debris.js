@@ -2,7 +2,7 @@ import phaser from 'phaser';
 import rocket from 'assets/rocket_frames.svg';
 
 // class example  extends phaser.GameObjects.Particles.Particle { // this does not work
-class Debris extends phaser.GameObjects.Sprite {
+class Debris extends phaser.GameObjects.RenderTexture  {
   constructor (scene) {
 
     super(scene);
@@ -31,10 +31,14 @@ class Debris extends phaser.GameObjects.Sprite {
     if(!scene.textures.exists('dynamicTestFrames')){
       //this.generateTestParticles();
       this.generateTestParticles();
+
     }
+    console.log(scene.textures.exists('dynamicTestFrames'));
+    //this.generateTestParticles(scene);
+
 
     // scene.anims.create({
-    //   key: 'testrParticles',
+    //   key: 'testParticles',
     //   frames: scene.anims.generateFrameNumbers('dynamicTestFrames', { start: 0, end: 3 }),
     //   frameRate: 0,
     //   repeat: -1
@@ -53,7 +57,7 @@ class Debris extends phaser.GameObjects.Sprite {
       accelerationY: { min: 20, max: 100 },
       gravityY: 100,
       blendMode: 0,
-      frequency: -1,
+      frequency: 100,
       tint: { onEmit: () => { return this.wreckage.colour; } },
       alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
       on: true,
@@ -89,22 +93,23 @@ class Debris extends phaser.GameObjects.Sprite {
 
   start (x, y, tint, frame){
     if(frame !== undefined){
-      this.sparks.setFrame(frame);
-      this.sparks.explode(4, x, y);
+      // this.sparks.setFrame(frame);
+      // this.sparks.explode(4, x, y);
     }
     this.wreckage.colour = tint;
+    console.log(this.wreckage);
     this.wreckage.explode(5, x, y);
   }
 
-  generateTestParticles () {
-    var canvasFrame = this.scene.textures.createCanvas('dynamicTestFrames', 15, 30);
+  generateTestParticles (scene) {
+    var canvasFrame = scene.textures.createCanvas('dynamicTestFrames', 15, 30);
     var ctx = canvasFrame.context;
     var img = new Image();
     console.log(rocket);
     img.src = '.'+rocket;
     //for (var i = 0; i < this.colours.length; i++){
     //console.log(rocket);
-    img.onload = function() {
+    img.onload = () => {
       ctx.save();
       // ctx.beginPath();
       //ctx.rect(0, 10, 12, 12);
