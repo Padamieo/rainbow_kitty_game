@@ -137,7 +137,7 @@ class Debris extends phaser.GameObjects.RenderTexture  {
       //ctx.beginPath();
       //ctx.fillStyle = '#ffffff';
 
-      canvasFrame.add(0, 0, .0, 0, 15, 28);
+      canvasFrame.add(0, 0, 0, 0, 15, 28);
       ctx.restore();
     //}
     canvasFrame.refresh();

@@ -45,7 +45,7 @@ class Game extends phaser.Scene {
 
     this.load.spritesheet('rocket_frames',
     rocket,
-      { frameWidth: 1, frameHeight: 56, frameWidth: 30 }
+      { frameHeight: 56, frameWidth: 30 }
     );
 
     this.load.spritesheet('rocket_pieces', rocket, {
@@ -122,6 +122,8 @@ class Game extends phaser.Scene {
     this.player = new Player( this );
 
     this.debris = new Debris( this );
+
+
 
     //console.log(this.customPipeline);
     // this.cameras.main.setRenderToTexture(this.customPipeline);
