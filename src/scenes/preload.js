@@ -30,9 +30,9 @@ class Preload extends phaser.Scene {
   //   this.startGame();
   // });
 
-    this.startGame();
     window.game.lives = 9;
     window.game.score = 0;
+    this.startGame();
   }
 
   startGame () {
