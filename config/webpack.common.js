@@ -33,7 +33,7 @@ module.exports = {
 					presets: ['env']
 				}
 			}
-	  },{
+		},{
 			test: /\.css$/,
 			exclude: /node_modules/,
 			use: [
