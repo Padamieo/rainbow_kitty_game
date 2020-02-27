@@ -35,7 +35,7 @@ class Game extends Phaser.Scene {
 		this.cameras.main.on('camerafadeoutcomplete', this.end.bind(this));
 
 		this.load.image('wall', wall);
-		this.load.svg('rocket', rocket, { width: 150, height: 56 });
+		// this.load.svg('rocket', rocket, { width: 150, height: 56 });
 
 		this.load.svg('kitty', kitty, { width: 400, height: 400 });
 		this.load.image('kitty2', kitty2);
@@ -47,18 +47,6 @@ class Game extends Phaser.Scene {
 			{ frameHeight: 56, frameWidth: 30 }
 		);
 
-		this.load.spritesheet('rocket_pieces', rocket, {
-			frameHeight: 28,
-			frameWidth: 15
-		}
-			// frameWidth: frameWidth,
-			// frameHeight: frameHeight,
-			// startFrame: startFrame,
-			// endFrame: endFrame,
-			// margin: margin,
-			// spacing: spacing
-		);
-
 		this.load.spritesheet('kitty_frames',
 			kitty,
 			{ frameHeight: 200, frameWidth: 200 }
@@ -68,12 +56,6 @@ class Game extends Phaser.Scene {
 			kitty2,
 			{ frameHeight: 200, frameWidth: 200 }
 		);
-
-		// var rt = this.add.renderTexture(0, 0, 30, 30);
-		// rt.draw('rocket_pieces', 0, 0, 2, 0xffffff);
-		// console.log(rt.texture.key);
-		// var tt = rt.saveTexture('doodle');
-		// console.log(rt.texture.key);
 
 		//this.load.glsl('test', shader);
 		// this.load.glsl('Custom', shader);

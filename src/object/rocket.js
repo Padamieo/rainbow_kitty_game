@@ -2,7 +2,7 @@ import Phaser from 'phaser';
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
 	constructor (scene) {
-
+		
 		scene.anims.create({
 			key: 'frames',
 			defaultTextureKey: 'rocket_frames',

@@ -6,27 +6,6 @@ class Debris extends Phaser.GameObjects.Sprite {
 	constructor (scene){
 		super(scene);
 
-		// var particles = scene.add.particles('rocket_pieces');
-		// var wreckage_config = {
-		//   frame: [0,1,13,12],
-		//   x: 100,
-		//   y: 100,
-		//   lifespan: 2000,
-		//   speed: 120,
-		//   angle: { min: 0, max: 360 },
-		//   accelerationY: { min: 20, max: 100 },
-		//   gravityY: 100,
-		//   blendMode: 0,
-		//   frequency: -1,
-		//   tint: { onEmit: () => { return this.wreckage.colour; } },
-		//   alpha:{ start:1, end:0, ease: "Cubic.easeIn" },
-		//   on: true,
-		//   rotate: { min: 0, max: 360 },
-		//   active: true
-		// };
-		// this.wreckage = particles.createEmitter(wreckage_config);
-		// this.wreckage.colour = 0xffffff;
-
 		if(!scene.textures.exists('dynamicTestFrames')){
 			//this.generateTestParticles();
 			var promi = this.generateDebris();
