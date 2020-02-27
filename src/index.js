@@ -1,6 +1,7 @@
 import './index.css';
 import Game from './scenes/game';
 import Menu from './scenes/menu';
+import Test from './scenes/test';
 import Phaser from 'phaser';
 import pkg from '../package.json';
 import Preload from './scenes/preload';
@@ -34,7 +35,8 @@ var config = {
 	scene: [
 		Preload,
 		Menu,
-		Game
+		Game,
+		Test
 	]
 };
 

@@ -27,7 +27,7 @@ class Explosions extends Phaser.GameObjects.Group {
 			var circle = new Phaser.Geom.Circle(50, 50, 5*f+i);
 
 			var points = circle.getPoints(f+3);
-			for (var i = 0; i < points.length; i++) {
+			for (i = 0; i < points.length; i++) {
 				graphics.fillCircle(points[i].x, points[i].y, 10+i+f);
 			}
 
