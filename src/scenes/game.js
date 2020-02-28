@@ -61,21 +61,21 @@ class Game extends Phaser.Scene {
 		// this.load.glsl('Custom', shader);
 
 		/*
-    var camera = this.cameras.main;
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    var scale = Math.min(w / 405, h / 720);
-    var width = w / scale;
-    var height = h / scale;
-    camera.setViewport(0, 0, 405, 405);
-    camera.setBackgroundColor(0x001111);
-    camera.setZoom(1);
-    camera.setViewport(10,10,600,600);
-    // camera.scaleManager(Phaser.Scale.FIT);
-    // console.log(this);
-    // this.scene.setScale(2);
-    // camera.setScale(2);
-    */
+		var camera = this.cameras.main;
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		var scale = Math.min(w / 405, h / 720);
+		var width = w / scale;
+		var height = h / scale;
+		camera.setViewport(0, 0, 405, 405);
+		camera.setBackgroundColor(0x001111);
+		camera.setZoom(1);
+		camera.setViewport(10,10,600,600);
+		// camera.scaleManager(Phaser.Scale.FIT);
+		// console.log(this);
+		// this.scene.setScale(2);
+		// camera.setScale(2);
+		*/
 
 		this.bullets = new Bullets( this );
 		this.explosions = new Explosions( this );

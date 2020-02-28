@@ -3,7 +3,6 @@ import Explosion from 'object/explosion';
 
 class Explosions extends Phaser.GameObjects.Group {
 	constructor (scene) {
-
 		super(scene, Explosion, {
 			classType: Explosion,
 			defaultKey: 'explosion',
@@ -17,7 +16,6 @@ class Explosions extends Phaser.GameObjects.Group {
 		});
 
 		this.generateExplostionFrames();
-
 	}
 
 	generateExplostionFrames() {
@@ -59,7 +57,6 @@ class Explosions extends Phaser.GameObjects.Group {
 
 	preUpdate (delta, step, processors) {
 		super.preUpdate(delta, step, processors);
-		// Bullet.update(delta);
 	}
 }
 

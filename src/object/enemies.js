@@ -59,7 +59,7 @@ class Enemies extends Phaser.GameObjects.Group {
 	}
 
 	incrementIndex(){
-		//
+		// 
 	}
 
 	callback(){
@@ -70,7 +70,6 @@ class Enemies extends Phaser.GameObjects.Group {
 			// new Rocket( this.scene, this.scene.cameras.main.centerX, this.scene.cameras.main.centerY );
 			var enemy = this.get();
 			if (enemy) {
-
 
 				if(this.index+1 < this.list.length){
 					this.index = this.index+1;
@@ -87,7 +86,7 @@ class Enemies extends Phaser.GameObjects.Group {
 	}
 
 	start(){
-
+		// 
 	}
 
 	preUpdate (delta, step, processors) {

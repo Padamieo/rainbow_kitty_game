@@ -2,6 +2,7 @@ import './index.css';
 import Game from './scenes/game';
 import Menu from './scenes/menu';
 import Test from './scenes/test';
+import ShaderTest from './scenes/ShaderTest';
 import Phaser from 'phaser';
 import pkg from '../package.json';
 import Preload from './scenes/preload';
@@ -36,7 +37,8 @@ var config = {
 		Preload,
 		Menu,
 		Game,
-		Test
+		Test,
+		ShaderTest,
 	]
 };
 

@@ -33,16 +33,16 @@ class Bullets extends Phaser.GameObjects.Group {
 	}
 
 	generateBulletShape() {
-		var canvasFrame = this.scene.textures.createCanvas('dynamicLaserFrames', this.width*this.colours.length, this.height);
-		var ctx = canvasFrame.context;
+		var texture = this.scene.textures.createCanvas('dynamicLaserFrames', this.width*this.colours.length, this.height);
+		var context = texture.getContext();
 		for (var i = 0; i < this.colours.length; i++){
-			ctx.beginPath();
-			ctx.fillStyle = '#'+this.colours[i];
-			ctx.fillRect(i*this.width, 0, this.width, this.height);
-			ctx.closePath();
-			canvasFrame.add(i, 0, i*this.width, 0, this.width, this.height);
+			context.beginPath();
+			context.fillStyle = '#'+this.colours[i];
+			context.fillRect(i*this.width, 0, this.width, this.height);
+			context.closePath();
+			texture.add(i, 0, i*this.width, 0, this.width, this.height);
 		}
-		canvasFrame.refresh();
+		texture.refresh();
 		// this.scene.add.image(200, 600, 'dynamicFrames', '__BASE').setOrigin(0);
 	}
 

@@ -41,16 +41,16 @@ class Sparks extends Phaser.GameObjects.Sprite {
 	}
 
 	generateBulletParticles() {
-		var canvasFrame = this.scene.textures.createCanvas('dynamicSparksFrames', this.sparkSize*this.colours.length, this.sparkSize);
-		var ctx = canvasFrame.context;
+		var texture = this.scene.textures.createCanvas('dynamicSparksFrames', this.sparkSize*this.colours.length, this.sparkSize);
+		var context = texture.getContext();
 		for (var i = 0; i < this.colours.length; i++){
-			ctx.beginPath();
-			ctx.fillStyle = '#'+this.colours[i];
-			ctx.fillRect(i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
-			ctx.closePath();
-			canvasFrame.add(i, 0, i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
+			context.beginPath();
+			context.fillStyle = '#'+this.colours[i];
+			context.fillRect(i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
+			context.closePath();
+			texture.add(i, 0, i*this.sparkSize, 0, this.sparkSize, this.sparkSize);
 		}
-		canvasFrame.refresh();
+		texture.refresh();
 		// this.scene.add.image(200, 600, 'dynamicSparksFrames', '__BASE').setOrigin(0);
 	}
 
