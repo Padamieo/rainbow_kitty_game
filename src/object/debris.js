@@ -59,7 +59,7 @@ class Debris extends Phaser.GameObjects.Sprite {
 	generateDebris () {
 		var p = this.addImageProcess(rocket).then((image) => {
 			var texture = this.scene.textures.createCanvas('dynamicTestFrames', image.width, image.height);
-			var canvas = texture.getCanvas();
+			// var canvas = texture.getCanvas();
 			var context = texture.context; // texture.getContext();
 
 			// context.beginPath();
