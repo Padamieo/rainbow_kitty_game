@@ -1,11 +1,14 @@
 import Phaser from 'phaser';
-import current from './current';
+// import current from './current.glsl';
+// import greyScale from './grey-scale.glsl';
+// import outline from './outline.glsl';
+import testBlur from './testBlur.glsl';
 
 function CustomPipeline(game) {
 	Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
 		game: game,
 		renderer: game.renderer,
-		fragShader: current
+		fragShader: testBlur
 	});
 }
 
