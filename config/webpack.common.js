@@ -20,7 +20,7 @@ module.exports = {
 		sourceMapFilename: '[name].map'
 	},
 	resolve: {
-		extensions: ['.js'],  // extensions that are used
+		extensions: ['.js', ".glsl"],  // extensions that are used
 		modules: [path.join(process.cwd(), 'src'), 'node_modules'] // directories where to look for modules
 	},
 	module: {
@@ -51,6 +51,10 @@ module.exports = {
 					name: 'assets/[hash]-[name].[ext]'
 				}
 			}]
+		},
+		{
+			test: /\.glsl$/,
+			loader: 'webpack-glsl-loader'
 		}]
 	},
 	plugins: [

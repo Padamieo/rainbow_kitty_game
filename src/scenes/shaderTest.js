@@ -21,6 +21,7 @@ class ShaderTest extends Phaser.Scene {
 
 	update(time, delta){
 		this.customPipeline.setFloat1('time', time);
+		this.customPipeline.setFloat1('delta', delta);
 	}
 
 	generateExhaustShape() {
