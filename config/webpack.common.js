@@ -20,7 +20,7 @@ module.exports = {
 		sourceMapFilename: '[name].map'
 	},
 	resolve: {
-		extensions: ['.js', ".glsl"],  // extensions that are used
+		extensions: ['.js', '.glsl'],  // extensions that are used
 		modules: [path.join(process.cwd(), 'src'), 'node_modules'] // directories where to look for modules
 	},
 	module: {
@@ -41,8 +41,8 @@ module.exports = {
 				'css-loader?sourceMap',
 			],
 		},{
-			test: [ /\.vert$/, /\.frag$/ ],
-			use: 'raw-loader'
+			test: [ /\.atlas$/, /\.frag$/ ],
+			use: 'url-loader'
 		},{
 			test: /\.(png|jp(e*)g|svg)$/,
 			use: [{

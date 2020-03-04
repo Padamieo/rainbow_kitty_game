@@ -6,6 +6,8 @@ import ShaderTest from './scenes/ShaderTest';
 import Phaser from 'phaser';
 import pkg from '../package.json';
 import Preload from './scenes/preload';
+import SpineTest from './scenes/spineTest';
+import 'phaser/plugins/spine/dist/SpinePlugin';
 
 var config = {
 	type: Phaser.AUTO,
@@ -33,12 +35,18 @@ var config = {
 			fps: 60,
 		}
 	},
+	plugins: {
+		scene: [
+			{ key: 'SpinePlugin', plugin: window.SpinePlugin, mapping: 'spine' }
+		]
+	},
 	scene: [
 		Preload,
 		Menu,
 		Game,
 		Test,
 		ShaderTest,
+		SpineTest,
 	]
 };
 
