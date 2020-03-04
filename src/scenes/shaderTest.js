@@ -1,5 +1,4 @@
 import Phaser from 'phaser';
-// import Enemies from 'object/enemies';
 import CustomPipeline from 'shaders/exhaust';
 
 class ShaderTest extends Phaser.Scene {
@@ -15,13 +14,22 @@ class ShaderTest extends Phaser.Scene {
 	}
 
 	create() {
-		// this.enemies = new Enemies( this );
 		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.add.image(this.game.config.width/2, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.add.image(this.game.config.width/2, 100, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.add.image(this.game.config.width/2, 200, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.scale = this.add.image(this.game.config.width/2, 400, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.scale.setScale(3);
+		this.follow = this.add.image(0, 0, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
 	}
 
 	update(time, delta){
 		this.customPipeline.setFloat1('time', time);
 		this.customPipeline.setFloat1('delta', delta);
+
+		this.input.on('pointermove', (pointer) => {
+			this.follow.setPosition(pointer.x, pointer.y);
+		});	  
 	}
 
 	generateExhaustShape() {
