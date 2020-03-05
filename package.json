@@ -43,6 +43,7 @@
     "webpack-merge": "^4.2.2"
   },
   "dependencies": {
+    "dragonbones-runtime": "https://github.com/DragonBones/DragonBonesJS",
     "phaser": "^3.22.0"
   }
 }

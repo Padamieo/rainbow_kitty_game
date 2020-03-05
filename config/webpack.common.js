@@ -41,8 +41,8 @@ module.exports = {
 				'css-loader?sourceMap',
 			],
 		},{
-			test: [ /\.vert$/, /\.frag$/ ],
-			use: 'raw-loader'
+			test: [ /\.dbbin$/], // for dragon bones specific
+			use: 'file-loader'
 		},{
 			test: /\.(png|jp(e*)g|svg)$/,
 			use: [{

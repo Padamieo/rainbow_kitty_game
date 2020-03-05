@@ -6,6 +6,9 @@ import ShaderTest from './scenes/ShaderTest';
 import Phaser from 'phaser';
 import pkg from '../package.json';
 import Preload from './scenes/preload';
+import DragonBones from './scenes/DragonBones';
+
+import dragonBones from 'dragonbones-runtime/Phaser/3.x/out/dragonBones.js';
 
 var config = {
 	type: Phaser.AUTO,
@@ -39,7 +42,13 @@ var config = {
 		Game,
 		Test,
 		ShaderTest,
-	]
+		DragonBones,
+	],
+	plugins: {
+		scene: [
+			{ key: 'DragonBones', plugin: dragonBones.phaser.plugin.DragonBonesScenePlugin, mapping: 'dragonbone' }    // setup DB scene plugin
+		]
+	},
 };
 
 if(process.env.NODE_ENV === 'development') {
