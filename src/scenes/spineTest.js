@@ -1,8 +1,9 @@
 import Phaser from 'phaser';
 
-import demo from 'assets/demos.json';
-import atlas from 'assets/atlas1.atlas';
-import png from 'assets/atlas1.png';
+import owlJSON from 'assets/owl-pro.json';
+import owlAtlas from 'assets/owl-pro.atlas';
+
+// https://labs.phaser.io/edit.html?src=src\spine\3.8\owl.js
 
 class SpineTest extends Phaser.Scene {
 	constructor() {
@@ -12,12 +13,15 @@ class SpineTest extends Phaser.Scene {
 	}
 
 	preload() {
-		console.log('aa', png);
-		this.load.spine('set1', demo, [ atlas ], true);
+		this.load.spine('owl', owlJSON, owlAtlas);
 	}
 
 	create() {
-		this.add.spine(100, 100, 'set1.spineboy', 'idle', true);
+		const owl = this.add.spine(200, 500, 'owl', 'idle', true);
+		owl.setScale(0.5);
+		this.physics.add.existing(owl);
+		owl.body.setSize(owl.height/1.5, owl.height/1.5, true);
+		// owl.setSkinByName('skin');
 	}
 
 	update(time, delta){ 

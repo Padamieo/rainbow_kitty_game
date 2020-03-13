@@ -41,8 +41,17 @@ module.exports = {
 				'css-loader?sourceMap',
 			],
 		},{
-			test: [ /\.atlas$/, /\.frag$/ ],
-			use: 'url-loader'
+			test: /\.atlas$/,
+			use: [
+				{ loader: 'file-loader' },
+				{ loader: 'extract-loader' },
+				{ loader: 'ref-loader' },
+			]
+		},{
+			type: 'javascript/auto',
+			test: /\.(json)$/,
+			exclude: /(node_modules)/,
+			loader: 'file-loader',
 		},{
 			test: /\.(png|jp(e*)g|svg)$/,
 			use: [{
