@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const Merge = require('webpack-merge');
 const CommonConfig = require('./webpack.common.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = Merge(CommonConfig, {
 	optimization: {
@@ -29,6 +30,6 @@ module.exports = Merge(CommonConfig, {
 				'NODE_ENV': JSON.stringify('production')
 			}
 		}),
-
+		new BundleAnalyzerPlugin(),
 	]
 });
