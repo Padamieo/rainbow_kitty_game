@@ -79,21 +79,21 @@ class Game extends Phaser.Scene {
 		// this.load.glsl('Custom', shader);
 
 		/*
-    var camera = this.cameras.main;
-    var w = window.innerWidth;
-    var h = window.innerHeight;
-    var scale = Math.min(w / 405, h / 720);
-    var width = w / scale;
-    var height = h / scale;
-    camera.setViewport(0, 0, 405, 405);
-    camera.setBackgroundColor(0x001111);
-    camera.setZoom(1);
-    camera.setViewport(10,10,600,600);
-    // camera.scaleManager(Phaser.Scale.FIT);
-    // console.log(this);
-    // this.scene.setScale(2);
-    // camera.setScale(2);
-    */
+		var camera = this.cameras.main;
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		var scale = Math.min(w / 405, h / 720);
+		var width = w / scale;
+		var height = h / scale;
+		camera.setViewport(0, 0, 405, 405);
+		camera.setBackgroundColor(0x001111);
+		camera.setZoom(1);
+		camera.setViewport(10,10,600,600);
+		// camera.scaleManager(Phaser.Scale.FIT);
+		// console.log(this);
+		// this.scene.setScale(2);
+		// camera.setScale(2);
+		*/
 
 		this.bullets = new Bullets( this );
 		this.explosions = new Explosions( this );
@@ -126,36 +126,38 @@ class Game extends Phaser.Scene {
 
 		//rainbow
 		/*
-    //this.rainbow = new Rainbow( this );
-    var particles = this.add.particles('tear');
-    //particles.setPipeline('Custom');
-    var emitter = particles.createEmitter({
-        x: 100,
-        y: 100,
-        angle: { min: 140, max: 40 },
-        lifespan: 2000,
-        speed: 20,
-        accelerationY: { min:20, max: 100 },
-        gravityY: 200,
-        scale: { start: 0, end: 2 },
-        blendMode: 0,
-        frequency: 140,
-        on: true,
-        active: true
-    });
+		//this.rainbow = new Rainbow( this );
+		var particles = this.add.particles('tear');
+		//particles.setPipeline('Custom');
+		var emitter = particles.createEmitter({
+			x: 100,
+			y: 100,
+			angle: { min: 140, max: 40 },
+			lifespan: 2000,
+			speed: 20,
+			accelerationY: { min:20, max: 100 },
+			gravityY: 200,
+			scale: { start: 0, end: 2 },
+			blendMode: 0,
+			frequency: 140,
+			on: true,
+			active: true
+		});
+		*/
 
-    this.input.on('pointerdown', (pointer) => {
-      emitter.setPosition(this.kitty.x, this.kitty.y);
-      emitter.resume();
-      //emitter.explode(10, this.kitty.x, this.kitty.y);
-    });
+		/*
+		this.input.on('pointerdown', (pointer) => {
+			emitter.setPosition(this.kitty.x, this.kitty.y);
+			emitter.resume();
+			//emitter.explode(10, this.kitty.x, this.kitty.y);
+		});
 
-    this.input.on('pointerup', (pointer) => {
-      //emitter.setPosition(this.kitty.x, this.kitty.y);
-      emitter.pause();
-      //emitter.explode(10, this.kitty.x, this.kitty.y);
-    });
-    */
+		this.input.on('pointerup', (pointer) => {
+			//emitter.setPosition(this.kitty.x, this.kitty.y);
+			emitter.pause();
+			//emitter.explode(10, this.kitty.x, this.kitty.y);
+		});
+		*/
 
 		this.rainbow = new Rainbow( this );
 

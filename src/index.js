@@ -4,6 +4,8 @@ import Menu from './scenes/menu';
 import Phaser from 'phaser';
 import pkg from '../package.json';
 import Preload from './scenes/preload';
+import {h, render } from 'preact';
+import App from './components/app';
 
 var config = {
 	type: Phaser.AUTO,
@@ -38,6 +40,7 @@ var config = {
 	]
 };
 
+console.log(process.env.NODE_ENV);
 if(process.env.NODE_ENV === 'development') {
 	window.game = new Phaser.Game(config);
 }else {
@@ -46,8 +49,5 @@ if(process.env.NODE_ENV === 'development') {
 	});
 }
 
-// game.setGameSize(600,600);
-// window.onresize = function () {
-//   window.game.renderer.resize(window.innerWidth, window.innerHeight);
-//   window.game.events.emit('resize');
-// }
+// preact user interface overlay
+render(<App ref={(preact) => {window.preact = preact}} />, document.body);

@@ -1,15 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const extractSass = new ExtractTextPlugin({
-	filename: '[name].[contenthash].css'
-});
 
 module.exports = {
-	context: path.join(process.cwd(), 'src'), //the home directory for webpack
-	devtool: 'source-map', // enhance debugging by adding meta info for the browser devtools
+	context: path.join(process.cwd(), 'src'),
+	devtool: 'source-map',
 	entry: {
 		app: './index.js'
 	},
@@ -20,8 +15,16 @@ module.exports = {
 		sourceMapFilename: '[name].map'
 	},
 	resolve: {
-		extensions: ['.js'],  // extensions that are used
-		modules: [path.join(process.cwd(), 'src'), 'node_modules'] // directories where to look for modules
+		extensions: ['.js'],
+		modules: [
+			path.join(process.cwd(), 'src'),
+			'node_modules'
+		],
+		symlinks: false,
+		alias: {
+			react: 'preact/compat',
+			'react-dom': 'preact/compat',
+		},
 	},
 	module: {
 		rules: [{
@@ -29,17 +32,15 @@ module.exports = {
 			exclude: /node_modules/,
 			use: {
 				loader: 'babel-loader',
-				options: {
-					presets: ['env']
-				}
 			}
 		},{
 			test: /\.css$/,
 			exclude: /node_modules/,
 			use: [
 				'style-loader',
-				'css-loader?sourceMap',
+				'css-loader',
 			],
+			sideEffects: true,
 		},{
 			test: [ /\.vert$/, /\.frag$/ ],
 			use: 'raw-loader'

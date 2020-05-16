@@ -1,27 +1,19 @@
 const webpack = require('webpack');
-const path = require('path');
 const Merge = require('webpack-merge');
-const CommonConfig = require('./webpack.common.js');
-const fs = require("fs");
+const ProductionConfig = require('./webpack.production.js');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-module.exports = Merge(CommonConfig, {
+module.exports = Merge(ProductionConfig, {
 	plugins: [
-		new webpack.HotModuleReplacementPlugin()
-	],
-	devServer: {
-		https: {
-			key: fs.readFileSync('./ssl/server.key'),
-			cert: fs.readFileSync('./ssl/server.crt')
-		},
-		host: '0.0.0.0',
-		disableHostCheck: true,
-		publicPath: '/',
-		port: 8000,
-		contentBase: path.join(process.cwd(), 'dist'),
-		historyApiFallback: true,
-		noInfo: false,
-		stats: 'minimal',
-		inline:true,
-		hot: true,
-	}
+		new webpack.LoaderOptionsPlugin({
+			minimize: true,
+			debug: true
+		}),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('development')
+			}
+		}),
+		new BundleAnalyzerPlugin(),
+	]
 });

@@ -1,0 +1,20 @@
+.app{
+    background: rgba(255, 100, 10, 0.5);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    box-sizing: border-box;
+  }
+  
+  .app.visible{
+    opacity: 1;
+  }
+  
+  .app.hidden {
+    opacity: 0;
+    z-index: 0;
+  }

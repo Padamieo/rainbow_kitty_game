@@ -3,12 +3,26 @@
     "browser": true,
     "commonjs": true,
     "es6": true,
-    "jest": true
+    "jest": true,
+    "jest/globals": true
   },
   "extends": "eslint:recommended",
   "parserOptions": {
-    "sourceType": "module"
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true,
+      "jsx": true
+    }
   },
+  "settings": {
+    "react": {
+      "pragma": "h"
+    }
+  },
+  "plugins": [
+    "react",
+    "jest"
+  ],
   "rules": {
     "indent": [
       "error",
