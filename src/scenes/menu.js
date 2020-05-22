@@ -31,41 +31,41 @@ class Menu extends phaser.Scene {
 		// this.scene.setScale(2);
 		// camera.setScale(2);
 		*/
+		console.log('a', FBInstant);
 	}
 
 	create() {
 		// this could be set on end of game rather than here
 		if(window.preact) window.preact.setStateExt({visible:true});
-		//this.ui = this.add.image(0, 0, 'ui').setOrigin(0).setScale(2);
-
-		//this.uis = this.add.image(0, 0, 'uis').setOrigin(0).setScale(1).setTint(0x9CB88C);
-
-		//this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1);
 
 		this.keys = this.input.keyboard.addKeys('S');
 		// this.scene.resume('Menu');
 		// this.scene.pause("Menu");
 
-		var seperation = this.game.config.height/8;
-
+		//var seperation = this.game.config.height/8;
+		var fontSize = 20;
+		var seperation = fontSize/2 + fontSize;
 		var commonStyle = {
 			fontFamily: '"Arial"',
 			fill: '#fff',
-			fontSize: 30,
+			fontSize: fontSize,
 			align: 'right',
 		};
 
-		var lives = window.game.lives || 9;
-		this.lives = this.add.text(this.game.config.width/2, seperation, lives+' lives', commonStyle);
-		this.lives.setOrigin(0.5, 0);
+		var lives = window.preact.state.lives || 9;
+		this.lives = this.add.text(this.game.config.width/12, seperation, lives+' lives', commonStyle);
 
-		var topscore = window.game.score || 0;
-		this.topScore = this.add.text(this.game.config.width/2, seperation*2, topscore+' top score', commonStyle);
-		this.topScore.setOrigin(0.5, 0);
+		var topscore = window.preact.state.score || 0;
+		this.topScore = this.add.text(this.game.config.width/12, seperation*2, topscore+' top score', commonStyle);
 
 		this.single = true;
 		this.camera = this.cameras.main;
 		this.cameras.main.on('camerafadeoutcomplete', this.startGame.bind(this));
+
+		this.events.on('addScore', function () {
+			console.log('doddddododo');
+			this.startFade();
+		}, this);
 	}
 
 	startGame(){

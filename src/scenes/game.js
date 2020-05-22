@@ -172,7 +172,7 @@ class Game extends Phaser.Scene {
 		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
 
 		this.events.once('returnMenu', () => {
-			this.starts();
+			this.processScores();
 		}, this);
 	}
 
@@ -180,12 +180,22 @@ class Game extends Phaser.Scene {
 		this.scene.start('Menu');
 	}
 
-	starts() {
-		console.log('score', this.score.score);
-		if(this.score.score > window.game.score){
-			window.game.score = this.score.score;
-		}
-		window.game.lives = window.game.lives-1;
+	processScores() {
+		// console.log('score', this.score.score);
+		// if(this.score.score > window.game.score){
+		// 	window.game.score = this.score.score;
+		// }
+
+		// FBInstant.getLeaderboardAsync('standard_everyone.' + context.getID())
+		// .then(leaderboard => {
+		// 	console.log(leaderboard.getName());
+		// 	return leaderboard.setScoreAsync(this.score.score);
+		// })
+		// .then(() => console.log('Score saved'))
+		// .catch(error => console.error(error));
+
+		// window.game.lives = window.game.lives-1;
+		if(window.preact) window.preact.dosomethign(this.score.score);
 		this.cameras.main.fadeOut(250, 0, 0, 0);
 	}
 
