@@ -58,7 +58,16 @@ export default class GameI extends Component {
 }
 
 class App extends Component {
-	state = { view: 'menu', visible: true, lives: 9, score: 0, id:'' };
+	state = {
+		connected: false,
+		view: 'menu',
+		visible: true,
+		lives: 9,
+		score: 0,
+		player: {},
+		id: undefined,
+		ready: false,
+	};
 
     setStateExt = (state) => {
         this.setState(this.state = state);
@@ -71,23 +80,35 @@ class App extends Component {
 
     startGame = (a) => {
         this.setState({...this.state, visible:false});
-        console.log('test');
-        console.log(window.game.scene);
-        // window.game.scene.game.startFade();
-        // window.game.scene.cameras.main.fadeOut(250, 0, 0, 0);
-		// window.game.scene.start('Game');
-		// window.game.scene.startFade();
-		// window.game.scene.events.emit('addScore');
+		console.log('start the game');
+		if(ready)
+		window.game.scene.keys.Menu.startGame(/* provide game type */);
+	}
+
+	getData() {
+		// get lives and timestamps of deaths
+		FBInstant.player
+		.getDataAsync(['achievements', 'lives'])
+		.then(function(data) {
+			console.log('data is loaded');
+			var achievements = data['achievements'];
+			var currentLife = data['lives'];
+		});
 	}
 
 	componentDidMount() {
 		console.log('componentDidMount');
-		this.something();
+		if(process.env.NODE_ENV === 'development') {
+			console.log('development');
+			// maybe use localstorage
+		}else{
+			this.something();
+		}
 	}
 	
-	dosomethign = (score) => {
-
-		console.log('dosomethign');
+	onGameEnd = (score) => {
+		this.setState({...this.state, visible:true});
+		console.log('game end score ', score);
 	};
 
 	something = () => {
@@ -103,9 +124,11 @@ class App extends Component {
 				var playerId = FBInstant.player.getID();
 				// FBInstant.context.createAsync(playerId);
 
-				console.log(playerId, this);
-				this.setState({...this.state, id:playerId});
-				if(!playerId){
+				console.log(playerId, contextId);
+				this.setState({...this.state, connected:true, player:{id:playerId, playerName, playerPic}});
+
+				if(contextId === null){
+					console.log('a');
 					FBInstant.context.createAsync(playerId)
 					.then(() => {
 						console.log('ttttt', FBInstant.context.getID());
@@ -113,18 +136,8 @@ class App extends Component {
 						this.setState({...this.state, id:FBInstant.context.getID()});
 					});
 				}
-
-				// Once startGameAsync() resolves it also means the loading view has
-				// been removed and the user can see the game viewport
-				// console.log(contextId, contextType);
-				// console.log(playerName, playerPic, playerId);
-				// var contextId = FBInstant.context.getID();
-				// var contt = FBInstant.getSupportedAPIs();
-				// console.log('contextId', contextId, contt);
-				// game.start();
-				// this.startGame();
 			});
-		});
+		}).catch(error => console.error(error));
 	}
 
 	onLeaderboard = () => {

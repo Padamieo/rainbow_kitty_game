@@ -1,7 +1,7 @@
 import phaser from 'phaser';
 // import Bullets from 'object/bullets';
-import {h, render } from 'preact';
-import App from 'components/app';
+// import {h, render } from 'preact';
+// import App from 'components/app';
 
 class Preload extends phaser.Scene {
 	constructor(test) {
@@ -55,14 +55,10 @@ class Preload extends phaser.Scene {
 			});
 		}
 		*/
-		console.log(this, window.preact.state.lives);
+		
+		//console.log(this, window.preact.state.lives);
 		// window.game.lives = 9;
 		// window.game.score = 0;
-		this.scene.start('Menu');
-	}
-
-	startGame () {
-		console.log(this.setup);
 		this.scene.start('Menu');
 	}
 }

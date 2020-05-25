@@ -195,7 +195,7 @@ class Game extends Phaser.Scene {
 		// .catch(error => console.error(error));
 
 		// window.game.lives = window.game.lives-1;
-		if(window.preact) window.preact.dosomethign(this.score.score);
+		if(window.preact) window.preact.onGameEnd(this.score.score);
 		this.cameras.main.fadeOut(250, 0, 0, 0);
 	}
 
