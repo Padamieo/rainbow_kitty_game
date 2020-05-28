@@ -25,10 +25,10 @@ class Enemies extends Phaser.GameObjects.Group {
 		});
 
 		this.limit = 2;
-		this.list = new Array(2).fill(0);
+		this.list = new Array(2).fill(1);
 		console.log(this.list);
 		this.list.push(1);
-		this.list.push(2);
+		//this.list.push(2);
 		console.log(this.list);
 		this.index = 0;
 

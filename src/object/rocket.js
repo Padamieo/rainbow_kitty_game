@@ -39,7 +39,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
 		this.exhaust = scene.add.image(0, 0, 'exhaust').setPipeline('Custom');
 		this.exhaust.setOrigin(0.5, 0);
-		this.exhaust.setScale(0.5);
+		this.exhaust.setScale(0.6);
 
 		// this.setRotation(Math.PI/5);
 		// this.setRotation(phaser.Math.DegToRad(45));
@@ -97,16 +97,18 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	aim () {
-		var c = Phaser.Math.Angle.Between(this.x, this.y, this.ax, this.ay);
-		// var a = Math.atan2(0, this.x * this.ax);
-		var velocity = new Phaser.Math.Vector2();
-		//this.physics.velocityFromRotation(angle, 10, velocity);
-		this.setRotation(c + Math.PI/2);
-		var x = Math.cos(c);
-		// V.y = sin(A)
-		// console.log(x);
-		//this.scene.pause("Menu");
-		this.x += x;
+		if(this.y > this.ay){
+			var c = Phaser.Math.Angle.Between(this.x, this.y, this.ax, this.ay);
+			// var a = Math.atan2(0, this.x * this.ax);
+			var velocity = new Phaser.Math.Vector2();
+			//this.physics.velocityFromRotation(angle, 10, velocity);
+			this.setRotation(c + Math.PI/2);
+			var x = Math.cos(c);
+			// V.y = sin(A)
+			// console.log(x);
+			//this.scene.pause("Menu");
+			this.x += x;
+		}
 	}
 
 

@@ -80,9 +80,10 @@ class Game extends Phaser.Scene {
 		this.bullets = new Bullets( this );
 		this.explosions = new Explosions( this );
 		
-
-		this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
-		// this.customPipeline.setFloat2('uResolution', this.game.config.width, this.game.config.height);
+		if(!this.game.renderer.hasPipeline('Custom')){
+			this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
+		}
+		// this.customPipeline.setFloat1('u_time', 0/1000);
 	}
 
 	create () {
@@ -243,7 +244,7 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, delta){
-		this.customPipeline.setFloat1('time', time);
+		this.customPipeline.setFloat1('u_time', time/1000);
 	}
 }
 export default Game;

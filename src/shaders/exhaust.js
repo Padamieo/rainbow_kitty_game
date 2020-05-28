@@ -2,19 +2,17 @@ import Phaser from 'phaser';
 // import current from './current.glsl';
 // import greyScale from './grey-scale.glsl';
 // import outline from './outline.glsl';
-import testBlur from './testBlur.glsl';
+import exhaust from './exhaust.glsl';
 
-function CustomPipeline(game) {
-	Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
-		game: game,
-		renderer: game.renderer,
-		fragShader: testBlur
-	});
-}
-
-var CustomPipeline2 = new Phaser.Class({
+var exhaustEffect = new Phaser.Class({
 	Extends: Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline,
-	initialize: CustomPipeline
+	initialize: function(game) {
+		Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline.call(this, {
+			game: game,
+			renderer: game.renderer,
+			fragShader: exhaust
+		});
+	}
 });
 
-export default CustomPipeline2;
+export default exhaustEffect;

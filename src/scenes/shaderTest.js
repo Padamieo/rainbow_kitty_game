@@ -15,17 +15,21 @@ class ShaderTest extends Phaser.Scene {
 
 	create() {
 		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
-		this.add.image(this.game.config.width/2, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
-		this.add.image(this.game.config.width/2, 100, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
-		this.add.image(this.game.config.width/2, 200, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
-		this.scale = this.add.image(this.game.config.width/2, 400, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
-		this.scale.setScale(3);
-		this.follow = this.add.image(0, 0, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.add.image(this.game.config.width/2.5, 20, 'exhaust').setOrigin(0).setScale(2).setPipeline('Custom');
+		this.add.image(this.game.config.width/3, 100, 'exhaust').setOrigin(0).setScale(2).setPipeline('Custom');
+		this.add.image(this.game.config.width/3, 200, 'exhaust').setOrigin(0).setScale(2).setPipeline('Custom');
+		this.scale = this.add.image(this.game.config.width/4, 400, 'exhaust').setOrigin(0).setScale(2.5).setPipeline('Custom');
+		this.scale.setScale(5);
+		this.follow = this.add.image(0, 0, 'exhaust').setOrigin(0).setScale(0.6).setPipeline('Custom');
+		console.log(this.game.config.height, this.game.config.width);
+
+		this.customPipeline.setFloat2('u_resolution', this.game.config.width, this.game.config.height);
 	}
 
 	update(time, delta){
-		this.customPipeline.setFloat1('time', time);
+		this.customPipeline.setFloat1('u_time', time/1000);
 		this.customPipeline.setFloat1('delta', delta);
+		
 
 		this.input.on('pointermove', (pointer) => {
 			this.follow.setPosition(pointer.x, pointer.y);
