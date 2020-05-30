@@ -7,8 +7,9 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 		super(scene);
 
 		this.generateRainbowTearShape(scene);
-
+		
 		this.particles = scene.add.particles('tear');
+		
 		this.emitter = this.particles.createEmitter({
 			maxVelocityX: 500,
 			maxVelocityY: 500,
@@ -35,6 +36,8 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 			console.log('p');
 		}, this);
 
+		scene.add.image(100, 400, 'tear');
+
 		scene.add.existing(this);
 	}
 
@@ -42,13 +45,15 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 		console.log('particle');
 	}
 
+
 	generateRainbowTearShape(scene) {
 		var polygon = new Phaser.Geom.Polygon([
 			50, 5,
 			20, 68,
 			22, 80,
 			30, 90,
-			50, 100,
+			45, 95,
+			55, 95,
 			70, 90,
 			78, 80,
 			80, 68,
@@ -64,7 +69,6 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 		graphics.generateTexture('tear', 100, 100);
 		// graphics.setScale(4);
 		graphics.clear();
-		// var sprite = this.add.sprite(100, 400, 'tear');
 	}
 
 	preUpdate (time, delta) {
