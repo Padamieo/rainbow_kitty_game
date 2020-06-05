@@ -19,7 +19,7 @@ class ShaderTest extends Phaser.Scene {
 	create() {
 		this.rainbow = new Rainbow( this );
 		console.log(this.rainbow); // .setPipeline('Custom');
-		this.rainbow .particles.setPipeline('Custom');
+		this.rainbow.particles.setPipeline('Custom');
 		// this.rainbow.emitter.setPipeline('Custom');
 		// this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
 		// this.add.image(this.game.config.width/2.5, 20, 'exhaust').setOrigin(0).setScale(2).setPipeline('Custom');

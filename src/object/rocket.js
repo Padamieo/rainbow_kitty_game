@@ -37,7 +37,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 		this.gap = this.scene.game.config.width/28;
 		this.setDepth(2);
 
-		this.exhaust = scene.add.image(0, 0, 'exhaust').setPipeline('Custom');
+		this.exhaust = scene.add.image(0, 0, 'exhaust').setPipeline('ExhaustPipeline');
 		this.exhaust.setOrigin(0.5, 0);
 		this.exhaust.setScale(0.6);
 

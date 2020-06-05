@@ -1,6 +1,6 @@
 import Phaser from 'phaser';
 
-import rainbow from './rainbow_cricle.glsl';
+import rainbow from './rainbow.glsl';
 
 var rainbowEffect = new Phaser.Class({
 	Extends: Phaser.Renderer.WebGL.Pipelines.TextureTintPipeline,

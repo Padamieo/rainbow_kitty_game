@@ -21,7 +21,8 @@ import Debris from 'object/debris';
 import Sparks from 'object/sparks';
 
 //import shader from 'object/shader.frag';
-import CustomPipeline from 'shaders/exhaust';
+import ExhaustPipeline from 'shaders/exhaust';
+import RainbowPipeline from 'shaders/rainbow';
 
 class Game extends Phaser.Scene {
 	constructor() {
@@ -80,8 +81,11 @@ class Game extends Phaser.Scene {
 		this.bullets = new Bullets( this );
 		this.explosions = new Explosions( this );
 		
-		if(!this.game.renderer.hasPipeline('Custom')){
-			this.customPipeline = this.game.renderer.addPipeline('Custom', new CustomPipeline(this.game));
+		if(!this.game.renderer.hasPipeline('ExhaustPipeline')){
+			this.exhaustPipeline = this.game.renderer.addPipeline('ExhaustPipeline', new ExhaustPipeline(this.game));
+		}
+		if(!this.game.renderer.hasPipeline('RainbowPipeline')){
+			this.rainbowPipeline = this.game.renderer.addPipeline('RainbowPipeline', new RainbowPipeline(this.game));
 		}
 		// this.customPipeline.setFloat1('u_time', 0/1000);
 	}
@@ -141,6 +145,8 @@ class Game extends Phaser.Scene {
     */
 
 		this.rainbow = new Rainbow( this );
+		this.rainbow.particles.setPipeline('RainbowPipeline');
+		this.rainbowPipeline.setFloat2('u_resolution', this.game.config.width, this.game.config.height);
 
 		this.score = new Score( this );
 
@@ -150,7 +156,7 @@ class Game extends Phaser.Scene {
 		this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
 		this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
 
-		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('Custom');
+		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('ExhaustPipeline');
 
 		this.events.once('returnMenu', () => {
 			this.starts();
@@ -244,7 +250,8 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, delta){
-		this.customPipeline.setFloat1('u_time', time/1000);
+		this.rainbowPipeline.setFloat1('u_time', time/1000);
+		this.exhaustPipeline.setFloat1('u_time', time/1000);
 	}
 }
 export default Game;

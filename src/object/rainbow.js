@@ -36,8 +36,6 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 			console.log('p');
 		}, this);
 
-		scene.add.image(100, 400, 'tear');
-
 		scene.add.existing(this);
 	}
 
@@ -47,8 +45,9 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 
 
 	generateRainbowTearShape(scene) {
-		var polygon = new Phaser.Geom.Polygon([
+		var polygonBase = new Phaser.Geom.Polygon([
 			50, 5,
+			22, 60,
 			20, 68,
 			22, 80,
 			30, 90,
@@ -57,17 +56,14 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 			70, 90,
 			78, 80,
 			80, 68,
+			78, 60,
 			50, 5
 		]);
-
-		// var polygon = Phaser.Geom.Polygon.Smooth(p);
-
+		var polygon = Phaser.Geom.Polygon.Smooth(polygonBase);
 		var graphics = scene.add.graphics({ x: 0, y: 0 });
-
 		graphics.fillStyle(0xffffff);
 		graphics.fillPoints(polygon.points, true);
 		graphics.generateTexture('tear', 100, 100);
-		// graphics.setScale(4);
 		graphics.clear();
 	}
 
