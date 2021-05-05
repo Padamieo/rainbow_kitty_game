@@ -16,7 +16,7 @@ class Score extends Phaser.GameObjects.Text {
 		this.score = 0;
 		this.default = 1;
 
-		this.setPosition(this.scene.game.config.width, 5);
+		this.setPosition(this.scene.game.config.width-10, 5);
 		this.setOrigin(1, 0);
 		this.setStroke('#de77ae', 5);
 
