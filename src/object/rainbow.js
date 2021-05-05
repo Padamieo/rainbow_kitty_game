@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 
-// class Turt extends phaser.GameObjects.Sprite {
+import MyPostFxClass from 'shaders/rainbow/rainbow';
+
 class Rainbow extends Phaser.GameObjects.Sprite {
 	constructor (scene) {
 
@@ -27,14 +28,16 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 			quantity: 0,
 		});
 
+		this.particles.setPostPipeline(MyPostFxClass);
+
 		//this.emitter.c = 180;
 		//this.emitter.setFrequency(-1, 0);
 		//this.emitter.setQuantity(0);
 
 		//var callback = function(particle, emitter) { /* ... */ }
-		this.emitter.forEachAlive(() => {
-			console.log('p');
-		}, this);
+		// this.emitter.forEachAlive(() => {
+		// 	console.log('p');
+		// }, this);
 
 		scene.add.existing(this);
 	}
@@ -69,6 +72,9 @@ class Rainbow extends Phaser.GameObjects.Sprite {
 
 	preUpdate (time, delta) {
 		super.preUpdate(time, delta);
+
+		var pipelineInstance = this.particles.getPostPipeline(MyPostFxClass);
+		pipelineInstance.update(time, delta);
 
 		if(this.scene.kitty){
 			this.emitter.setPosition(this.scene.kitty.x, this.scene.kitty.y+(this.scene.kitty.half/2));

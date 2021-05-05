@@ -2,32 +2,34 @@ import Phaser from 'phaser';
 import Rocket from 'object/rocket';
 
 class Enemies extends Phaser.GameObjects.Group {
-	constructor (scene, obj) {
-
-		super(scene, Rocket, {
+	constructor (scene) {
+		super(scene, {
 			classType: Rocket,
-			defaultKey: null,
+			defaultKey: 'Rocket',
 			defaultFrame: null,
 			active: true,
 			maxSize: 20,
-			runChildUpdate: false,
+			runChildUpdate: true,
 			createCallback: null,
 			removeCallback: null,
 			createMultipleCallback: null
 		});
 
 		this.generateExhaustShape();
+		this.defaultSetup();
+	}
 
+	defaultSetup() {
 		this.scene.tick = this.scene.time.addEvent({
 			delay: 2500,
-			callback: this.callback.bind(this),
+			callback: () => this.calculateAddEnemy(this),
 			loop: true
 		});
 
 		this.limit = 2;
-		this.list = new Array(2).fill(1);
+		this.list = new Array(5).fill(0);
 		console.log(this.list);
-		this.list.push(1);
+		this.list.push(0);
 		//this.list.push(2);
 		console.log(this.list);
 		this.index = 0;
@@ -38,7 +40,7 @@ class Enemies extends Phaser.GameObjects.Group {
 		// console.log(b.next().value);
 	}
 
-	generateExhaustShape () {
+	generateExhaustShape() {
 		var polygonBase = new Phaser.Geom.Polygon([
 			25, 0,
 			14, 8,
@@ -62,18 +64,19 @@ class Enemies extends Phaser.GameObjects.Group {
 		// 
 	}
 
-	callback(){
+	calculateAddEnemy() {
 
-		//console.log('add');
-		if(this.getLength() <= this.limit){
+		if(this.getLength() <= this.limit) {
 			// console.log('spawn', this.getLength());
 			// new Rocket( this.scene, this.scene.cameras.main.centerX, this.scene.cameras.main.centerY );
+			console.log('here');
 			var enemy = this.get();
+
 			if (enemy) {
 
-				if(this.index+1 < this.list.length){
+				if (this.index+1 < this.list.length) {
 					this.index = this.index+1;
-				}else{
+				} else {
 					this.index = 0;
 				}
 				var v = this.list[this.index];
@@ -92,6 +95,7 @@ class Enemies extends Phaser.GameObjects.Group {
 	preUpdate (delta, step, processors) {
 		super.preUpdate(delta, step, processors);
 		// Bullet.update(delta);
+		console.log('A');
 	}
 }
 

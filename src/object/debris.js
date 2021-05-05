@@ -1,8 +1,7 @@
 import Phaser from 'phaser';
 import rocket from 'assets/rocket_frames.svg';
 
-// class example  extends phaser.GameObjects.Particles.Particle { // this does not work
-class Debris extends Phaser.GameObjects.Sprite {
+class Debris extends Phaser.GameObjects.GameObject {
 	constructor (scene){
 		super(scene);
 
@@ -52,7 +51,7 @@ class Debris extends Phaser.GameObjects.Sprite {
 
 	start (x, y, tint, frame){
 		//if(frame !== undefined){
-		// this.wreckage.colour = tint;
+		this.wreckage.colour = tint;
 		this.wreckage.explode(5, x, y);
 	}
 

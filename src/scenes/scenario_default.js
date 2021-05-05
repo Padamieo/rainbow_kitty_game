@@ -11,7 +11,7 @@ import wall from 'assets/background_wall_temp.png';
 
 import Background from 'object/background';
 import Bullets from 'object/bullets';
-import Explosions from 'object/explosions';
+import Explosion from 'object/explosion';
 import Enemies from 'object/enemies';
 import Kitty from 'object/kitty';
 import Player from 'object/player';
@@ -20,14 +20,12 @@ import Score from 'object/score';
 import Debris from 'object/debris';
 import Sparks from 'object/sparks';
 
-//import shader from 'object/shader.frag';
-import ExhaustPipeline from 'shaders/exhaust';
-import RainbowPipeline from 'shaders/rainbow';
+import ExhaustFxClass from 'shaders/exhaust/exhaust';
 
-class Game extends Phaser.Scene {
+class Scenario_default extends Phaser.Scene {
 	constructor() {
 		super({
-			key: 'Game'
+			key: 'scenario_default'
 		});
 	}
 
@@ -40,8 +38,8 @@ class Game extends Phaser.Scene {
 
 		this.load.svg('kitty', kitty, { width: 400, height: 400 });
 		this.load.image('kitty2', kitty2);
-		this.load.svg('eye', eye, { width: 75, height:75 });
-		this.load.svg('iris', iris, { width: 75, height:75 });
+		this.load.svg('eye', eye, { width: 75, height: 75 });
+		this.load.svg('iris', iris, { width: 75, height: 75 });
 
 		this.load.spritesheet('rocket_frames',
 			rocket,
@@ -58,95 +56,30 @@ class Game extends Phaser.Scene {
 			{ frameHeight: 200, frameWidth: 200 }
 		);
 
-		//this.load.glsl('test', shader);
-		// this.load.glsl('Custom', shader);
-
-		/*
-		var camera = this.cameras.main;
-		var w = window.innerWidth;
-		var h = window.innerHeight;
-		var scale = Math.min(w / 405, h / 720);
-		var width = w / scale;
-		var height = h / scale;
-		camera.setViewport(0, 0, 405, 405);
-		camera.setBackgroundColor(0x001111);
-		camera.setZoom(1);
-		camera.setViewport(10,10,600,600);
-		// camera.scaleManager(Phaser.Scale.FIT);
-		// console.log(this);
-		// this.scene.setScale(2);
-		// camera.setScale(2);
-		*/
 
 		this.bullets = new Bullets( this );
-		this.explosions = new Explosions( this );
+		this.explosions = new Explosion( this );
 		
-		if(!this.game.renderer.hasPipeline('ExhaustPipeline')){
-			this.exhaustPipeline = this.game.renderer.addPipeline('ExhaustPipeline', new ExhaustPipeline(this.game));
-		}
-		if(!this.game.renderer.hasPipeline('RainbowPipeline')){
-			this.rainbowPipeline = this.game.renderer.addPipeline('RainbowPipeline', new RainbowPipeline(this.game));
-		}
+		// if(!this.game.renderer.hasPipeline('ExhaustPipeline')){
+		// 	this.exhaustPipeline = this.game.renderer.addPipeline('ExhaustPipeline', new ExhaustPipeline(this.game));
+		// }
+		// if(!this.game.renderer.hasPipeline('RainbowPipeline')){
+		// 	this.rainbowPipeline = this.game.renderer.addPipeline('RainbowPipeline', new RainbowPipeline(this.game));
+		// }
 		// this.customPipeline.setFloat1('u_time', 0/1000);
 	}
 
 	create () {
-
 		this.background = new Background( this, this.game.config.width/2, this.game.config.height/2, this.game.config.width, this.game.config.height, 'wall' );
-
-		// this.add.image(0, 60, 'rocket').setOrigin(0).setScale(1).setPipeline('Custom');
-		// this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'kitty_frames').setOrigin(0).setScale(1);
-
-		// this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'dynamicTestFrames').setOrigin(0).setScale(1);
 
 		this.kitty = new Kitty( this, this.cameras.main.centerX, this.game.config.height/3 );
 		this.player = new Player( this );
 		this.sparks = new Sparks( this );
 		this.debris = new Debris( this );
 
-		//console.log(this.customPipeline);
-		// this.cameras.main.setRenderToTexture(this.customPipeline);
-		// this.cameras.main.ignore([ this.kitty, this.background, this.player ]);
-		// var cam1 = this.cameras.main;
-		// var cam2 = this.cameras.add(0, 0, 800, 600);
-		//this.add.image(50, 180, 'exhaust').setPipeline('Custom');
-
-		//rainbow
-		/*
-    //this.rainbow = new Rainbow( this );
-    var particles = this.add.particles('tear');
-    //particles.setPipeline('Custom');
-    var emitter = particles.createEmitter({
-        x: 100,
-        y: 100,
-        angle: { min: 140, max: 40 },
-        lifespan: 2000,
-        speed: 20,
-        accelerationY: { min:20, max: 100 },
-        gravityY: 200,
-        scale: { start: 0, end: 2 },
-        blendMode: 0,
-        frequency: 140,
-        on: true,
-        active: true
-    });
-
-    this.input.on('pointerdown', (pointer) => {
-      emitter.setPosition(this.kitty.x, this.kitty.y);
-      emitter.resume();
-      //emitter.explode(10, this.kitty.x, this.kitty.y);
-    });
-
-    this.input.on('pointerup', (pointer) => {
-      //emitter.setPosition(this.kitty.x, this.kitty.y);
-      emitter.pause();
-      //emitter.explode(10, this.kitty.x, this.kitty.y);
-    });
-    */
-
 		this.rainbow = new Rainbow( this );
-		this.rainbow.particles.setPipeline('RainbowPipeline');
-		this.rainbowPipeline.setFloat2('u_resolution', this.game.config.width, this.game.config.height);
+		// this.rainbow.particles.setPipeline('RainbowPipeline');
+		// this.rainbowPipeline.setFloat2('u_resolution', this.game.config.width, this.game.config.height);
 
 		this.score = new Score( this );
 
@@ -154,9 +87,9 @@ class Game extends Phaser.Scene {
 		this.enemies = new Enemies( this );
 
 		this.physics.add.overlap(this.enemies, this.kitty, this.kittyCollision.bind(this));
-		this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
+		// this.physics.add.overlap(this.enemies, this.bullets, this.detailedCollision.bind(this));
 
-		this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPipeline('ExhaustPipeline');
+		this.test = this.add.image(20, 20, 'exhaust').setOrigin(0).setScale(1).setPostPipeline(ExhaustFxClass);
 
 		this.events.once('returnMenu', () => {
 			this.starts();
@@ -164,7 +97,7 @@ class Game extends Phaser.Scene {
 	}
 
 	end() {
-		this.scene.start('Menu');
+		this.scene.start('menu');
 	}
 
 	starts() {
@@ -250,8 +183,11 @@ class Game extends Phaser.Scene {
 	}
 
 	update(time, delta){
-		this.rainbowPipeline.setFloat1('u_time', time/1000);
-		this.exhaustPipeline.setFloat1('u_time', time/1000);
+		// this.rainbowPipeline.setFloat1('u_time', time/1000);
+		// this.exhaustPipeline.setFloat1('u_time', time/1000);
+
+		var pipelineInstance = this.test.getPostPipeline(ExhaustFxClass);
+		pipelineInstance.update(time, delta);
 	}
 }
-export default Game;
+export default Scenario_default;

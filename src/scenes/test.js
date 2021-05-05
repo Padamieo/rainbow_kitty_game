@@ -1,11 +1,11 @@
 import Phaser from 'phaser';
 import rocket from 'assets/rocket_frames.svg';
-import rocket2 from 'assets/rocket_frames.png';
+// import rocket2 from 'assets/rocket_frames.png';
 
 class Test extends Phaser.Scene {
 	constructor() {
 		super({
-			key: 'Test'
+			key: 'test'
 		});
 	}
 
@@ -76,7 +76,7 @@ class Generate extends Phaser.GameObjects.GameObject {
 	}
 
 	generateBand() {
-		var prom = this.addImageProcess(rocket2).then((image) => {
+		var prom = this.addImageProcess(rocket).then((image) => {
 			var texture = this.scene.textures.createCanvas('dynamicTest2Frames', image.width, image.height);
 			var context = texture.getContext();
 			//var canvas = texture.getCanvas();
@@ -94,8 +94,18 @@ class Generate extends Phaser.GameObjects.GameObject {
 				
 				for (var p = 0; p < image.width; p++) {
 					var c = texture.getPixel(p, 25);
+					const darker = -50;
+					const lighter = 25;
 					if(c.a > 0){
-						texture.setPixel(p, 25, 255, 0, 0);
+						texture.setPixel(p, 23, c.r+lighter, c.g+lighter, c.b+lighter);
+						texture.setPixel(p, 24, c.r+darker, c.g+darker, c.b+darker);
+						texture.setPixel(p, 25, c.r+darker, c.g+darker, c.b+darker);
+						texture.setPixel(p, 26, c.r+darker, c.g+darker, c.b+darker);
+						texture.setPixel(p, 27, c.r+darker, c.g+darker, c.b+darker);
+						// texture.setPixel(p, 28, c.r+darker, c.g+darker, c.b+darker);
+
+						texture.setPixel(p, 31, c.r+lighter, c.g+lighter, c.b+lighter);
+						texture.setPixel(p, 32, c.r+darker, c.g+darker, c.b+darker);
 					}
 				}
 				
@@ -182,6 +192,8 @@ class NewSprite extends Phaser.GameObjects.Sprite {
 
 		super(scene, x, y,'data_frames');
 		this.setTint('0x4EF24E');
+		console.log(this.rotation);
+		this.setRotation(1);
 		this.anims.play('frames2', true);
 
 		scene.add.existing(this);

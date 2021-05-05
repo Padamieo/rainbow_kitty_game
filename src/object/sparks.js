@@ -1,9 +1,12 @@
 import Phaser from 'phaser';
 
-class Sparks extends Phaser.GameObjects.Sprite {
+class Sparks extends Phaser.GameObjects.GameObject {
 	constructor (scene){
 		super(scene);
+		this.defaultSetup(scene);
+	}
 
+	defaultSetup(scene) {
 		this.colours = (this.scene.bullets ? this.scene.bullets.colours : ['ffffff']);
 		this.sparkSize = 5;
 
@@ -41,7 +44,10 @@ class Sparks extends Phaser.GameObjects.Sprite {
 	}
 
 	generateBulletParticles() {
-		var texture = this.scene.textures.createCanvas('dynamicSparksFrames', this.sparkSize*this.colours.length, this.sparkSize);
+		var texture = this.scene.textures.createCanvas(
+			'dynamicSparksFrames',
+			this.sparkSize*this.colours.length, this.sparkSize
+		);
 		var context = texture.getContext();
 		for (var i = 0; i < this.colours.length; i++){
 			context.beginPath();
@@ -54,7 +60,7 @@ class Sparks extends Phaser.GameObjects.Sprite {
 		// this.scene.add.image(200, 600, 'dynamicSparksFrames', '__BASE').setOrigin(0);
 	}
 
-	start (x, y, tint, frame){
+	start (x, y, frame){
 		if(frame !== undefined){
 			this.sparks.setFrame(frame);
 			this.sparks.explode(4, x, y);

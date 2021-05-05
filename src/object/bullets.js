@@ -3,7 +3,7 @@ import Bullet from 'object/bullet';
 
 class Bullets extends Phaser.GameObjects.Group {
 	constructor(scene) {
-		super(scene, Bullet, {
+		super(scene, {
 			classType: Bullet,
 			defaultKey: null,
 			defaultFrame: null,

@@ -1,4 +1,5 @@
 import Phaser from 'phaser';
+import ExhaustFxClass from 'shaders/exhaust/exhaust';
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
 	constructor (scene) {
@@ -18,26 +19,36 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 		});
 
 		super(scene, 0, 0,'rocket_frames');
+		this.defaultSetup(scene);
+	}
 
+	defaultSetup(scene) {
 		this.anims.play('frames', true);
-
-		scene.add.existing(this);
-
-		scene.physics.add.existing(this);
+		console.log('a');
+		// scene.add.existing(this);
+		console.log('b');
+		if (scene.physics) {
+			scene.physics.add.existing(this);
+		}
 		this.type = 0;
 		this.max = 0.1;
 		this.speed = 0;
-
-		scene.enemies.add(this);
-
+		if (scene.enemies) {
+			scene.enemies.add(this);
+		}
 		this.start = this.x;
 		this.ax = this.scene.kitty.x;
 		this.ay = this.scene.kitty.y;
 
 		this.gap = this.scene.game.config.width/28;
 		this.setDepth(2);
+		// this.setScale(0.5);
 
-		this.exhaust = scene.add.image(0, 0, 'exhaust').setPipeline('ExhaustPipeline');
+		console.log('c1');
+		this.exhaust = scene.add.image(0, 0, 'exhaust');
+		console.log('c2');
+		//.setPipeline('ExhaustPipeline');
+		this.exhaust.setPostPipeline(ExhaustFxClass);
 		this.exhaust.setOrigin(0.5, 0);
 		this.exhaust.setScale(0.6);
 
@@ -69,9 +80,15 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 				this.reset();
 			}
 
-			this.exhaust.x = this.x + this.exhaust.height/3 * Math.cos((Math.PI/2)+this.rotation);
-			this.exhaust.y = this.y + this.exhaust.height/3 * Math.sin((Math.PI/2)+this.rotation);
-			this.exhaust.setRotation(this.rotation);
+			if (this.exhaust){
+				this.exhaust.x = this.x + this.exhaust.height/3 * Math.cos((Math.PI/2)+this.rotation);
+				this.exhaust.y = this.y + this.exhaust.height/3 * Math.sin((Math.PI/2)+this.rotation);
+				this.exhaust.setRotation(this.rotation);
+				var pipelineInstance = this.exhaust.getPostPipeline(ExhaustFxClass);
+				if (pipelineInstance) {
+					pipelineInstance.update(time, delta);
+				}
+			}
 		}
 		//this.exhaust.setRotation((Math.PI/3)*this.rotation);
 	}
@@ -111,7 +128,6 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 		}
 	}
 
-
 	winder (time) {
 		var sinX = Math.sin(time * 0.002);
 		var magnitude = ((sinX + this.sinX) * 0.1)/-1;
@@ -124,6 +140,7 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
 	launch(type){
 		console.log('launch');
+		this.reset();
 		this.typeSet(type);
 	}
 
@@ -159,12 +176,9 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 	}
 
 	hit(frame){
-
-		var explosion = this.scene.explosions.get();
-		if (explosion) {
-			explosion.start(this.x, this.y, this.colour(this.type), frame);
+		if (this.scene.explosions) {
+			this.scene.explosions.start(this.x, this.y, this.colour(this.type), frame);
 		}
-
 		this.setActive(false);
 		this.setVisible(false);
 		this.exhaust.destroy();

@@ -4,7 +4,7 @@ import phaser from 'phaser';
 class Preload extends phaser.Scene {
 	constructor(test) {
 		super({
-			key: 'Preload'
+			key: 'preload'
 		});
 	}
 
@@ -38,7 +38,7 @@ class Preload extends phaser.Scene {
 	}
 
 	startGame () {
-		this.scene.start('Game');
+		this.scene.start('test_rockets');
 	}
 }
 export default Preload;
