@@ -3,30 +3,13 @@ import ExhaustFxClass from 'shaders/exhaust/exhaust';
 
 class Rocket extends Phaser.Physics.Arcade.Sprite {
 	constructor (scene) {
-		
-		scene.anims.create({
-			key: 'frames',
-			defaultTextureKey: 'rocket_frames',
-			frames: [
-				{frame: 0 },
-				{frame: 1 },
-				{frame: 2 },
-				{frame: 3 },
-				{frame: 4 }
-			],
-			repeat: -1,
-			frameRate: 12,
-		});
-
-		super(scene, 0, 0,'rocket_frames');
+		super(scene, 0, 0,'rocket_0_frames');
 		this.defaultSetup(scene);
 	}
 
 	defaultSetup(scene) {
-		this.anims.play('frames', true);
-		console.log('a');
-		// scene.add.existing(this);
-		console.log('b');
+		this.anims.play('rocket_0_animation', true);
+
 		if (scene.physics) {
 			scene.physics.add.existing(this);
 		}
@@ -42,7 +25,8 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 
 		this.gap = this.scene.game.config.width/28;
 		this.setDepth(2);
-		// this.setScale(0.5);
+		this.displayWidth = 30;
+		this.displayHeight = 56;
 
 		console.log('c1');
 		this.exhaust = scene.add.image(0, 0, 'exhaust');
@@ -154,23 +138,24 @@ class Rocket extends Phaser.Physics.Arcade.Sprite {
 	colour (type) {
 		var colour = '';
 		switch (type) {
+
 		case 0:
-			colour = 0x00DFFC;
-			break;
-		case 1:
 			colour = 0x4EF24E;
 			break;
-		case 2:
+		case 1:
 			colour = 0xFEFF0D;
 			break;
-		case 3:
+		case 2:
 			colour = 0xFFAA00;
 			break;
-		case 4:
+		case 3:
 			colour = 0xf24e90;
 			break;
-		default:
+		case 4:
 			colour = 0xFF003C;
+			break;
+		default:
+			colour = 0x00DFFC;
 		}
 		return colour;
 	}

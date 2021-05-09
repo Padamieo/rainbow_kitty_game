@@ -1,5 +1,6 @@
 import Phaser from 'phaser';
 import Rocket from 'object/rocket';
+import GenerateRocketTextures from 'object/generate_rocket_textures';
 
 class Enemies extends Phaser.GameObjects.Group {
 	constructor (scene) {
@@ -20,14 +21,17 @@ class Enemies extends Phaser.GameObjects.Group {
 	}
 
 	defaultSetup() {
+		new GenerateRocketTextures(this.scene);
+
 		this.scene.tick = this.scene.time.addEvent({
 			delay: 2500,
 			callback: () => this.calculateAddEnemy(this),
 			loop: true
 		});
 
-		this.limit = 2;
-		this.list = new Array(5).fill(0);
+		this.limit = 1;
+		this.list = [0,1,2,3,4,5]
+		//  new Array(5).fill(0);
 		console.log(this.list);
 		this.list.push(0);
 		//this.list.push(2);
@@ -74,8 +78,8 @@ class Enemies extends Phaser.GameObjects.Group {
 
 			if (enemy) {
 
-				if (this.index+1 < this.list.length) {
-					this.index = this.index+1;
+				if (this.index < this.list.length) {
+					this.index = this.index;
 				} else {
 					this.index = 0;
 				}

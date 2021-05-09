@@ -25,13 +25,9 @@ class ShaderTestSmoke extends Phaser.Scene {
 
 	preload() {
 		this.load.image('wall', wall);
-		this.x = new Custom_Explosion(this);
-		// this.load.spritesheet('rocket_frames',
-		// rocket,
-		// 	{ frameHeight: 112, frameWidth: 60 }
-		// );
 		this.load.svg('rocket_frames', rocket, { width: 150, height: 56 });
 
+		this.x = new Custom_Explosion(this);
 		this.amount = 3;		
 
 		for (var i = 0; i < this.amount; i++) {
